@@ -19,7 +19,7 @@ const app = express();
 
 const queryBuilder = require('./query-builder');
 
-const DiscoveryV1 = require('watson-developer-cloud/discovery/v1-experimental');
+const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 const discovery = new DiscoveryV1({
   // If unspecified here, the DISCOVERY_USERNAME and
   // DISCOVERY_PASSWORD env properties will be checked
