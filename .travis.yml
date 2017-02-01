@@ -9,7 +9,7 @@ cache:
   - node_modules
 env:
   global:
-  - CF_APP=discovery-news-demo-2
+  - CF_APP=discovery-news-demo
   - CF_API=https://api.ng.bluemix.net
   - CF_ORGANIZATION=WatsonPlatformServices
   - CF_SPACE=demos
@@ -20,4 +20,4 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-    repo: watson-developer-cloud/discovery-nodejs-2
+    repo: watson-developer-cloud/discovery-nodejs
