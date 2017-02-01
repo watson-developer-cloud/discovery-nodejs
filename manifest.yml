@@ -3,7 +3,7 @@ declared-services:
     label: discovery
     plan: open_experimental
 applications:
-  - name: discovery-news-demo-2
+  - name: discovery-news-demo
     command: npm start
     path: .
     memory: 512M
