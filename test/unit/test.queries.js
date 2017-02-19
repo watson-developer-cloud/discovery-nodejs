@@ -15,6 +15,7 @@
  */
 
 if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<username>') {
+  // eslint-disable-next-line
   console.log('Skipping integration tests because DISCOVERY_USERNAME is null.');
 } else {
   const app = require('../../app');
@@ -22,7 +23,7 @@ if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<user
   const API_ENDPOINT = '/api/query';
 
   describe('queries', function () {
-    this.timeout(5000);
+    this.timeout(20000);
     it('Should work with "IBM"', () =>
       request(app)
       .post(API_ENDPOINT)
