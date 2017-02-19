@@ -18,7 +18,7 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 require('babel-register');
 
-describe('react', () => {
+describe('react', function () {
   this.timeout(5000);
   it('should render some html', () => {
     const index = require('../../views/index.jsx').default;
