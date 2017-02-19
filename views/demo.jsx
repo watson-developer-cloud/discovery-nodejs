@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import React from 'react';
 import { Icon } from 'watson-react-components';
-import jpath from 'jpath-query';
 
 import Query from './Query/index.jsx';
 import TopEntities from './TopEntities/index.jsx';
@@ -9,6 +8,10 @@ import TopStories from './TopStories/index.jsx';
 import SentimentAnalysis from './SentimentAnalysis/index.jsx';
 import MentionsAndSentiments from './MentionsAndSentiments/index.jsx';
 import NoResults from './NoResults/index.jsx';
+
+const hasResults = (entities) =>
+  entities.aggregations && entities.aggregations.length > 0 &&
+  entities.aggregations[0].field === 'enrichedTitle.entities.text';
 
 const parseQueryResults = (data) => {
   const parsedData = {
@@ -40,14 +43,14 @@ const parseQueryResults = (data) => {
       parsedData.mentions = aggregation;
     }
 
-    if (jpath.jpath('/type', aggregation, 'not found') === 'nested') {
-      if (aggregation.path === 'enrichedTitle.entities') {
-        const entities = aggregation.aggregations;
-        if (jpath.jpath('/0/match', entities, 'not found') === 'Person') {
-          parsedData.entities.people = jpath.jpath('/0/aggregations/0/results', entities);
+    if (aggregation.type === 'nested' && aggregation.path === 'enrichedTitle.entities') {
+      const entities = aggregation.aggregations;
+      if (entities && entities.length > 0 && hasResults(entities[0])) {
+        if (entities[0].match === 'enrichedTitle.entities.type:Company') {
+          parsedData.entities.people = entities[0].aggregations[0].results;
         }
-        if (jpath.jpath('/0/match', entities, 'not found') === 'Company') {
-          parsedData.entities.companies = jpath.jpath('/0/aggregations/0/results', entities);
+        if (entities[0].match === 'enrichedTitle.entities.type:Person') {
+          parsedData.entities.companies = entities[0].aggregations[0].results;
         }
       }
     }
