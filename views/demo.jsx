@@ -47,10 +47,10 @@ const parseQueryResults = (data) => {
       const entities = aggregation.aggregations;
       if (entities && entities.length > 0 && hasResults(entities[0])) {
         if (entities[0].match === 'enrichedTitle.entities.type:Company') {
-          parsedData.entities.people = entities[0].aggregations[0].results;
+          parsedData.entities.companies = entities[0].aggregations[0].results;
         }
         if (entities[0].match === 'enrichedTitle.entities.type:Person') {
-          parsedData.entities.companies = entities[0].aggregations[0].results;
+          parsedData.entities.people = entities[0].aggregations[0].results;
         }
       }
     }
