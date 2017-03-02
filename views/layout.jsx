@@ -17,6 +17,13 @@ function Layout(props) {
         <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
         <link rel="stylesheet" href="/css/watson-react-components.min.css" />
         <link rel="stylesheet" href="/css/style.css" />
+        {/* Bluemix Analytics - begin*/}
+        <script type="text/javascript">{`
+          window._analytics = { coremetrics: false, optimizely: false, addRoll: false };
+        `}</script>
+        <meta name="segment" property="watson-demos" value="discovery-news-demo" />
+        <script src={props.bluemixAnalytics} />
+        {/* Bluemix Analytics  - end*/}
       </head>
       <body>
         <Header
@@ -50,6 +57,7 @@ function Layout(props) {
 
 Layout.propTypes = {
   children: React.PropTypes.object.isRequired,
+  bluemixAnalytics: React.PropTypes.string,
 };
 
 export default Layout;
