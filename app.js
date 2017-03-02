@@ -39,7 +39,9 @@ const discovery = new DiscoveryV1({
 require('./config/express')(app);
 
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {
+    BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
+  });
 });
 
 app.post('/api/query', (req, res, next) => {
