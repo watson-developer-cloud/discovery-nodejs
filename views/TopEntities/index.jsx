@@ -57,8 +57,13 @@ export default React.createClass({
               </Pane>
               <Pane label="Companies">
                 <Cloud
-                  data={this.props.entities.companies.filter((item) =>
-                    item.key.toLowerCase() !== this.props.query.text.toLowerCase())} />
+                  data={
+                    this.props.entities.companies ?
+                    this.props.entities.companies.filter((item) =>
+                      item.key.toLowerCase() !== this.props.query.text.toLowerCase()) :
+                    []
+                  }
+                />
               </Pane>
             </Tabs>
           </div>
