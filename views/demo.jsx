@@ -46,10 +46,10 @@ const parseQueryResults = (data) => {
     if (aggregation.type === 'nested' && aggregation.path === 'enrichedTitle.entities') {
       const entities = aggregation.aggregations;
       if (entities && entities.length > 0 && hasResults(entities[0])) {
-        if (entities[0].match === 'enrichedTitle.entities.type:Company') {
+        if (entities[0].match === 'Company') {
           parsedData.entities.companies = entities[0].aggregations[0].results;
         }
-        if (entities[0].match === 'enrichedTitle.entities.type:Person') {
+        if (entities[0].match === 'Person') {
           parsedData.entities.people = entities[0].aggregations[0].results;
         }
       }
