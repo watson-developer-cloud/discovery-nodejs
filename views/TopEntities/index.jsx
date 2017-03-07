@@ -49,9 +49,6 @@ export default React.createClass({
               Easily extract frequently mentioned entities - such as people, topics and companies with Pre-enriched News.
             </p>
             <Tabs selected={0}>
-              <Pane label="People">
-                <Cloud data={this.props.entities.people} />
-              </Pane>
               <Pane label="Topics">
                 <Cloud data={this.props.entities.topics} />
               </Pane>
@@ -64,6 +61,9 @@ export default React.createClass({
                     []
                   }
                 />
+              </Pane>
+              <Pane label="People">
+                <Cloud data={this.props.entities.people} />
               </Pane>
             </Tabs>
           </div>
