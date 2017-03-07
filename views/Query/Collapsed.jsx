@@ -22,6 +22,7 @@ export default React.createClass({
       startDate: moment(this.props.query.date.from),
       endDate: moment(this.props.query.date.to),
       query: this.props.query,
+      restrictedDateRange: false,
       dateButtons: [{ value: 'lastweek',
         id: 'rb-1',  // id's must be unique across the entire page. Default value is name-value
         text: 'Last Week',
@@ -62,6 +63,7 @@ export default React.createClass({
         from: this.state.startDate.format('YYYYMMDD'),
         to: this.state.endDate.format('YYYYMMDD'),
       },
+      restrictedDateRange: this.state.restrictedDateRange,
     });
   },
 
@@ -86,6 +88,7 @@ export default React.createClass({
           from: this.state.startDate.format('YYYYMMDD'),
           to: this.state.endDate.format('YYYYMMDD'),
         },
+        restrictedDateRange: this.state.restrictedDateRange,
       });
     }
   },
@@ -97,20 +100,28 @@ export default React.createClass({
           from: this.state.startDate.format('YYYYMMDD'),
           to: this.state.endDate.format('YYYYMMDD'),
         },
+        restrictedDateRange: this.state.restrictedDateRange,
       });
     }
   },
   dateButtonChanged(e) {
     var newDates = {};
+    var largestValue = "lasttwomonths";
+    var restrictedDateRange;
     let newButtonState = this.state.dateButtons.map((item) => {
       item.selected = item.value == e.target.value ? true : false;
       if (item.selected) {
         newDates = {startDate: item.startDate, endDate: item.endDate};
+        restrictedDateRange = item.value != largestValue;
       }
       return item;
     });
-    this.setState({dateButtons: newButtonState});
-    this.onDatesChange(newDates);
+    Promise.resolve(
+      this.setState({restrictedDateRange: restrictedDateRange})
+    ).then(() => {
+      this.setState({dateButtons: newButtonState});
+      this.onDatesChange(newDates);
+    });
   },
   render() {
     return (

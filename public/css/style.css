@@ -703,6 +703,10 @@ html {
   margin-top: 0rem;
 }
 
+.hidden {
+  display: none;
+}
+
 .query {
   padding: 0rem;
   background-color: #9753e1;
