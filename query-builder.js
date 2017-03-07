@@ -35,7 +35,7 @@ module.exports = {
       params.aggregations = [].concat(entities, sentiments, mentions);
     }
     if (query.date) {
-      params.filter = `blekko.urlrank>1,blekko.chrondate>${moment(query.date.from).unix()},blekko.chrondate<${moment(query.date.to).unix()}`;
+      params.filter = `blekko.hostrank>20,blekko.chrondate>${moment(query.date.from).unix()},blekko.chrondate<${moment(query.date.to).unix()}`;
     }
     return params;
   },
