@@ -55,8 +55,7 @@ export default React.createClass({
     this.setState({ focusedInput });
   },
 
-  onDatesChange({ startDate, endDate }) {
-    this.setState({ startDate, endDate });
+  onDatesChange() {
     this.props.onQueryChange({
       text: this.state.query.text,
       date: {
@@ -117,10 +116,14 @@ export default React.createClass({
       return item;
     });
     Promise.resolve(
-      this.setState({restrictedDateRange: restrictedDateRange})
+      this.setState({
+        restrictedDateRange: restrictedDateRange,
+        dateButtons: newButtonState,
+        startDate: newDates.startDate,
+        endDate: newDates.endDate
+      })
     ).then(() => {
-      this.setState({dateButtons: newButtonState});
-      this.onDatesChange(newDates);
+      this.onDatesChange();
     });
   },
   render() {
