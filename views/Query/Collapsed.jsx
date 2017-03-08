@@ -115,16 +115,12 @@ export default React.createClass({
       }
       return item;
     });
-    Promise.resolve(
-      this.setState({
-        restrictedDateRange: restrictedDateRange,
-        dateButtons: newButtonState,
-        startDate: newDates.startDate,
-        endDate: newDates.endDate
-      })
-    ).then(() => {
-      this.onDatesChange();
-    });
+    this.setState({
+      restrictedDateRange: restrictedDateRange,
+      dateButtons: newButtonState,
+      startDate: newDates.startDate,
+      endDate: newDates.endDate
+    }, this.onDatesChange);
   },
   render() {
     return (
