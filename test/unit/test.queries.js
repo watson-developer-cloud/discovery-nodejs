@@ -21,6 +21,7 @@ if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<user
   const app = require('../../app');
   const request = require('supertest');
   const API_ENDPOINT = '/api/query';
+  const moment = require('moment');
 
   describe('queries', function () {
     this.timeout(20000);
@@ -42,6 +43,20 @@ if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<user
       request(app)
       .post(API_ENDPOINT)
       .query({ text: 'General Motors' })
+      .expect(200)
+    );
+
+    it('Should work with a date range', () =>
+      request(app)
+      .post(API_ENDPOINT)
+      .query({
+        text: 'IBM',
+        date: {
+          from: moment().subtract(2, 'months').format('YYYYMMDD'),
+          to: moment().format('YYYYMMDD')
+        },
+        restrictedDateRange: true
+      })
       .expect(200)
     );
   });
