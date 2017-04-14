@@ -196,5 +196,5 @@ This data is collected from the `package.json` file in the sample application an
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [getting_started]: https://www.ibm.com/watson/developercloud/doc/common/index.html
 [service_url]: http://www.ibm.com/watson/developercloud/discovery.html
-[docs]: http://www.ibm.com/watson/developercloud/discovery/
+[docs]: http://www.ibm.com/watson/developercloud/doc/discovery/index.html
 [sign_up]: https://console.ng.bluemix.net/registration/
