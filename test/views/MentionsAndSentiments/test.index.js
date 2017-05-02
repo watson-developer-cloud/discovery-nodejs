@@ -122,8 +122,7 @@ describe('mentions_sort_test', () => {
 
   it('Orders results by number of "mentions"', () => {
     let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
-    console.log("ASKDJFKASJDFKASJD");
-    console.log(wrapper.find(Accordion).debug());
+    let wrapper = shallow(<MentionsAndSentiments query={queryAAA} mentions={mentionsAAA} />);
     let firstMention = wrapper.find(Accordion).nodes[0].props.header.props.children[0].props.children;
     let secondMention = wrapper.find(Accordion).nodes[1].props.header.props.children[0].props.children;
     assert.equal(firstMention, 'Sample Company + Company Two');

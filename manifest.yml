@@ -1,9 +1,9 @@
 declared-services:
   my-discovery:
-    label: discovery
-    plan: standard
+    label: disco-starter-kits
+    plan: free
 applications:
-  - name: discovery-news-demo
+  - name: news-demo
     command: npm start
     path: .
     memory: 512M
