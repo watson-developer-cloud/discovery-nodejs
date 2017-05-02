@@ -41,9 +41,7 @@ export default React.createClass({
           })),
     }));
 
-    mentions = mentions.sort(function(a, b) {
-      return (b.data.length - a.data.length)
-    })
+    mentions = mentions.sort((a, b) => (b.data.length - a.data.length))
     .filter((name, i) => i < 4);
 
     // calculate sentiments
