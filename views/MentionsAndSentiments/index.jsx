@@ -28,7 +28,6 @@ export default React.createClass({
     let mentions = getNames(this.props.mentions.aggregations[0].results)
       .filter((name) => !(new RegExp(this.props.query.text, 'gi').test(name))) // filter out a mention that matches the query text input
       .filter((name) => /^[A-Z]/.test(name)) // check if name is capitalized (to ensure a brand is used)
-      .filter((name, i) => i < 4) // only first four are needed
       .map((name, i) => ({
         name,
         toggle: i === 0,
@@ -40,7 +39,10 @@ export default React.createClass({
             negative: item[2],
             neutral: item[3],
           })),
-      }));
+    }));
+
+    mentions = mentions.sort((a, b) => (b.data.length - a.data.length))
+      .filter((name, i) => i < 4);
 
     // calculate sentiments
     mentions = mentions.map((item) => {
