@@ -42,7 +42,7 @@ export default React.createClass({
     }));
 
     mentions = mentions.sort((a, b) => (b.data.length - a.data.length))
-    .filter((name, i) => i < 4);
+      .filter((name, i) => i < 4);
 
     // calculate sentiments
     mentions = mentions.map((item) => {

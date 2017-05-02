@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Accordion from '../../../views/Accordion/index.jsx';
 import MentionsAndSentiments from '../../../views/MentionsAndSentiments/index.jsx';
 
-describe('mentions_sort_test', () => {
+describe('<MentionsAndSentiments />', () => {
   let mentions_sample = {
     'type': 'filter',
     'match': 'enrichedTitle.entities.type::Company',
@@ -114,10 +114,10 @@ describe('mentions_sort_test', () => {
 
   let query_sample = {
     date: {
-      from: '20170301',
-      to: '20170501'
+      'from': '20170301',
+      'to': '20170501'
     },
-    text: 'Sample Company'
+    'text': 'Sample Company'
   };
 
   it('Orders results by number of "mentions"', () => {
