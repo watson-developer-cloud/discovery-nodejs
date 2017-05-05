@@ -58,6 +58,16 @@ html {
   color: #9753e1;
 }
 
+#sort-label {
+  padding-right: 1.5rem;
+}
+
+#sort-by {
+  display: inline;
+  width: 20rem;
+
+}
+
 /* react-dates styles */
 
 .CalendarDay {

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import QuerySyntax from '../QuerySyntax/index.jsx';
 import queryBuilder from '../../query-builder.js';  // eslint-disable-line
+import moment from 'moment';
 
 const Story = props => (
   <div className="story">
+    <p>{moment(props.date*1000).format("M/D/YYYY hh:MMa")}</p>
     <a
       className="story--title base--a results--a"
       href={props.url}
@@ -16,8 +18,21 @@ const Story = props => (
     <p className="base--p story--source">
       {props.host ? props.host : 'Placeholder Source'}
     </p>
+    <p>
+      <span>Score:   </span>
+      {props.score}
+    </p>
   </div>
 );
+
+const Select = props => (
+  <select name="sort-select" id="sort-by" className="base--select" onChange={props.onChange} value={props.currSelected}>
+    <option value="relevance">Relevance</option>
+    <option value="date">Date</option>
+  </select>
+);
+
+//<option value="relevance" {this.state.sortType == 'Relevance' ? 'selected' : ''}>Relevance</option>
 
 Story.propTypes = {
   title: PropTypes.string.isRequired,
@@ -34,11 +49,13 @@ export default React.createClass({
       text: React.PropTypes.string,
       date: React.PropTypes.object,
     }),
+    onSortChange: React.PropTypes.func.isRequired,
   },
 
   getInitialState() {
     return {
       showQuery: false,
+      sortType: (typeof this.props.query.sort === 'undefined' || this.props.query.sort == '') ? 'relevance' : 'date',
     };
   },
 
@@ -50,7 +67,18 @@ export default React.createClass({
     this.setState({ showQuery: false });
   },
 
+  onChangeSort(e) {
+    this.setState({ sortType: e.target.value });
+    let sortVal = e.target.value == 'date' ? '-blekko.chrondate,-_score' : '';
+    console.log(sortVal);
+    let newQuery = Object.assign({}, this.props.query, {
+      sort: sortVal
+    });
+    this.props.onSortChange(newQuery);
+  },
+
   render() {
+    console.log(this.state.sortType);
     return (
       <div>
         {!this.state.showQuery ? (
@@ -68,6 +96,14 @@ export default React.createClass({
             <p className="base--p top-stories--description">
               Find the most recent and relevant news articles.
             </p>
+            <div className="sort-option">
+              <span id="sort-label">
+                Sort By:
+              </span>
+              <span>
+                <Select onChange={this.onChangeSort} currSelected={this.state.sortType}/>
+              </span>
+            </div>
             <div className="top-stories--list">
               {this.props.stories.map(item =>
                 <Story
@@ -75,6 +111,8 @@ export default React.createClass({
                   title={item.enrichedTitle ? item.enrichedTitle.text : (item.title || 'Untitled')}
                   url={item.url}
                   host={item.host}
+                  date={item.blekko.chrondate}
+                  score={item.score}
                 />)
               }
             </div>

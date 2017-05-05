@@ -12,6 +12,7 @@ Query.propTypes = {
   query: React.PropTypes.shape({
     text: React.PropTypes.string,
     date: React.PropTypes.object,
+    sort: React.PropTypes.string,
     dateRangeRestricted: React.PropTypes.bool,
   }),
   onQueryChange: React.PropTypes.func.isRequired,
