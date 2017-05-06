@@ -9,9 +9,11 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 ## Getting started
 
-1. You need a Bluemix account. If you don't have one, [sign up][sign_up].
+0. You need a Bluemix account. If you don't have one, [sign up][sign_up].
 
-2. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
+1. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
+
+2. clone this repo 
 
 3. Edit the `manifest.yml` file and change `<application-name>` to something unique. The name you use determines the URL of your application. For example, `<application-name>.mybluemix.net`.
 
