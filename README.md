@@ -11,9 +11,9 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 1. You need a Bluemix account. If you don't have one, [sign up][sign_up].
 
-1. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
+2. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
 
-1. Edit the `manifest.yml` file and change `<application-name>` to something unique. The name you use determines the URL of your application. For example, `<application-name>.mybluemix.net`.
+3. Edit the `manifest.yml` file and change `<application-name>` to something unique. The name you use determines the URL of your application. For example, `<application-name>.mybluemix.net`.
 
   ```yaml
   applications:
@@ -25,14 +25,14 @@ Demo: https://discovery-news-demo.mybluemix.net/
     memory: 512M
   ```
 
-1. Connect to Bluemix with the command line tool.
+4. Connect to Bluemix with the command line tool.
 
   ```sh
   cf api https://api.ng.bluemix.net
   cf login
   ```
 
-1. Create and retrieve service keys to access the [Discovery][service_url] service:
+5. Create and retrieve service keys to access the [Discovery][service_url] service:
 
   ```none
   cf create-service discovery standard my-discovery-service
@@ -40,7 +40,7 @@ Demo: https://discovery-news-demo.mybluemix.net/
   cf service-key my-discovery-service myKey
   ```
 
-1. Use the credentials that are returned in step 5 to retrieve the IBM curated News `environment_id` from the list of environments:
+6. Use the credentials that are returned in step 5 to retrieve the IBM curated News `environment_id` from the list of environments:
 
   ```none
   curl -X GET -u <username>:<password> https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2016-11-07
@@ -67,7 +67,7 @@ Demo: https://discovery-news-demo.mybluemix.net/
     }]
   }
   ```
-1. Use the `environment_id` from step 6 to retrieve the IBM curated News `collection_id` from the list of collections:
+7. Use the `environment_id` from step 6 to retrieve the IBM curated News `collection_id` from the list of collections:
 
   ```none
   curl -X GET -u <username>:<password> https://gateway.watsonplatform.net/discovery/api/v1/environments/bb6ffe96-53d5-44b3-8838-922d4665df8d/collections?version=2016-11-07
@@ -91,7 +91,7 @@ Demo: https://discovery-news-demo.mybluemix.net/
     ]
   }
   ```
-1. Create an `.env` file in the root directory by copying the sample `.env.example` file using the following command:
+8. Create an `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
   ```none
   cp .env.example .env
@@ -108,21 +108,21 @@ Demo: https://discovery-news-demo.mybluemix.net/
   DISCOVERY_COLLECTION=<collection>
   ```
 
-1. Install the needed application dependencies with this command:
+9. Install the needed application dependencies with this command:
 
   ```none
   npm install
   ```
 
-1. Start the application locally:
+10. Start the application locally:
 
   ```none
   npm start
   ```
 
-1. Point your browser to [http://localhost:3000](http://localhost:3000).
+11. Point your browser to [http://localhost:3000](http://localhost:3000).
 
-1. When you're ready, push the application to Bluemix with this command:
+12. When you're ready, push the application to Bluemix with this command:
 
   ```none
   cf push
