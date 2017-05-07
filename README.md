@@ -13,7 +13,9 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 1. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
 
-2. clone this repo 
+2. Clone this repo using: 
+
+`git clone https://github.com/watson-developer-cloud/discovery-nodejs.git`
 
 3. Edit the `manifest.yml` file and change `<application-name>` to something unique. The name you use determines the URL of your application. For example, `<application-name>.mybluemix.net`.
 
