@@ -128,7 +128,7 @@ describe('<MentionsAndSentiments />', () => {
     assert.equal(secondMention, 'Sample Company + Company One');
   });
 
-  it('Reports number of mentions, not number of days a mention occured', () => {
+  it('Mentions should equal the sum of positive, negative, and neutral mentions', () => {
     let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
     let firstMentionCount = wrapper.find(Accordion).nodes[0].props.header.props.children[1].props.children;
     let secondMentionCount = wrapper.find(Accordion).nodes[1].props.header.props.children[1].props.children;

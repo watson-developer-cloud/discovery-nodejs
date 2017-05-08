@@ -90,12 +90,9 @@ export default React.createClass({
   },
 
   calculateMentionCount(data) {
-    let totalSum = 0;
-    data.forEach((article) => {
-      totalSum += article.positive;
-      totalSum += article.neutral;
-      totalSum += article.negative;
-    });
+    let totalSum = data.reduce((acc, item) => {
+      return [acc[0] + item.positive, acc[1] + item.neutral, acc[2] + item.negative]
+    }, [0,0,0]);
     return totalSum;
   },
 
