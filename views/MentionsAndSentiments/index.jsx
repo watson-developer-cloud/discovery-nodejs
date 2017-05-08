@@ -89,6 +89,16 @@ export default React.createClass({
     this.setState({ mentions });
   },
 
+  calculateMentionCount(data) {
+    var totalSum = 0;
+    for (let article of data) {
+      totalSum += article.positive;
+      totalSum += article.neutral;
+      totalSum += article.negative;
+    }
+    return totalSum;
+  },
+
   render() {
     return (
       <div>
@@ -121,7 +131,7 @@ export default React.createClass({
                   header={
                     <div className="mentions-sentiments--data-row">
                       <div className="mentions-sentiments--data-name">{`${capitalize(this.props.query.text)} + ${item.name}`}</div>
-                      <div className="mentions-sentiments--data-mentions">{item.data.length}</div>
+                      <div className="mentions-sentiments--data-mentions">{this.calculateMentionCount(item.data)}</div>
                       <div className="mentions-sentiments--data-sentiment">{capitalize(item.sentiment)}</div>
                     </div>
                   }
