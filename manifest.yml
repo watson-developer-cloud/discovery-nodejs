@@ -1,11 +1,11 @@
 declared-services:
-  my-discovery:
+  Discovery-Demo:
     label: discovery
-    plan: standard
+    plan: partner
 applications:
   - name: discovery-news-demo
     command: npm start
     path: .
     memory: 512M
     services:
-      - my-discovery
+      - Discovery-Demo
