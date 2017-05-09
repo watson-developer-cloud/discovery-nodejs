@@ -19,3 +19,8 @@ deploy:
     script: scripts/deploy.sh production
     on:
       branch: release
+  # deploy master to staging
+  - provider: script
+    script: scripts/deploy.sh staging
+    on:
+      branch: master
