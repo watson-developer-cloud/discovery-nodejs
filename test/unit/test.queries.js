@@ -28,30 +28,39 @@ if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<user
   const moment = require('moment');
 
   describe('queries', function () {
+    let testNewsApp;
+
+    before((done) => {
+      app.then((newsApp) => {
+        testNewsApp = newsApp;
+        done();
+      });
+    });
+
     this.timeout(20000);
     it('Should work with "IBM"', () =>
-      request(app)
+      request(testNewsApp)
       .post(API_ENDPOINT)
       .query({ text: 'IBM' })
       .expect(200)
     );
 
     it('Should work with "International Business Machines"', () =>
-      request(app)
+      request(testNewsApp)
       .post(API_ENDPOINT)
       .query({ text: 'International Business Machines' })
       .expect(200)
     );
 
     it('Should work with "General Motors"', () =>
-      request(app)
+      request(testNewsApp)
       .post(API_ENDPOINT)
       .query({ text: 'General Motors' })
       .expect(200)
     );
 
     it('Should work with a date range', () =>
-      request(app)
+      request(testNewsApp)
       .post(API_ENDPOINT)
       .query({
         text: 'IBM',
