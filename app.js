@@ -27,13 +27,8 @@ const discovery = new DiscoveryV1({
   // username: '<username>',
   // password: '<password>',
   version_date: '2016-11-09',
-  path: {
-    environment_id: process.env.ENVIRONMENT_ID || '<environment-id>',
-    collection_id: process.env.COLLECTION_ID || '<collection-id>',
-  },
   qs: { aggregation: `[${queryBuilder.aggregations.join(',')}]` },
 });
-
 
 // Bootstrap application settings
 require('./config/express')(app);
@@ -44,18 +39,44 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/api/query', (req, res, next) => {
-  const params = queryBuilder.build(req.body);
-  discovery.query(params, (error, response) => {
-    if (error) {
-      next(error);
-    } else {
-      res.json(response);
-    }
-  });
-});
+// gather news collection info
+discovery.getEnvironments({}, (error, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    const news_environment_id = response.environments.find((environment) => {
+      return environment.read_only == true;
+    }).environment_id;
 
-// error-handler settings
-require('./config/error-handler')(app);
+    discovery.getCollections({
+      environment_id: news_environment_id
+    }, (error, response) => {
+      if (error) {
+        console.error(error);
+      } else {
+        const news_collection_id = response.collections[0].collection_id;
+
+        // setup query endpoint for news
+        app.post('/api/query', (req, res, next) => {
+          const params = Object.assign({}, queryBuilder.build(req.body), {
+            environment_id: news_environment_id,
+            collection_id: news_collection_id
+          });
+
+          discovery.query(params, (error, response) => {
+            if (error) {
+              next(error);
+            } else {
+              res.json(response);
+            }
+          });
+        });
+
+        // error-handler settings for all other routes
+        require('./config/error-handler')(app);
+      }
+    });
+  }
+});
 
 module.exports = app;
