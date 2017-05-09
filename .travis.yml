@@ -17,10 +17,12 @@ deploy:
   # deploy release to production
   - provider: script
     script: scripts/deploy.sh production
+    skip_cleanup: true
     on:
       branch: release
   # deploy master to staging
   - provider: script
     script: scripts/deploy.sh staging
+    skip_cleanup: true
     on:
       branch: master
