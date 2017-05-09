@@ -10,9 +10,6 @@ script: npm test
 cache:
   directories:
   - node_modules
-before_deploy:
-  - wget 'https://cli.run.pivotal.io/stable?release=linux64-binary&source=github' -qO cf-linux-amd64.tgz && tar -zxvf cf-linux-amd64.tgz && rm cf-linux-amd64.tgz
-  - ./cf install-plugin -f https://github.com/contraband/autopilot/releases/download/0.0.3/autopilot-linux
 deploy:
   # deploy release to production
   - provider: script
