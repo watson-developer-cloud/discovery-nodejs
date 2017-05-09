@@ -1,4 +1,4 @@
-# Discovery Demo
+# Discovery Demo [![Build Status](https://travis-ci.org/watson-developer-cloud/discovery-nodejs.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/discovery-nodejs)
 
 
 Use the IBM Watson [Discovery][service_url] service to add a cognitive search and content analytics engine to your applications to identify patterns, trends and actionable insights that drive better decision-making.
