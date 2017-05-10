@@ -120,11 +120,19 @@ describe('<MentionsAndSentiments />', () => {
     'text': 'Sample Company'
   };
 
-  it('Orders results by number of "mentions"', () => {
+  it('Orders results by number of mentions', () => {
     let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
     let firstMention = wrapper.find(Accordion).nodes[0].props.header.props.children[0].props.children;
     let secondMention = wrapper.find(Accordion).nodes[1].props.header.props.children[0].props.children;
     assert.equal(firstMention, 'Sample Company + Company Two');
     assert.equal(secondMention, 'Sample Company + Company One');
+  });
+
+  it('Mentions should equal the sum of positive, negative, and neutral mentions', () => {
+    let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
+    let firstMentionCount = wrapper.find(Accordion).nodes[0].props.header.props.children[1].props.children;
+    let secondMentionCount = wrapper.find(Accordion).nodes[1].props.header.props.children[1].props.children;
+    assert.equal(firstMentionCount, 1000008);
+    assert.equal(secondMentionCount, 74);
   });
 });
