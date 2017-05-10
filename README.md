@@ -56,9 +56,15 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 1. Point your browser to [http://localhost:3000](http://localhost:3000).
 
-1. Edit the `manifest.yml` file and replace 'discovery-news-demo' with `<your application name>` you selected
+1. Create a `manifest.yml` in the project directory that looks like this:
+   ```yml
+   name: <your application name>
+   command: npm start
+   services:
+     - my-discovery-service
+   ```
 
-1. When you're ready, push the application to Bluemix and bind your Discovery service with these commands:
+1. When you're ready, push the application to Bluemix and bind your Discovery service with:
 
   ```none
   cf push <your application name>
