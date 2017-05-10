@@ -722,14 +722,14 @@ html {
   color: #9753e1;
   height: 12rem;
   white-space: nowrap;
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   display: inline-block;
 }
 .query--no-results:hover {
   word-wrap: break-word;
   white-space: normal;
-  overflow-y: scroll;
+  overflow-y: auto;
   text-overflow: initial;
 }
 .query--right-bg {
@@ -873,7 +873,7 @@ html {
 .query .text-input--dummy {
   font-size: 1em;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .query--text-input-container {
