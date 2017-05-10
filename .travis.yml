@@ -3,23 +3,9 @@ dist: trusty
 sudo: required
 node_js: 6
 before_install:
-  - openssl aes-256-cbc -K $encrypted_aba75b5b520c_key -iv $encrypted_aba75b5b520c_iv -in secrets.tar.enc -out secrets.tar -d
-  - tar xvf secrets.tar
-  - cp .env.production .env
+- openssl aes-256-cbc -K $encrypted_aba75b5b520c_key -iv $encrypted_aba75b5b520c_iv
+  -in .env.enc -out .env -d
 script: npm test
 cache:
   directories:
   - node_modules
-deploy:
-  # deploy release to production
-  - provider: script
-    script: scripts/deploy.sh production
-    skip_cleanup: true
-    on:
-      branch: release
-  # deploy master to staging
-  - provider: script
-    script: scripts/deploy.sh staging
-    skip_cleanup: true
-    on:
-      branch: master
