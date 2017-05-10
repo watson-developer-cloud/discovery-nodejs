@@ -24,6 +24,14 @@ export default React.createClass({
       date: React.PropTypes.object,
     }),
   },
+
+  calculateMentionCount(data) {
+    let totalSum = data.reduce((acc, item) => {
+      return acc + item.positive + item.neutral + item.negative
+    }, 0);
+    return totalSum;
+  },
+
   getInitialState() {
     let mentions = getNames(this.props.mentions.aggregations[0].results)
       .filter((name) => !(new RegExp(this.props.query.text, 'gi').test(name))) // filter out a mention that matches the query text input
@@ -41,7 +49,13 @@ export default React.createClass({
           })),
     }));
 
-    mentions = mentions.sort((a, b) => (b.data.length - a.data.length))
+    mentions = mentions.map((mention) => {
+      return Object.assign({}, mention, {
+        totalMentions: this.calculateMentionCount(mention.data)
+      })
+    })
+
+    mentions = mentions.sort((a, b) => (b.totalMentions - a.totalMentions))
       .filter((name, i) => i < 4);
 
     // calculate sentiments
@@ -87,13 +101,6 @@ export default React.createClass({
     const mentions = this.state.mentions;
     mentions[index].toggle = !mentions[index].toggle;
     this.setState({ mentions });
-  },
-
-  calculateMentionCount(data) {
-    let totalSum = data.reduce((acc, item) => {
-      return acc + item.positive + item.neutral + item.negative
-    }, 0);
-    return totalSum;
   },
 
   render() {
