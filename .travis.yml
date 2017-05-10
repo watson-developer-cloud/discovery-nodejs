@@ -2,22 +2,10 @@ language: node_js
 dist: trusty
 sudo: required
 node_js: 6
+before_install:
+- openssl aes-256-cbc -K $encrypted_aba75b5b520c_key -iv $encrypted_aba75b5b520c_iv
+  -in .env.enc -out .env -d
 script: npm test
-
 cache:
   directories:
   - node_modules
-env:
-  global:
-  - CF_APP=discovery-news-demo
-  - CF_API=https://api.ng.bluemix.net
-  - CF_ORGANIZATION=WatsonPlatformServices
-  - CF_SPACE=demos
-before_deploy: npm install -g cf-blue-green
-deploy:
-  provider: script
-  script: cf-blue-green-travis
-  skip_cleanup: true
-  on:
-    branch: master
-    repo: watson-developer-cloud/discovery-nodejs

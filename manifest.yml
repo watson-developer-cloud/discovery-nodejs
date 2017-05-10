@@ -1,11 +1,6 @@
-declared-services:
-  my-discovery:
-    label: discovery
-    plan: standard
 applications:
-  - name: discovery-news-demo
-    command: npm start
-    path: .
-    memory: 512M
-    services:
-      - my-discovery
+- name: discovery-news-demo
+  memory: 512M
+  command: npm start
+  services:
+    - Discovery-Demo

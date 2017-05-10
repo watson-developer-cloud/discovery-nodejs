@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-const express = require('express');
-const app = express();
-
 const queryBuilder = require('./query-builder');
 
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
@@ -27,35 +24,62 @@ const discovery = new DiscoveryV1({
   // username: '<username>',
   // password: '<password>',
   version_date: '2016-11-09',
-  path: {
-    environment_id: process.env.ENVIRONMENT_ID || '<environment-id>',
-    collection_id: process.env.COLLECTION_ID || '<collection-id>',
-  },
   qs: { aggregation: `[${queryBuilder.aggregations.join(',')}]` },
 });
 
-
-// Bootstrap application settings
-require('./config/express')(app);
-
-app.get('/', (req, res) => {
-  res.render('index', {
-    BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
-  });
-});
-
-app.post('/api/query', (req, res, next) => {
-  const params = queryBuilder.build(req.body);
-  discovery.query(params, (error, response) => {
+// gather news collection info
+const NewsDemoApp = new Promise((resolve, reject) => {
+  discovery.getEnvironments({}, (error, response) => {
     if (error) {
-      next(error);
+      console.error(error);
+      reject(error);
     } else {
-      res.json(response);
+      const news_environment_id = response.environments.find((environment) => {
+        return environment.read_only == true;
+      }).environment_id;
+
+      discovery.getCollections({
+        environment_id: news_environment_id
+      }, (error, response) => {
+        if (error) {
+          console.error(error);
+          reject(error);
+        } else {
+          const news_collection_id = response.collections[0].collection_id;
+
+          // Bootstrap application settings
+          const express = require('express');
+          const app = express();
+          require('./config/express')(app);
+
+          app.get('/', (req, res) => {
+            res.render('index', {
+              BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
+            });
+          });
+          // setup query endpoint for news
+          app.post('/api/query', (req, res, next) => {
+            const params = Object.assign({}, queryBuilder.build(req.body), {
+              environment_id: news_environment_id,
+              collection_id: news_collection_id
+            });
+
+            discovery.query(params, (error, response) => {
+              if (error) {
+                next(error);
+              } else {
+                res.json(response);
+              }
+            });
+          });
+
+          // error-handler settings for all other routes
+          require('./config/error-handler')(app);
+          resolve(app);
+        }
+      });
     }
   });
 });
 
-// error-handler settings
-require('./config/error-handler')(app);
-
-module.exports = app;
+module.exports = NewsDemoApp;
