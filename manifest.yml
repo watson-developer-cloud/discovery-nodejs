@@ -1,6 +1,0 @@
-applications:
-- name: discovery-news-demo
-  memory: 512M
-  command: npm start
-  services:
-    - Discovery-Demo
