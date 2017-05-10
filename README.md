@@ -1,4 +1,4 @@
-# Discovery Demo
+# Discovery Demo [![Build Status](https://travis-ci.org/watson-developer-cloud/discovery-nodejs.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/discovery-nodejs)
 
 
 Use the IBM Watson [Discovery][service_url] service to add a cognitive search and content analytics engine to your applications to identify patterns, trends and actionable insights that drive better decision-making.
@@ -12,18 +12,6 @@ Demo: https://discovery-news-demo.mybluemix.net/
 1. You need a Bluemix account. If you don't have one, [sign up][sign_up].
 
 1. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
-
-1. Edit the `manifest.yml` file and change `<application-name>` to something unique. The name you use determines the URL of your application. For example, `<application-name>.mybluemix.net`.
-
-  ```yaml
-  applications:
-  - services:
-    - my-service-instance
-    name: <application-name>
-    command: npm start
-    path: .
-    memory: 512M
-  ```
 
 1. Connect to Bluemix with the command line tool.
 
@@ -40,72 +28,18 @@ Demo: https://discovery-news-demo.mybluemix.net/
   cf service-key my-discovery-service myKey
   ```
 
-1. Use the credentials that are returned in step 5 to retrieve the IBM curated News `environment_id` from the list of environments:
-
-  ```none
-  curl -X GET -u <username>:<password> https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2016-11-07
-  ```
-
-  Output:
-
-  ```json
-  {
-    "environments": [{
-      "created": "2016-11-30T15:41:22.298Z",
-      "description": "Watson News cluster environment",
-      "environment_id": "bb6ffe96-53d5-44b3-8838-922d4665df8d",
-      "index_capacity": {
-        ...
-      },
-      "memory_usage": {
-        ...
-      },
-      "name": "Watson News Environment",
-      "read_only": true,
-      "status": "active",
-      "updated": "2016-11-30T15:41:22.298Z"
-    }]
-  }
-  ```
-1. Use the `environment_id` from step 6 to retrieve the IBM curated News `collection_id` from the list of collections:
-
-  ```none
-  curl -X GET -u <username>:<password> https://gateway.watsonplatform.net/discovery/api/v1/environments/bb6ffe96-53d5-44b3-8838-922d4665df8d/collections?version=2016-11-07
-  ```
-
-  Output:
-
-  ```json
-  {
-    "collections": [
-      {
-        "collection_id": "0288e2a0-a1c1-4a38-a376-3c3bd89e927b",
-        "description": "Watson News T3 collection",
-        "name": "v5-fullnews-t3-2016",
-        "configuration_id": "f916ddcd-961e-4668-b46b-2b0f9fe8f002",
-        "language": "en_us",
-        "status": "active",
-        "created": "2016-11-30T15:41:22.318Z",
-        "updated": "2016-11-30T15:41:22.318Z"
-      }
-    ]
-  }
-  ```
 1. Create an `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
   ```none
   cp .env.example .env
   ```
-  Update the `.env` with your service instace information, your `environment_id`, and your `collection_id` that you retrieved in steps 5 to 7.
+  Update the `.env` with your service instance information from step 4
 
   The `.env` file will look something like the following:
 
   ```none
   DISCOVERY_USERNAME=<username>
   DISCOVERY_PASSWORD=<password>
-
-  DISCOVERY_ENVIRONMENT=<environment>
-  DISCOVERY_COLLECTION=<collection>
   ```
 
 1. Install the needed application dependencies with this command:
@@ -122,10 +56,18 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 1. Point your browser to [http://localhost:3000](http://localhost:3000).
 
-1. When you're ready, push the application to Bluemix with this command:
+1. Create a `manifest.yml` in the project directory that looks like this:
+   ```yml
+   name: <your application name>
+   command: npm start
+   services:
+     - my-discovery-service
+   ```
+
+1. When you're ready, push the application to Bluemix and bind your Discovery service with:
 
   ```none
-  cf push
+  cf push <your application name>
   ```
 
 After completing these steps, you are ready to test your application. Start a browser and enter the URL of your application.
@@ -141,7 +83,7 @@ For more details about developing applications that use Watson Developer Cloud s
 * The main source of troubleshooting and recovery information is the Bluemix log. To view the log, run this command:
 
   ```sh
-  cf logs <application-name> --recent
+  cf logs <your application name> --recent
   ```
 
 * For more details about the service, see the [documentation][docs] for the Discovery service.
@@ -158,7 +100,6 @@ For more details about developing applications that use Watson Developer Cloud s
 │   ├── error-handler.js
 │   ├── express.js
 │   └── security.js
-├── manifest.yml
 ├── package.json
 ├── public                      // static resources
 ├── server.js                   // entry point
