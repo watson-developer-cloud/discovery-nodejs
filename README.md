@@ -56,11 +56,12 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 1. Point your browser to [http://localhost:3000](http://localhost:3000).
 
+1. Edit the `manifest.yml` file and replace 'discovery-news-demo' with `<your application name>` you selected
+
 1. When you're ready, push the application to Bluemix and bind your Discovery service with these commands:
 
   ```none
   cf push <your application name>
-  cf bind-service <your application name> my-discovery-service
   ```
 
 After completing these steps, you are ready to test your application. Start a browser and enter the URL of your application.
