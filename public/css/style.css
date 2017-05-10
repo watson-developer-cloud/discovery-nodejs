@@ -713,6 +713,28 @@ html {
   position: relative;
   min-height: 500px;
 }
+.query--no-results-wrapper {
+  width: 100%;
+  text-align: center;
+}
+.query--no-results {
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.query--no-results-wrapper {
+  width: 100%;
+  text-align: center;
+}
+.query--no-results {
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
 .query--right-bg {
   height: 100%;
   background-color: white;
@@ -853,6 +875,7 @@ html {
 
 .query .text-input--dummy {
   font-size: 1em;
+  max-width: 100%;
 }
 
 .query--text-input-container {
