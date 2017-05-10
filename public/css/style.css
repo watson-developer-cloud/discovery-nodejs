@@ -1,5 +1,6 @@
 html {
   font-size: 14px;
+  overflow-x: hidden;
 }
 .base--p {
   font-size: 1.1428em;
@@ -706,12 +707,30 @@ html {
 .hidden {
   display: none;
 }
-
 .query {
   padding: 0rem;
   background-color: #9753e1;
   position: relative;
   min-height: 500px;
+}
+.query--no-results-wrapper {
+  width: 100%;
+  text-align: center;
+}
+.query--no-results {
+  width: 70%;
+  color: #9753e1;
+  height: 12rem;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.query--no-results:hover {
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-y: auto;
+  text-overflow: initial;
 }
 .query--right-bg {
   height: 100%;
@@ -853,6 +872,8 @@ html {
 
 .query .text-input--dummy {
   font-size: 1em;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .query--text-input-container {
