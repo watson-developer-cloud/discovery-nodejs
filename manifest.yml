@@ -1,0 +1,5 @@
+applications:
+- name: discovery-news-demo
+  memory: 512M
+  services:
+    - Discovery-Demo
