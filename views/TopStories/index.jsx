@@ -6,15 +6,9 @@ import { Icon } from 'watson-react-components';
 
 const Story = props => (
   <div className="story">
-    <div className="story--date-and-score">
-      <span className="story--date">
+      <div className="story--date">
         {moment(props.date*1000).format("M/D/YYYY hh:MMa")}
-      </span>
-      <span className="story--score">
-        <span>Score:   </span>
-        {props.score}
-      </span>
-    </div>
+      </div>
     <a
       className="story--title base--a results--a"
       href={props.url}
@@ -24,9 +18,16 @@ const Story = props => (
     >
       {props.title}
     </a>
-    <p className="base--p story--source">
-      {props.host ? props.host : 'Placeholder Source'}
-    </p>
+    <div className="story--source-and-score">
+      <span className="base--p story--source">
+        {props.host ? props.host : 'Placeholder Source'}
+      </span>
+      <span className="story--source-score-divider"> | </span>
+      <span className="story--score base--p">
+        <span>Score:   </span>
+        {props.score}
+      </span>
+    </div>
   </div>
 );
 
@@ -37,7 +38,7 @@ const Select = props => (
       <option value="date">Date</option>
     </select>
     <span className="sort-select--icon">
-      <Icon style={{ transform: 'rotateZ(90deg)', width: '1.5rem', height: '1.5rem', fill: '#5A5A5A' }} type="right" />
+      <Icon style={{ transform: 'rotateZ(90deg)', width: '0.8rem', height: '0.8rem', fill: '#5A5A5A' }} type="right" />
     </span>
   </span>
 );
