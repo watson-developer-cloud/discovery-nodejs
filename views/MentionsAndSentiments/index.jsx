@@ -24,6 +24,14 @@ export default React.createClass({
       date: React.PropTypes.object,
     }),
   },
+
+  calculateMentionCount(data) {
+    let totalSum = data.reduce((acc, item) => {
+      return acc + item.positive + item.neutral + item.negative
+    }, 0);
+    return totalSum;
+  },
+
   getInitialState() {
     let mentions = getNames(this.props.mentions.aggregations[0].results)
       .filter((name) => !(new RegExp(this.props.query.text, 'gi').test(name))) // filter out a mention that matches the query text input
@@ -41,7 +49,13 @@ export default React.createClass({
           })),
     }));
 
-    mentions = mentions.sort((a, b) => (b.data.length - a.data.length))
+    mentions = mentions.map((mention) => {
+      return Object.assign({}, mention, {
+        totalMentions: this.calculateMentionCount(mention.data)
+      })
+    })
+
+    mentions = mentions.sort((a, b) => (b.totalMentions - a.totalMentions))
       .filter((name, i) => i < 4);
 
     // calculate sentiments
@@ -121,7 +135,7 @@ export default React.createClass({
                   header={
                     <div className="mentions-sentiments--data-row">
                       <div className="mentions-sentiments--data-name">{`${capitalize(this.props.query.text)} + ${item.name}`}</div>
-                      <div className="mentions-sentiments--data-mentions">{item.data.length}</div>
+                      <div className="mentions-sentiments--data-mentions">{this.calculateMentionCount(item.data)}</div>
                       <div className="mentions-sentiments--data-sentiment">{capitalize(item.sentiment)}</div>
                     </div>
                   }
