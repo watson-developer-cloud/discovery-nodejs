@@ -1199,20 +1199,33 @@ html {
 
 .story--date {
   float: left;
+<<<<<<< Updated upstream
   font-size: 0.7em;
   color: #5A5A5A;
   font-weight: 300;
   margin-top: 1rem;
   margin-bottom: 0.5em;
+=======
+  font-size: 0.8em;
+  color: #5A5A5A;
+  font-weight: 300;
+  margin-top: 1rem;
+>>>>>>> Stashed changes
 }
 
 .story--score {
   float: right;
+<<<<<<< Updated upstream
   font-size: 0.7em;
   color: #5A5A5A;
   font-weight: 300;
   border: 1px solid #d2cece;
   border-radius: 24px;
+=======
+  font-size: 0.8em;
+  color: #5A5A5A;
+  font-weight: 300;
+>>>>>>> Stashed changes
 }
 
 .story--title {

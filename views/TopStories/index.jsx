@@ -2,10 +2,19 @@ import React, { PropTypes } from 'react';
 import QuerySyntax from '../QuerySyntax/index.jsx';
 import queryBuilder from '../../query-builder.js';  // eslint-disable-line
 import moment from 'moment';
+import { Icon } from 'watson-react-components';
 
 const Story = props => (
   <div className="story">
-    <p>{moment(props.date*1000).format("M/D/YYYY hh:MMa")}</p>
+    <div className="story--date-and-score">
+      <span className="story--date">
+        {moment(props.date*1000).format("M/D/YYYY hh:MMa")}
+      </span>
+      <span className="story--score">
+        <span>Score:   </span>
+        {props.score}
+      </span>
+    </div>
     <a
       className="story--title base--a results--a"
       href={props.url}
@@ -18,19 +27,22 @@ const Story = props => (
     <p className="base--p story--source">
       {props.host ? props.host : 'Placeholder Source'}
     </p>
-    <p>
-      <span>Score:   </span>
-      {props.score}
-    </p>
   </div>
 );
 
 const Select = props => (
-  <select name="sort-select" id="sort-by" className="base--select" onChange={props.onChange} value={props.currSelected}>
-    <option value="relevance">Relevance</option>
-    <option value="date">Date</option>
-  </select>
+  <span>
+    <select name="sort-select" id="sort-by" className="base--select sort--select" onChange={props.onChange} value={props.currSelected}>
+      <option value="relevance">Relevance</option>
+      <option value="date">Date</option>
+    </select>
+    <span className="sort-select--icon">
+      <Icon style={{ transform: 'rotateZ(90deg)', width: '1.5rem', height: '1.5rem', fill: '#5A5A5A' }} type="right" />
+    </span>
+  </span>
 );
+
+//<Icon type="right" />
 
 //<option value="relevance" {this.state.sortType == 'Relevance' ? 'selected' : ''}>Relevance</option>
 
@@ -70,7 +82,6 @@ export default React.createClass({
   onChangeSort(e) {
     this.setState({ sortType: e.target.value });
     let sortVal = e.target.value == 'date' ? '-blekko.chrondate,-_score' : '';
-    console.log(sortVal);
     let newQuery = Object.assign({}, this.props.query, {
       sort: sortVal
     });
@@ -78,7 +89,6 @@ export default React.createClass({
   },
 
   render() {
-    console.log(this.state.sortType);
     return (
       <div>
         {!this.state.showQuery ? (
@@ -98,7 +108,7 @@ export default React.createClass({
             </p>
             <div className="sort-option">
               <span id="sort-label">
-                Sort By:
+                Sort by:
               </span>
               <span>
                 <Select onChange={this.onChangeSort} currSelected={this.state.sortType}/>
