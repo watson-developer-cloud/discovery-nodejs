@@ -59,13 +59,34 @@ html {
 }
 
 #sort-label {
-  padding-right: 1.5rem;
+  padding-right: 1rem;
+  font-size: 0.8em;
+  color: #121212;
 }
 
 #sort-by {
   display: inline;
-  width: 20rem;
+  width: 21rem;
+}
 
+.sort--select {
+  border-style: none;
+  border-bottom: thin solid black;
+  background: transparent;
+  width: 10em;
+}
+
+.base--select:focus {
+  border-style: none;
+  border-bottom: thin solid #9753e1;
+  background: transparent;
+  outline: none;
+}
+
+.sort-select--icon {
+  position: relative;
+  margin-left: -1.63rem;
+  z-index: -1;
 }
 
 /* react-dates styles */
@@ -1172,6 +1193,28 @@ html {
   margin-bottom: .5rem;
 }
 
+.story--date-and-score {
+
+}
+
+.story--date {
+  float: left;
+  font-size: 0.7em;
+  color: #5A5A5A;
+  font-weight: 300;
+  margin-top: 1rem;
+  margin-bottom: 0.5em;
+}
+
+.story--score {
+  float: right;
+  font-size: 0.7em;
+  color: #5A5A5A;
+  font-weight: 300;
+  border: 1px solid #d2cece;
+  border-radius: 24px;
+}
+
 .story--title {
   font-weight: 300;
   font-size: 1.3em;
@@ -1179,7 +1222,7 @@ html {
 }
 
 .story--source {
-  font-size: 1em;
+  font-size: 0.9em;
   margin-top: 0.05rem;
 }
 
