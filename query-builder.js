@@ -38,7 +38,7 @@ module.exports = {
       params.filter = `blekko.hostrank>20,blekko.chrondate>${moment(query.date.from).unix()},blekko.chrondate<${moment(query.date.to).unix()}`;
     }
     if (query.sort) {
-      params.sort = query.sort;
+      params.sort = query.sort == 'date' ? '-blekko.chrondate,-_score' : '-_score';
     }
     return params;
   },

@@ -43,10 +43,6 @@ const Select = props => (
   </span>
 );
 
-//<Icon type="right" />
-
-//<option value="relevance" {this.state.sortType == 'Relevance' ? 'selected' : ''}>Relevance</option>
-
 Story.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
@@ -82,7 +78,7 @@ export default React.createClass({
 
   onChangeSort(e) {
     this.setState({ sortType: e.target.value });
-    let sortVal = e.target.value == 'date' ? '-blekko.chrondate,-_score' : '';
+    let sortVal = e.target.value;
     let newQuery = Object.assign({}, this.props.query, {
       sort: sortVal
     });
