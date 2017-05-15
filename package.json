@@ -55,7 +55,7 @@
     "react-dom": "^15.4.2",
     "recharts": "^0.20.2",
     "uglifyify": "^3.0.4",
-    "watson-developer-cloud": "^2.14.8",
+    "watson-developer-cloud": "^2.31.0",
     "watson-react-components": "^0.5.8",
     "whatwg-fetch": "^2.0.1"
   },
@@ -69,6 +69,7 @@
     "mocha": "^3.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "react-addons-test-utils": "^15.5.1",
+    "sinon": "^2.2.0",
     "supertest": "^2.0.1"
   },
   "babel": {

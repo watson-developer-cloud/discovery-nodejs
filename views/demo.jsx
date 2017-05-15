@@ -133,6 +133,7 @@ export default React.createClass({
                     query={this.state.query}
                     stories={this.state.data.results}
                     onShowCode={this.toggleTopResults}
+                    onSortChange={this.handleQueryChange}
                   />
                 </div>
               </div>
