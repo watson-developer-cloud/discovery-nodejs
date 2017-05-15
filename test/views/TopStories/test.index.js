@@ -4,14 +4,6 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import TopStories from '../../../views/TopStories/index.jsx';
 
-function selectDate(storiesWrapper) {
-  storiesWrapper.find('.sort-option').nodes[0].props.children[1].props.children.props.onChange({target: { value : 'date'}});
-}
-
-function selectRelevance(storiesWrapper) {
-  storiesWrapper.find('.sort-option').nodes[0].props.children[1].props.children.props.onChange({target: { value : 'relevance'}});
-}
-
 describe('<TopStories/>', () => {
   let stories = [];
   let query_sample = {
@@ -22,29 +14,35 @@ describe('<TopStories/>', () => {
     'text': 'Sample Company'
   };
   const onSortChangeSpy = sinon.spy();
-  const expected = Object.assign({}, query_sample, {
-    sort: 'date'
-  });
   let wrapper = shallow(<TopStories stories={stories} query={query_sample} onSortChange={onSortChangeSpy} />);
+
+  function select(selectValue) {
+    wrapper.find('.sort-option').nodes[0].props.children[1].props.children.props.onChange({target: { value : selectValue}});
+  }
 
   describe('When I select Date', () => {
     beforeEach(() => {
-      selectDate(wrapper);
+      select('date');
     });
 
     it('calls onSortChange with Date', () => {
+      const expected = Object.assign({}, query_sample, {
+        sort: 'date'
+      });
       assert.ok(onSortChangeSpy.calledWith(expected));
     });
-  });
 
-  describe('When I select Relevance', () => {
-    beforeEach(() => {
-      selectDate(wrapper);
-      selectRelevance(wrapper);
-    });
+    describe('and then when I select Relevance', () => {
+      beforeEach(() => {
+        select('relevance');
+      });
 
-    it('calls onSortChange with Relevance', () => {
-      assert.ok(onSortChangeSpy.calledWith(expected));
+      it('calls onSortChange with Relevance', () => {
+        const expected = Object.assign({}, query_sample, {
+          sort: 'relevance'
+        });
+        assert.ok(onSortChangeSpy.calledWith(expected));
+      });
     });
   });
 });
