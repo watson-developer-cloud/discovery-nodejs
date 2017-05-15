@@ -88,6 +88,9 @@ For more details about developing applications that use Watson Developer Cloud s
 
 * For more details about the service, see the [documentation][docs] for the Discovery service.
 
+* *Hot Reload* is recommended for developing changes.
+    * This will allow changes to the code to immediately be reflected on the locally running instance of the application, rather than manually rebooting it.
+    * Install and use [this](https://github.com/remy/nodemon) according to the instructions found in the readme.
 
 ----
 
