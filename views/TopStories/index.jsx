@@ -62,9 +62,10 @@ export default React.createClass({
   },
 
   getInitialState() {
+    console.log(this.props.query.sort);
     return {
       showQuery: false,
-      sortType: (typeof this.props.query.sort === 'undefined' || this.props.query.sort == '') ? 'relevance' : 'date',
+      sortType: (typeof this.props.query.sort === 'undefined' || this.props.query.sort == 'relevance') ? 'relevance' : 'date',
     };
   },
 
