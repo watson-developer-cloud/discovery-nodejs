@@ -4,7 +4,7 @@ import { Icon } from 'watson-react-components';
 const NoContent = (props) => (
   <div className="no-content--wrapper">
     <div className="no-content--icon">
-      <Icon style={{ width: '3.7rem', height: '3.7rem', fill: '#00bfb0' }} type="info" />
+      <Icon type="info" />
     </div>
     <div className='no-content--messages'>
     <p className='no-content--set-message'>{props.message}</p>
@@ -18,10 +18,6 @@ const NoContent = (props) => (
     </div>
   </div>
 );
-
-// <p className={props.query.restrictedDateRange ? 'no-content--timeframe' : 'hidden'}>
-//   Try setting the timeframe to 'Last 2 Months'.
-// </p>
 
 NoContent.propTypes = {
   query: PropTypes.object,

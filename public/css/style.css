@@ -1672,6 +1672,11 @@ input:focus, button:focus, textarea:focus {
   left: 1em;
   padding-top: 1.1rem;
 }
+.no-content--icon .icon {
+  width: 3.7rem;
+  height: 3.7rem;
+  fill: #00bfb0;
+}
 .no-content--messages {
   position: relative;
   text-align: left;
@@ -1688,7 +1693,7 @@ input:focus, button:focus, textarea:focus {
   font-weight: 300;
   color: #000000;
   font-size: 1em;
-  margin-top: 0.8em;
+  margin-top: 0.3em;
 }
 .mentions-sentiments {
   padding-bottom: 2rem;
