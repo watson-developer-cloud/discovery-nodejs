@@ -13,6 +13,8 @@ import moment from 'moment';
 import QuerySyntax from '../QuerySyntax/index.jsx';
 import queryBuilder from '../../query-builder.js';  // eslint-disable-line
 import Accordion from '../Accordion/index.jsx';
+import NoContent from '../NoContent/index.jsx';
+import { Icon } from 'watson-react-components';
 import { getNames, getItemsForName } from './mentionsParser';
 import capitalize from './capitalize';
 
@@ -111,76 +113,87 @@ export default React.createClass({
             <div className="widget--header">
               <h2 className="base--h2 widget--header-title">{this.widgetTitle()}</h2>
               <div className="widget--header-spacer" />
-              <button
-                className="base--button widget--header-button"
-                href="#" onClick={this.onShowQuery}
-              >
-                View Query
-              </button>
-            </div>
-            <p className="base--p mentions-sentiments--description">
-              Identify frequently co-mentioned entities and follow trends in sentiment.
-            </p>
-            <div className="mentions-sentiments--header-row">
-              <div className="mentions-sentiments--header-row-name">Topic</div>
-              <div className="mentions-sentiments--header-row-mentions">Number of Mentions</div>
-              <div className="mentions-sentiments--header-row-sentiment">Sentiment</div>
-            </div>
-            <div className="accordions">
-              {this.state.mentions.map((item, index) =>
-                <Accordion
-                  key={index}
-                  show={this.state.mentions[index].toggle}
-                  onClickToggle={() => this.toggleContent(index)}
-                  header={
-                    <div className="mentions-sentiments--data-row">
-                      <div className="mentions-sentiments--data-name">{`${capitalize(this.props.query.text)} + ${item.name}`}</div>
-                      <div className="mentions-sentiments--data-mentions">{this.calculateMentionCount(item.data)}</div>
-                      <div className="mentions-sentiments--data-sentiment">{capitalize(item.sentiment)}</div>
+                <button
+                  className="base--button widget--header-button"
+                  href="#" onClick={this.onShowQuery}
+                  >
+                  View Query
+                </button>
+              </div>
+              <p className="base--p mentions-sentiments--description">
+                Identify frequently co-mentioned entities and follow trends in sentiment.
+              </p>
+              <div className="accordions--wrapper">
+                {this.state.mentions.length > 0 ? (
+                  <div>
+                    <div className="mentions-sentiments--header-row">
+                      <div className="mentions-sentiments--header-row-name">Topic</div>
+                      <div className="mentions-sentiments--header-row-mentions">Number of Mentions</div>
+                      <div className="mentions-sentiments--header-row-sentiment">Sentiment</div>
                     </div>
-                  }
-                  content={(
-                    <ResponsiveContainer width={'100%'} height={250}>
-                      <LineChart data={item.data} margin={{ top: 40, right: 30, bottom: 0, left: -20 }}>
-                        <Line
-                          type="linear"
-                          dataKey="positive"
-                          name="Positive Sentiment"
-                          stroke="#00a78f"
-                          strokeWidth="3"
-                          dot={{
-                            stroke: '#40d5bb',
-                            strokeWidth: 2,
-                            r: 4,
-                          }}
-                          activeDot={{ strokeWidth: 2, r: 4, fill: '#40d5bb' }}
-                        />
-                        <Line
-                          type="linear"
-                          dataKey="negative"
-                          name="Negative Sentiment"
-                          stroke="#dc267f"
-                          strokeWidth="3"
-                          strokeDasharray="6, 8"
-                          dot={{
-                            stroke: '#ff509e',
-                            strokeDasharray: '0',
-                            strokeWidth: 2,
-                            r: 4,
-                          }}
-                          activeDot={{ strokeWidth: 2, r: 4, fill: '#ff509e' }}
-                        />
-                        <CartesianGrid stroke="#ccc" />
-                        <XAxis dataKey="date" tickLine={false} />
-                        <YAxis padding={{ top: 10}} label="&nbsp;&#x23; of articles" allowDecimals={false} tickLine={false} />
-                        <Legend
-                          align="left"
-                          iconSize={20}
-                        />
-                        <Tooltip />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  )}
+                    <div className="accordions">
+                    {this.state.mentions.map((item, index) =>
+                      <Accordion
+                        key={index}
+                        show={this.state.mentions[index].toggle}
+                        onClickToggle={() => this.toggleContent(index)}
+                        header={
+                          <div className="mentions-sentiments--data-row">
+                            <div className="mentions-sentiments--data-name">{`${capitalize(this.props.query.text)} + ${item.name}`}</div>
+                            <div className="mentions-sentiments--data-mentions">{this.calculateMentionCount(item.data)}</div>
+                            <div className="mentions-sentiments--data-sentiment">{capitalize(item.sentiment)}</div>
+                          </div>
+                        }
+                        content={(
+                          <ResponsiveContainer width={'100%'} height={250}>
+                            <LineChart data={item.data} margin={{ top: 40, right: 30, bottom: 0, left: -20 }}>
+                              <Line
+                                type="linear"
+                                dataKey="positive"
+                                name="Positive Sentiment"
+                                stroke="#00a78f"
+                                strokeWidth="3"
+                                dot={{
+                                  stroke: '#40d5bb',
+                                  strokeWidth: 2,
+                                  r: 4,
+                                }}
+                                activeDot={{ strokeWidth: 2, r: 4, fill: '#40d5bb' }}
+                              />
+                              <Line
+                                type="linear"
+                                dataKey="negative"
+                                name="Negative Sentiment"
+                                stroke="#dc267f"
+                                strokeWidth="3"
+                                strokeDasharray="6, 8"
+                                dot={{
+                                  stroke: '#ff509e',
+                                  strokeDasharray: '0',
+                                  strokeWidth: 2,
+                                  r: 4,
+                                }}
+                                activeDot={{ strokeWidth: 2, r: 4, fill: '#ff509e' }}
+                              />
+                              <CartesianGrid stroke="#ccc" />
+                              <XAxis dataKey="date" tickLine={false} />
+                              <YAxis padding={{ top: 10}} label="&nbsp;&#x23; of articles" allowDecimals={false} tickLine={false} />
+                              <Legend
+                                align="left"
+                                iconSize={20}
+                              />
+                              <Tooltip />
+                            </LineChart>
+                          </ResponsiveContainer>
+                        )}
+                      />
+                    )}
+                    </div>
+                  </div>
+              ) : (
+                <NoContent
+                  query={this.props.query}
+                  message={'There are no analytics available for your query.'}
                 />
               )}
             </div>
