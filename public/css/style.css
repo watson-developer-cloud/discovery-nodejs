@@ -59,6 +59,36 @@ html {
   color: #9753e1;
 }
 
+#sort-label {
+  padding-right: 0.5rem;
+  font-size: 0.8em;
+  color: #121212;
+}
+
+#sort-by {
+  display: inline;
+  width: 10rem;
+  padding: 0.4rem 0.1rem;
+}
+
+.sort--select {
+  border-style: none;
+  border-bottom: thin solid #5A5A5A;
+  background: transparent;
+  font-size: 0.9em;
+}
+
+.sort--select:focus {
+  outline: none;
+  border-bottom: thin solid #9753e1;
+}
+
+.sort-select--icon {
+  position: relative;
+  margin-left: -0.76rem;
+  z-index: -1;
+}
+
 /* react-dates styles */
 
 .CalendarDay {
@@ -1183,15 +1213,34 @@ html {
   margin-bottom: .5rem;
 }
 
+.story--date {
+  font-size: 0.7em;
+  color: #5A5A5A;
+  font-weight: 300;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .story--title {
   font-weight: 300;
   font-size: 1.3em;
   line-height: 1.3;
 }
 
-.story--source {
-  font-size: 1em;
+.story--source-and-score {
   margin-top: 0.05rem;
+}
+
+.story--source {
+  font-size: 0.9em;
+}
+
+.story--source-score-divider {
+  color: #C7C7C7;
+}
+
+.story--score {
+  font-size: 0.9em;
 }
 
 .sentiment--description {

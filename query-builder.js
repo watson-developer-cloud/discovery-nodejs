@@ -28,14 +28,17 @@ module.exports = {
   build(query, full) {
     const params = {
       count: 5,
-      return: 'title,enrichedTitle.text,url,host',
-      query: `"${query.text}",language:english`,
+      return: 'title,enrichedTitle.text,url,host,blekko.chrondate',
+      query: `"${query.text}",language:english`
     };
     if (full) {
       params.aggregations = [].concat(entities, sentiments, mentions);
     }
     if (query.date) {
       params.filter = `blekko.hostrank>20,blekko.chrondate>${moment(query.date.from).unix()},blekko.chrondate<${moment(query.date.to).unix()}`;
+    }
+    if (query.sort) {
+      params.sort = query.sort == 'date' ? '-blekko.chrondate,-_score' : '-_score';
     }
     return params;
   },
