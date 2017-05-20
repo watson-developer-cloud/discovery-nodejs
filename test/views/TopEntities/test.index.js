@@ -1,7 +1,6 @@
 import React from 'react';
 import assert from 'assert';
 import { shallow } from 'enzyme';
-//import NoContent from '../../../views/NoContent/index.jsx';
 import { Tabs } from 'watson-react-components';
 import TopEntities from '../../../views/TopEntities/index.jsx';
 
@@ -67,7 +66,7 @@ describe('<TopEntities />', () => {
     let topics;
     let companies;
     let people;
-    
+
     beforeEach(() => {
       wrapper = shallow(<TopEntities entities={entities_partially_empty_sample} />);
       topics = wrapper.find(Tabs).nodes[0].props.children[0].props;
