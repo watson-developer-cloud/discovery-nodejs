@@ -32,12 +32,14 @@ export default React.createClass({
   },
 
   filterEmptySentimentResults(sentiments) {
-    var filtered_results = sentiments.results.filter(function(source){
-      return source.aggregations[0].results.length > 0;
+    return sentiments.results.filter((result) =>  {
+      return result.aggregations[0].results.length > 0;
     });
-    sentiments.results = filtered_results;
-    return sentiments;
   },
+
+  // return sentiments.results.filter((result) => {
+  //   return result.aggregation[0].results.length > 0;
+  // });
 
   render() {
     return (
