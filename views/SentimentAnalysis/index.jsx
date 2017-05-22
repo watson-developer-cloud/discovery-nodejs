@@ -37,10 +37,6 @@ export default React.createClass({
     });
   },
 
-  // return sentiments.results.filter((result) => {
-  //   return result.aggregation[0].results.length > 0;
-  // });
-
   render() {
     return (
       <div>
