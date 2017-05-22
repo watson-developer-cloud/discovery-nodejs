@@ -1659,6 +1659,42 @@ input:focus, button:focus, textarea:focus {
 }
 .accordion--graph {
 }
+.no-content--wrapper {
+  border: 1px solid #e3e3e3;
+  height: 6em;
+  width: 100%;
+  display: inline-flex;
+  padding-bottom: 6rem;
+  background: #f0f3f6;
+}
+.no-content--icon {
+  position: relative;
+  left: 1em;
+  padding-top: 1.1rem;
+}
+.no-content--icon .icon {
+  width: 3.7rem;
+  height: 3.7rem;
+  fill: #00bfb0;
+}
+.no-content--messages {
+  position: relative;
+  text-align: left;
+  padding-left: 1.7em;
+  width: 100%;
+  top: -10%;
+}
+.no-content--set-message {
+  font-weight: 300;
+  color: #000000;
+  font-size: 1.4em;
+}
+.no-content--recommendations {
+  font-weight: 300;
+  color: #000000;
+  font-size: 1em;
+  margin-top: 0.3em;
+}
 .mentions-sentiments {
   padding-bottom: 2rem;
 }

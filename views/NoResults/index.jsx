@@ -8,8 +8,12 @@ const NoResults = (props) => (
         {props.query ? props.query.text : '' }
       </div>
     </div>
-    <p className={props.query.restrictedDateRange ? 'base--h3' : 'hidden'}>
-      Try setting the timeframe to 'Last 2 Months'.
+    <p className='base--h3'>
+    {props.query.restrictedDateRange ? (
+      "Try expanding the timeframe."
+    ) : (
+      "Try modifying your query."
+    )}
     </p>
   </div>
 );

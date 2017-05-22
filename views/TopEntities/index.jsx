@@ -3,7 +3,7 @@ import { Tabs, Pane } from 'watson-react-components';
 import Cloud from './cloud.jsx';
 import QuerySyntax from '../QuerySyntax/index.jsx';
 import queryBuilder from '../../query-builder.js';  // eslint-disable-line
-
+import NoContent from '../NoContent/index.jsx';
 
 export default React.createClass({
   displayName: 'TopEntities',
@@ -50,9 +50,19 @@ export default React.createClass({
             </p>
             <Tabs selected={0}>
               <Pane label="Topics">
-                <Cloud data={this.props.entities.topics} />
+                {this.props.entities.topics.length > 0 ? (
+                  <Cloud data={this.props.entities.topics} />
+                  ) : (
+                    <NoContent
+                      query={this.props.query}
+                      message={'No Topics found.'}
+                    />
+                  )
+                }
+
               </Pane>
               <Pane label="Companies">
+              {this.props.entities.companies.length > 0 ? (
                 <Cloud
                   data={
                     this.props.entities.companies ?
@@ -61,9 +71,24 @@ export default React.createClass({
                     []
                   }
                 />
+                ) : (
+                  <NoContent
+                    query={this.props.query}
+                    message={'No Companies found.'}
+                  />
+                )
+              }
               </Pane>
               <Pane label="People">
+              {this.props.entities.people.length > 0 ? (
                 <Cloud data={this.props.entities.people} />
+                ) : (
+                <NoContent
+                  query={this.props.query}
+                  message={'No People found.'}
+                />
+                )
+              }
               </Pane>
             </Tabs>
           </div>

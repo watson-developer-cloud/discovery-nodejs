@@ -2,6 +2,7 @@ import React from 'react';
 import assert from 'assert';
 import { shallow } from 'enzyme';
 import Accordion from '../../../views/Accordion/index.jsx';
+import NoContent from '../../../views/NoContent/index.jsx';
 import MentionsAndSentiments from '../../../views/MentionsAndSentiments/index.jsx';
 
 describe('<MentionsAndSentiments />', () => {
@@ -192,6 +193,19 @@ describe('<MentionsAndSentiments />', () => {
     ]
   };
 
+  let mentions_empty_sample = {
+    'type': 'filter',
+    'match': 'enrichedTitle.entities.type::Company',
+    'matching_results': '0',
+    'aggregations': [
+      {
+        'type': 'term',
+        'field': 'enrichedTitle.entities.text',
+        'results': []
+      }
+    ]
+  };
+
   let query_sample = {
     date: {
       'from': '20170301',
@@ -218,5 +232,10 @@ describe('<MentionsAndSentiments />', () => {
     assert.equal(firstMentionCount, 28);
     assert.equal(secondMentionCount, 20);
     assert.equal(thirdMentionCount, 10);
+  });
+
+  it('Shows the No Content component when there are no results', () => {
+    let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_empty_sample} />);
+    assert.equal(wrapper.find(NoContent).length, 1);
   });
 });
