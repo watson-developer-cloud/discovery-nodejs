@@ -31,6 +31,14 @@ export default React.createClass({
     this.setState({ showQuery: false });
   },
 
+  filterEmptySentimentResults(sentiments) {
+    var filtered_results = sentiments.results.filter(function(source){
+      return source.aggregations[0].results.length > 0;
+    });
+    sentiments.results = filtered_results;
+    return sentiments;
+  },
+
   render() {
     return (
       <div>
@@ -50,7 +58,7 @@ export default React.createClass({
               Extract sentiment from news articles across a variety of news sources (10 random sources used below).
             </p>
             <SentimentChart sentiment={this.props.sentiment} showLabels size="large" />
-            <SentimentBySource sentiments={this.props.sentiments} />
+            <SentimentBySource sentiments={this.filterEmptySentimentResults(this.props.sentiments)} />
           </div>
         ) : (
           <QuerySyntax
