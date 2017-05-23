@@ -1,9 +1,9 @@
 import React from 'react';
 import assert from 'assert';
 import { shallow } from 'enzyme';
-import Accordion from '../../../views/Accordion/index.jsx';
-import NoContent from '../../../views/NoContent/index.jsx';
-import MentionsAndSentiments from '../../../views/MentionsAndSentiments/index.jsx';
+import Accordion from '../../../../views/Accordion/index.jsx';
+import NoContent from '../../../../views/NoContent/index.jsx';
+import MentionsAndSentiments from '../../../../views/MentionsAndSentiments/index.jsx';
 
 describe('<MentionsAndSentiments />', () => {
   let mentions_sample = {

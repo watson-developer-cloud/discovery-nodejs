@@ -1,8 +1,8 @@
 import React from 'react';
 import assert from 'assert';
 import { shallow } from 'enzyme';
-import SentimentAnalysis from '../../../views/SentimentAnalysis/index.jsx';
-import SentimentBySource from '../../../views/SentimentAnalysis/SentimentBySource.jsx';
+import SentimentAnalysis from '../../../../views/SentimentAnalysis/index.jsx';
+import SentimentBySource from '../../../../views/SentimentAnalysis/SentimentBySource.jsx';
 
 describe('<SentimentAnalysis />', () => {
 
