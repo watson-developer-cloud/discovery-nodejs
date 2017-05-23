@@ -1,10 +1,10 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 set -e
 
 if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then
-  npm run test-unit;
+  npm test;
 else
   echo "Building on fork: not running integration tests.";
-  npm test;
+  npm run test-unit;
 fi
