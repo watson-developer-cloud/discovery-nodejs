@@ -140,7 +140,7 @@ export default React.createClass({
                         header={
                           <div className="mentions-sentiments--data-row">
                             <div className="mentions-sentiments--data-name">{`${capitalize(this.props.query.text)} + ${item.name}`}</div>
-                            <div className="mentions-sentiments--data-mentions">{this.calculateMentionCount(item.data)}</div>
+                            <div className="mentions-sentiments--data-mentions">{item.totalMentions}</div>
                             <div className="mentions-sentiments--data-sentiment">{capitalize(item.sentiment)}</div>
                           </div>
                         }
