@@ -6,7 +6,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_aba75b5b520c_key -iv $encrypted_aba75b5b520c_iv
   -in .env.enc -out .env -d
 script:
-  - ./.travis_script.sh
+  - .travis_script.sh
 cache:
   directories:
   - node_modules
