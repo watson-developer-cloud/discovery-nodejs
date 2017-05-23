@@ -2,7 +2,7 @@ import React from 'react';
 import assert from 'assert';
 import { shallow } from 'enzyme';
 import { Tabs } from 'watson-react-components';
-import TopEntities from '../../../views/TopEntities/index.jsx';
+import TopEntities from '../../../../views/TopEntities/index.jsx';
 
 describe('<TopEntities />', () => {
   let entities_partially_empty_sample = {

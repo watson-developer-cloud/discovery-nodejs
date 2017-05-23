@@ -16,11 +16,11 @@
 
 const path = require('path');
 // load default variables for testing
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
-const app = require('../../app');
+const app = require('../../../app');
 const request = require('supertest');
-const handleError = require('../utils/handleError');
+const handleError = require('../../utils/handleError');
 
 describe('express', () => {
   let testNewsApp;

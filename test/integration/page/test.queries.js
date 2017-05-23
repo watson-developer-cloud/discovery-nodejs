@@ -16,13 +16,13 @@
 
 const path = require('path');
 // load default variables for testing
-require('dotenv').config({ path: path.join(__dirname, '../../.env') });
+require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
 
 if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<username>') {
   // eslint-disable-next-line
   console.log('Skipping integration tests because DISCOVERY_USERNAME is null.');
 } else {
-  const app = require('../../app');
+  const app = require('../../../app');
   const request = require('supertest');
   const API_ENDPOINT = '/api/query';
   const moment = require('moment');
