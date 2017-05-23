@@ -9,46 +9,44 @@ describe('<SentimentAnalysis />', () => {
   describe('When SentimentAnalysis is loaded', () => {
 
     let partially_empty_sources = {
-       "type":"term",
-       "field":"blekko.basedomain",
-       "results":[
-          {
-             "key":"feedblitz.com",
-             "matching_results":58,
-             "aggregations":[
+      'type':'term',
+      'field':'blekko.basedomain',
+      'results':[
+        {
+          'key':'feedblitz.com',
+          'matching_results':58,
+          'aggregations':[
+            {
+              'type':'term',
+              'field':'docSentiment.type',
+              'results':[
                 {
-                   "type":"term",
-                   "field":"docSentiment.type",
-                   "results":[
-                      {
-                         "key":"positive",
-                         "matching_results":56
-                      }
-                   ]
+                  'key':'positive',
+                  'matching_results':56
                 }
-             ]
-          },
-          {
-             "key":"aolcdn.com",
-             "matching_results":1,
-             "aggregations":[
-                {
-                   "type":"term",
-                   "field":"docSentiment.type",
-                   "results":[
+              ]}
+          ]
+        },
+        {
+          'key':'aolcdn.com',
+          'matching_results':1,
+          'aggregations':[
+            {
+              'type':'term',
+              'field':'docSentiment.type',
+              'results':[
 
-                   ]
-                }
-             ]
-          }
-       ]
-    }
+              ]
+            }]
+        }
+      ]
+    };
 
     let sentiment_sample = {
-      "field":"",
-      "type":"",
-      "results":[]
-    }
+      'field':'',
+      'type':'',
+      'results':[]
+    };
 
     let filtered_sentiments;
 
