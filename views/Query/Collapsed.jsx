@@ -140,7 +140,9 @@ export default React.createClass({
                 </div>
               </div>
             </div>
-            <div className="query--date-buttons-container">
+            <div className={this.state.query.text.length ?
+                ("query--date-buttons-container") :
+                ("query--date-buttons-container query--date-buttons-disabled")}>
               <ButtonsGroup
                 type="radio"  // radio, button, or checkbox
                 name="radio-buttons"
