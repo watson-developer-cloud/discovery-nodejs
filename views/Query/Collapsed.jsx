@@ -13,15 +13,18 @@ export default React.createClass({
         from: React.PropTypes.string,
         to: React.PropTypes.string,
       }),
+      enabled: React.PropTypes.bool
     }).isRequired,
   },
 
   getInitialState() {
+    let new_query = this.props.query;
+    new_query.enabled = this.props.query.text.length > 0;
     return {
       focusedInput: null,
       startDate: moment(this.props.query.date.from),
       endDate: moment(this.props.query.date.to),
-      query: this.props.query,
+      query: new_query,
       restrictedDateRange: false,
       dateButtons: [{ value: 'lastweek',
         id: 'rb-1',  // id's must be unique across the entire page. Default value is name-value
@@ -51,6 +54,12 @@ export default React.createClass({
     };
   },
 
+  buttonState() {
+    return this.state.query.enabled ?
+        ("query--date-buttons-container") :
+        ("query--date-buttons-disabled query--date-buttons-container")
+  },
+
   onFocusChange(focusedInput) {
     this.setState({ focusedInput });
   },
@@ -74,7 +83,8 @@ export default React.createClass({
    * On Input text change
    */
   handleInputChange(event) {
-    this.setState({ query: { text: event.target.value } });
+    this.setState({ query: { text: event.target.value,
+      enabled: event.target.value.length > 0 } });
   },
   /**
    * On Input text key press
@@ -140,9 +150,7 @@ export default React.createClass({
                 </div>
               </div>
             </div>
-            <div className={this.state.query.text.length ?
-                ("query--date-buttons-container") :
-                ("query--date-buttons-container query--date-buttons-disabled")}>
+            <div className={this.buttonState()}>
               <ButtonsGroup
                 type="radio"  // radio, button, or checkbox
                 name="radio-buttons"

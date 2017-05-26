@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import TopStories from '../../../../views/TopStories/index.jsx';
 
-describe('<TopStories/>', () => {
+describe('<TopStories />', () => {
   let stories = [];
   let query_sample = {
     date: {
