@@ -844,7 +844,7 @@ html {
   color: white;
   font-size: 1em;
   max-width: calc(100% - 5rem);
-  box-shadow: 0 2px 0 0 white;
+  box-shadow: none;
   padding-bottom: 1.1rem;
 }
 
@@ -902,7 +902,7 @@ html {
 
 .query .text-input--dummy {
   font-size: 1em;
-  width: 100%;
+  width: calc(100% - 3rem);
   overflow-x: hidden;
 }
 
@@ -1859,6 +1859,11 @@ input:focus, button:focus, textarea:focus {
   .query--flex-container .query--date-buttons-container {
     font-size: smaller;
   }
+}
+
+.query--date-buttons-disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 @media (max-width: 600px) {
