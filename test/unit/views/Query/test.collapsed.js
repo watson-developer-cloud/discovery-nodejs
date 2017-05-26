@@ -25,9 +25,6 @@ describe('<Collapsed />', () => {
 
     let wrapper;
 
-    let radioButtons;
-    let searchTextBox;
-
     beforeEach(() => {
       wrapper = shallow(<Collapsed onQueryChange={onQueryChange} query={query_empty_sample} />);
     });
