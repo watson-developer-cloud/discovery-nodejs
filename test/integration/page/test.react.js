@@ -21,7 +21,7 @@ require('babel-register');
 describe('react', function () {
   this.timeout(5000);
   it('should render some html', () => {
-    const index = require('../../views/index.jsx').default;
+    const index = require('../../../views/index.jsx').default;
     const element = React.createElement(index, null);
     const result = ReactDOMServer.renderToString(element);
     assert(result);

@@ -2,9 +2,9 @@ import React from 'react';
 import assert from 'assert';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
-import TopStories from '../../../views/TopStories/index.jsx';
+import TopStories from '../../../../views/TopStories/index.jsx';
 
-describe('<TopStories/>', () => {
+describe('<TopStories />', () => {
   let stories = [];
   let query_sample = {
     date: {
