@@ -35,7 +35,8 @@ const NewsDemoApp = new Promise((resolve, reject) => {
       reject(error);
     } else {
       const news_environment_id = response.environments.find((environment) => {
-        return environment.read_only == true;
+        return environment.read_only == true &&
+               environment.environment_id !== 'system';
       }).environment_id;
 
       discovery.getCollections({
