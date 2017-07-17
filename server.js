@@ -3,7 +3,9 @@
 require('dotenv').config({ silent: true });
 
 // Deployment tracking
-require('cf-deployment-tracker-client').track();
+if (!process.env.DEMO_DEPLOY) {
+  require('cf-deployment-tracker-client').track();
+}
 
 const server = require('./app');
 const port = process.env.PORT || 3000;
