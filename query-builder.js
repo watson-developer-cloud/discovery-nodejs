@@ -3,7 +3,7 @@ const { fields } = require('./fields');
 // Aggregations used to build the different parts of the UI
 const moment = require('moment');
 // ISO 8601 date format accepted by the service
-const ISO_8601 = 'YYYY-MM-DDThh:mm:ssZZ'
+const ISO_8601 = 'YYYY-MM-DDThh:mm:ssZZ';
 
 const entities = [
   `nested(${fields.title_entity}).filter(${fields.title_entity_type}:Company).term(${fields.title_entity_text})`,

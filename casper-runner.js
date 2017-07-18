@@ -17,6 +17,7 @@
 require('dotenv').config();
 
 if (!process.env.DISCOVERY_USERNAME) {
+  // eslint-disable-next-line no-console
   console.log('Skipping integration tests because DISCOVERY_USERNAME is null');
 } else {
   const spawn = require('child_process').spawn;
