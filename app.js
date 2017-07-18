@@ -34,9 +34,12 @@ const NewsDemoApp = new Promise((resolve, reject) => {
       console.error(error);
       reject(error);
     } else {
+      // const news_environment_id = response.environments.find((environment) => {
+      //   return environment.read_only == true &&
+      //          environment.environment_id !== 'system';
+      // }).environment_id;
       const news_environment_id = response.environments.find((environment) => {
-        return environment.read_only == true &&
-               environment.environment_id !== 'system';
+        return environment.name === 'news-closed-beta';
       }).environment_id;
 
       discovery.getCollections({
@@ -46,7 +49,10 @@ const NewsDemoApp = new Promise((resolve, reject) => {
           console.error(error);
           reject(error);
         } else {
-          const news_collection_id = response.collections[0].collection_id;
+          // const news_collection_id = response.collections[0].collection_id;
+          const news_collection_id = response.collections.find((collection) => {
+            return collection.name === 'en-20170715-20170715';
+          }).collection_id;
 
           // Bootstrap application settings
           const express = require('express');

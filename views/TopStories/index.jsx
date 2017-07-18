@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react';
 import QuerySyntax from '../QuerySyntax/index.jsx';
 import queryBuilder from '../../query-builder.js';  // eslint-disable-line
 import moment from 'moment';
+import { fields } from '../../fields';
 import { Icon } from 'watson-react-components';
 
 const Story = props => (
   <div className="story">
       <div className="story--date">
-        {moment(props.date*1000).format("M/D/YYYY hh:MMa")}
+        {moment(props.date).format("M/D/YYYY hh:MMa")}
       </div>
     <a
       className="story--title base--a results--a"
@@ -115,10 +116,10 @@ export default React.createClass({
               {this.props.stories.map(item =>
                 <Story
                   key={item.id}
-                  title={item.enrichedTitle ? item.enrichedTitle.text : (item.title || 'Untitled')}
-                  url={item.url}
-                  host={item.host}
-                  date={item.blekko.chrondate}
+                  title={(item[fields.title] || 'Untitled')}
+                  url={item[fields.url]}
+                  host={item[fields.host]}
+                  date={item[fields.publication_date]}
                   score={item.score}
                 />)
               }

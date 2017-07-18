@@ -1,23 +1,26 @@
 
+const { fields } = require('./fields');
 // Aggregations used to build the different parts of the UI
 const moment = require('moment');
+// ISO 8601 date format accepted by the service
+const ISO_8601 = 'YYYY-MM-DDThh:mm:ssZZ'
 
 const entities = [
-  'nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Company).term(enrichedTitle.entities.text)',
-  'nested(enrichedTitle.entities).filter(enrichedTitle.entities.type:Person).term(enrichedTitle.entities.text)',
-  'term(enrichedTitle.concepts.text)',
+  `nested(${fields.title_entity}).filter(${fields.title_entity_type}:Company).term(${fields.title_entity_text})`,
+  `nested(${fields.title_entity}).filter(${fields.title_entity_type}:Person).term(${fields.title_entity_text})`,
+  `term(${fields.title_concept_text})`,
 ];
 
 const sentiments = [
-  'term(blekko.basedomain).term(docSentiment.type)',
-  'term(docSentiment.type)',
-  'min(docSentiment.score)',
-  'max(docSentiment.score)',
+  `term(${fields.host}).term(${fields.text_document_sentiment_type})`,
+  `term(${fields.text_document_sentiment_type})`,
+  `min(${fields.text_document_sentiment_score})`,
+  `max(${fields.text_document_sentiment_score})`,
 ];
 
 const mentions = [
   // eslint-disable-next-line
-  'filter(enrichedTitle.entities.type::Company).term(enrichedTitle.entities.text).timeslice(blekko.chrondate,1day).term(docSentiment.type)'
+  `filter(${fields.title_entity_type}::Company).term(${fields.title_entity_text}).timeslice(${fields.publication_date},1day).term(${fields.text_document_sentiment_type})`
 ];
 
 module.exports = {
@@ -28,17 +31,17 @@ module.exports = {
   build(query, full) {
     const params = {
       count: 5,
-      return: 'title,enrichedTitle.text,url,host,blekko.chrondate',
-      query: `"${query.text}",language:english`
+      return: `${fields.title},${fields.url},${fields.host},${fields.publication_date}`,
+      query: `"${query.text}",${fields.language}:english`
     };
     if (full) {
       params.aggregations = [].concat(entities, sentiments, mentions);
     }
     if (query.date) {
-      params.filter = `blekko.hostrank>20,blekko.chrondate>${moment(query.date.from).unix()},blekko.chrondate<${moment(query.date.to).unix()}`;
+      params.filter = `${fields.publication_date}>${moment(query.date.from).format(ISO_8601)},${fields.publication_date}<${moment(query.date.to).format(ISO_8601)}`;
     }
     if (query.sort) {
-      params.sort = query.sort == 'date' ? '-blekko.chrondate,-_score' : '-_score';
+      params.sort = query.sort == 'date' ? `-${fields.publication_date},-_score` : '-_score';
     }
     return params;
   },
