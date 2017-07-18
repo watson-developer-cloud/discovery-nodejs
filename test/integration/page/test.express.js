@@ -23,22 +23,13 @@ const request = require('supertest');
 const handleError = require('../../utils/handleError');
 
 describe('express', () => {
-  let testNewsApp;
-
-  before((done) => {
-    app.then((newsApp) => {
-      testNewsApp = newsApp;
-      done();
-    });
-  });
-
   it('load home page when GET /', (done) => {
     handleError(done, () => {
-      request(testNewsApp).get('/').expect(200);
+      request(app).get('/').expect(200);
     });
   });
 
   it('404 when page not found', () =>
-    request(testNewsApp).get('/foo/bar').expect(404)
+    request(app).get('/foo/bar').expect(404)
   );
 });
