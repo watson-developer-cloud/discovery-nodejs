@@ -32,7 +32,7 @@ module.exports = {
     const params = {
       count: 5,
       return: `${fields.title},${fields.url},${fields.host},${fields.publication_date}`,
-      query: `"${query.text}",${fields.language}:english`
+      query: `"${query.text}",${fields.language}:(english|en)`
     };
     if (full) {
       params.aggregations = [].concat(entities, sentiments, mentions);
