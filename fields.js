@@ -2,7 +2,7 @@ module.exports.fields = {
   title: 'title',
   url: 'url',
   host: 'host',
-  publication_date: 'publication_date',
+  publication_date: 'crawl_date',
   language: 'language',
   title_entity: 'enriched_title.entities',
   title_entity_text: 'enriched_title.entities.text',
