@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import React from 'react';
 import { Icon } from 'watson-react-components';
 
+import { fields } from '../fields';
 import Query from './Query/index.jsx';
 import TopEntities from './TopEntities/index.jsx';
 import TopStories from './TopStories/index.jsx';
@@ -11,7 +12,7 @@ import NoResults from './NoResults/index.jsx';
 
 const hasResults = (entities) =>
   entities.aggregations && entities.aggregations.length > 0 &&
-  entities.aggregations[0].field === 'enrichedTitle.entities.text';
+  entities.aggregations[0].field === fields.title_entity_text;
 
 const parseQueryResults = (data) => {
   const parsedData = {
@@ -24,32 +25,32 @@ const parseQueryResults = (data) => {
 
   data.aggregations.forEach((aggregation) => {
     // sentiments by source
-    if (aggregation.type === 'term' && aggregation.field.startsWith('blekko.basedomain')) {
+    if (aggregation.type === 'term' && aggregation.field === fields.host) {
       parsedData.sentiments = aggregation;
     }
     // Overall sentiment
-    if (aggregation.type === 'term' && aggregation.field.startsWith('docSentiment')) {
+    if (aggregation.type === 'term' && aggregation.field === fields.text_document_sentiment_type) {
       parsedData.sentiment = aggregation;
     }
 
-    if (aggregation.type === 'term' && aggregation.field === 'enrichedTitle.concepts.text') {
+    if (aggregation.type === 'term' && aggregation.field === fields.title_concept_text) {
       parsedData.entities.topics = aggregation.results;
     }
 
     // Mentions and sentiments
     if (aggregation.type === 'filter' &&
       'aggregations' in aggregation &&
-      aggregation.aggregations[0].field === 'enrichedTitle.entities.text') {
+      aggregation.aggregations[0].field === fields.title_entity_text) {
       parsedData.mentions = aggregation;
     }
 
-    if (aggregation.type === 'nested' && aggregation.path === 'enrichedTitle.entities') {
+    if (aggregation.type === 'nested' && aggregation.path === fields.title_entity) {
       const entities = aggregation.aggregations;
       if (entities && entities.length > 0 && hasResults(entities[0])) {
-        if (entities[0].match === 'enrichedTitle.entities.type:Company') {
+        if (entities[0].match === `${fields.title_entity_type}:Company`) {
           parsedData.entities.companies = entities[0].aggregations[0].results;
         }
-        if (entities[0].match === 'enrichedTitle.entities.type:Person') {
+        if (entities[0].match === `${fields.title_entity_type}:Person`) {
           parsedData.entities.people = entities[0].aggregations[0].results;
         }
       }

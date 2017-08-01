@@ -9,74 +9,72 @@ Demo: https://discovery-news-demo.mybluemix.net/
 
 ## Getting started
 
+To deploy this repository as-is, click the "Deploy to Bluemix" button
+
+[![Deploy to Bluemix][deploy_button_url]][deploy_url]
+
+When this button is clicked, it will begin the process of creating a deployment toolchain based on the master branch of the repo into Bluemix and you will have to modify the application name to the name of the host you want to put it at. The default will get mapped to {organization/user}-{repo_name}-{timestamp}.
+
+After creating the toolchain, you must either run the deployment script as part of the [Continuous Delivery](https://www.ibm.com/devops/method/content/deliver/practice_continuous_delivery/) which will create the service for you, or refer to the [Setup a IBM Watson Discovery Service](#setup-a-ibm-watson-discovery-service) section below to create it manually.
+
+For more details about developing applications that use Watson Developer Cloud services in Bluemix, see [Getting started with Watson Developer Cloud and Bluemix][getting_started].
+
+## Development
+
+### Setup a IBM Watson Discovery Service
+
 1. You need a Bluemix account. If you don't have one, [sign up][sign_up].
 
 1. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
 
 1. Connect to Bluemix with the command line tool.
 
-  ```sh
-  cf api https://api.ng.bluemix.net
-  cf login
-  ```
+   ```sh
+   cf api https://api.ng.bluemix.net
+   cf login
+   ```
 
 1. Create and retrieve service keys to access the [Discovery][service_url] service:
 
-  ```none
-  cf create-service discovery standard my-discovery-service
-  cf create-service-key my-discovery-service myKey
-  cf service-key my-discovery-service myKey
-  ```
+   ```none
+   cf create-service discovery standard Discovery-Demo
+   cf create-service-key Discovery-Demo myKey
+   cf service-key Discovery-Demo myKey
+   ```
 
 1. Create an `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
-  ```none
-  cp .env.example .env
-  ```
-  Update the `.env` with your service instance information from step 4
+   ```none
+   cp .env.example .env
+   ```
+   Update the `.env` with your service instance information from step 4
 
-  The `.env` file will look something like the following:
+   The `.env` file will look something like the following:
 
-  ```none
-  DISCOVERY_USERNAME=<username>
-  DISCOVERY_PASSWORD=<password>
-  ```
+   ```none
+   DISCOVERY_USERNAME=<username>
+   DISCOVERY_PASSWORD=<password>
+   ```
+
+### Run the demo locally
 
 1. Install the needed application dependencies with this command:
 
-  ```none
-  npm install
-  ```
+   ```none
+   npm install
+   ```
 
 1. Start the application locally:
 
-  ```none
-  npm start
-  ```
+   ```none
+   npm start
+   ```
 
 1. Point your browser to [http://localhost:3000](http://localhost:3000).
 
-1. Create a `manifest.yml` in the project directory that looks like this:
-   ```yml
-   name: <your application name>
-   command: npm start
-   services:
-     - my-discovery-service
-   ```
-
-1. When you're ready, push the application to Bluemix and bind your Discovery service with:
-
-  ```none
-  cf push <your application name>
-  ```
-
-After completing these steps, you are ready to test your application. Start a browser and enter the URL of your application.
-
-            <your application name>.mybluemix.net
-
-
-For more details about developing applications that use Watson Developer Cloud services in Bluemix, see [Getting started with Watson Developer Cloud and Bluemix][getting_started].
-
+* *Hot Reload* is recommended for developing changes.
+    * This will allow changes to the code to immediately be reflected on the locally running instance of the application, rather than manually rebooting it.
+    * Install and use [this](https://github.com/remy/nodemon) according to the instructions found in the readme.
 
 ## Troubleshooting
 
@@ -87,10 +85,6 @@ For more details about developing applications that use Watson Developer Cloud s
   ```
 
 * For more details about the service, see the [documentation][docs] for the Discovery service.
-
-* *Hot Reload* is recommended for developing changes.
-    * This will allow changes to the code to immediately be reflected on the locally running instance of the application, rather than manually rebooting it.
-    * Install and use [this](https://github.com/remy/nodemon) according to the instructions found in the readme.
 
 ----
 
@@ -142,3 +136,5 @@ This data is collected from the `package.json` file in the sample application an
 [service_url]: http://www.ibm.com/watson/developercloud/discovery.html
 [docs]: http://www.ibm.com/watson/developercloud/doc/discovery/index.html
 [sign_up]: https://console.ng.bluemix.net/registration/
+[deploy_button_url]: https://deployment-tracker.mybluemix.net/stats/790012bd5928500d2f22b1e09648756b/button.svg
+[deploy_url]: https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/discovery-nodejs.git

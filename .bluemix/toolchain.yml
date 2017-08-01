@@ -1,0 +1,53 @@
+version: '2'
+template:
+  name: "Watson Discovery Service News Demo"
+  description: "A demo designed to get developers started using the Watson Discovery Service with news data"
+  header: '![](toolchain.svg)'
+  required:
+    - sample-build
+    - sample-repo
+  info:
+    git url: >-
+      [https://github.com/watson-developer-cloud/discovery-nodejs](https://github.com/watson-developer-cloud/discovery-nodejs)
+    git branch: >-
+      [master](https://github.com/watson-developer-cloud/discovery-nodejs/tree/master)
+toolchain:
+  name: 'watson-discovery-service-news-demo-{{timestamp}}'
+  template:
+    getting_started: |-
+      **Your toolchain is ready!**
+
+      Commit a change to the Git repo to trigger a new build and deployment or run it manually using the Continuous Delivery tool below.
+services:
+  sample-repo:
+    service_id: hostedgit
+    parameters:
+      repo_name: '{{toolchain.name}}'
+      repo_url: 'https://github.com/watson-developer-cloud/discovery-nodejs'
+      type: clone
+      has_issues: true
+      enable_traceability: true
+  sample-build:
+    service_id: pipeline
+    parameters:
+      services:
+        - sample-repo
+      name: '{{services.sample-repo.parameters.repo_name}}'
+      ui-pipeline: true
+      configuration:
+        content:
+          $ref: pipeline.yml
+          $refType: text
+        env:
+          SAMPLE_REPO: sample-repo
+          CF_APP_NAME: '{{form.pipeline.parameters.prod-app-name}}'
+          PROD_SPACE_NAME: '{{form.pipeline.parameters.prod-space}}'
+          PROD_ORG_NAME: '{{form.pipeline.parameters.prod-organization}}'
+          PROD_REGION_ID: '{{form.pipeline.parameters.prod-region}}'
+        execute: false
+form:
+  pipeline:
+    parameters:
+      prod-app-name: '{{services.sample-repo.parameters.repo_name}}'
+    schema:
+      $ref: deploy.json

@@ -16,6 +16,9 @@
 
 const queryBuilder = require('./query-builder');
 
+const NEWS_ENVIRONMENT_ID = 'system';
+const NEWS_COLLECTION_ID = 'news';
+
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 const discovery = new DiscoveryV1({
   // If unspecified here, the DISCOVERY_USERNAME and
@@ -23,63 +26,38 @@ const discovery = new DiscoveryV1({
   // After that, the SDK will fall back to the bluemix-provided VCAP_SERVICES environment property
   // username: '<username>',
   // password: '<password>',
-  version_date: '2016-11-09',
+  version_date: '2017-08-01',
   qs: { aggregation: `[${queryBuilder.aggregations.join(',')}]` },
 });
 
-// gather news collection info
-const NewsDemoApp = new Promise((resolve, reject) => {
-  discovery.getEnvironments({}, (error, response) => {
+// Bootstrap application settings
+const express = require('express');
+const app = express();
+require('./config/express')(app);
+
+app.get('/', (req, res) => {
+  res.render('index', {
+    BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
+  });
+});
+
+// setup query endpoint for news
+app.post('/api/query', (req, res, next) => {
+  const params = Object.assign({}, queryBuilder.build(req.body), {
+    environment_id: NEWS_ENVIRONMENT_ID,
+    collection_id: NEWS_COLLECTION_ID
+  });
+
+  discovery.query(params, (error, response) => {
     if (error) {
-      console.error(error);
-      reject(error);
+      next(error);
     } else {
-      const news_environment_id = response.environments.find((environment) => {
-        return environment.read_only == true;
-      }).environment_id;
-
-      discovery.getCollections({
-        environment_id: news_environment_id
-      }, (error, response) => {
-        if (error) {
-          console.error(error);
-          reject(error);
-        } else {
-          const news_collection_id = response.collections[0].collection_id;
-
-          // Bootstrap application settings
-          const express = require('express');
-          const app = express();
-          require('./config/express')(app);
-
-          app.get('/', (req, res) => {
-            res.render('index', {
-              BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
-            });
-          });
-          // setup query endpoint for news
-          app.post('/api/query', (req, res, next) => {
-            const params = Object.assign({}, queryBuilder.build(req.body), {
-              environment_id: news_environment_id,
-              collection_id: news_collection_id
-            });
-
-            discovery.query(params, (error, response) => {
-              if (error) {
-                next(error);
-              } else {
-                res.json(response);
-              }
-            });
-          });
-
-          // error-handler settings for all other routes
-          require('./config/error-handler')(app);
-          resolve(app);
-        }
-      });
+      res.json(response);
     }
   });
 });
 
-module.exports = NewsDemoApp;
+// error-handler settings for all other routes
+require('./config/error-handler')(app);
+
+module.exports = app;
