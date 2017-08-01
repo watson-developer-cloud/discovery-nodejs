@@ -31,37 +31,37 @@ if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<user
     this.timeout(20000);
     it('Should work with "IBM"', () =>
       request(app)
-      .post(API_ENDPOINT)
-      .query({ text: 'IBM' })
-      .expect(200)
+        .post(API_ENDPOINT)
+        .query({ text: 'IBM' })
+        .expect(200)
     );
 
     it('Should work with "International Business Machines"', () =>
       request(app)
-      .post(API_ENDPOINT)
-      .query({ text: 'International Business Machines' })
-      .expect(200)
+        .post(API_ENDPOINT)
+        .query({ text: 'International Business Machines' })
+        .expect(200)
     );
 
     it('Should work with "General Motors"', () =>
       request(app)
-      .post(API_ENDPOINT)
-      .query({ text: 'General Motors' })
-      .expect(200)
+        .post(API_ENDPOINT)
+        .query({ text: 'General Motors' })
+        .expect(200)
     );
 
     it('Should work with a date range', () =>
       request(app)
-      .post(API_ENDPOINT)
-      .query({
-        text: 'IBM',
-        date: {
-          from: moment().subtract(2, 'months').format('YYYYMMDD'),
-          to: moment().format('YYYYMMDD')
-        },
-        restrictedDateRange: true
-      })
-      .expect(200)
+        .post(API_ENDPOINT)
+        .query({
+          text: 'IBM',
+          date: {
+            from: moment().subtract(2, 'months').format('YYYYMMDD'),
+            to: moment().format('YYYYMMDD')
+          },
+          restrictedDateRange: true
+        })
+        .expect(200)
     );
   });
 }
