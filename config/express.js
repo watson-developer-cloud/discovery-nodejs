@@ -44,7 +44,7 @@ module.exports = function (app) {
     require('./security')(app);
   }
 
-  app.use(express.static(path.join(__dirname, '..', 'public')));
+  app.use(express.static(path.join(__dirname, '..', 'build')));
   app.use(morgan('dev'));
 };
 
