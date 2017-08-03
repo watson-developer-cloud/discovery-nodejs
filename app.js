@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const queryBuilder = require('./query-builder');
+const queryBuilder = require('./src/query-builder');
 
 const NEWS_ENVIRONMENT_ID = 'system';
 const NEWS_COLLECTION_ID = 'news';
@@ -32,13 +32,12 @@ const discovery = new DiscoveryV1({
 
 // Bootstrap application settings
 const express = require('express');
+const path = require('path');
 const app = express();
 require('./config/express')(app);
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
-  });
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // setup query endpoint for news
