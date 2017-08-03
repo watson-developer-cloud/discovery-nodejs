@@ -11,6 +11,12 @@ stages:
   - name: Build
     type: builder
     artifact_dir: ''
+    build_type: npm
+    script: |
+      #!/bin/bash
+      export PATH=/opt/IBM/node-v6.7.0/bin:$PATH
+      npm install
+      npm run build
 - name: Deploy
   inputs:
   - type: job
@@ -69,7 +75,7 @@ stages:
       name: ${TEMP_APP_NAME}
       instances: ${CF_INSTANCES}
       memory: ${CF_MEMORY}
-      command: npm start
+      command: node server.js
       services:
         - ${DISCOVERY_SERVICE_NAME}
 
