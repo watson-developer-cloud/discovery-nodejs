@@ -29,7 +29,7 @@ module.exports = function (app) {
       'Origin, X-Requested-With, Content-Type, Accept'
     );
 
-    if ('OPTIONS' == req.method) {
+    if ('OPTIONS' === req.method) {
       res.sendStatus(200);
     } else {
       next();

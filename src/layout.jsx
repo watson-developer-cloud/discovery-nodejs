@@ -18,7 +18,7 @@ export default function Layout(props) {
         apiReference="http://www.ibm.com/watson/developercloud/discovery/api"
         startInBluemix="https://console.ng.bluemix.net/registration/?target=/catalog/services/discovery/"
         version="GA"
-        description="Add a cognitive search and content analytics engine to applications to identify patterns, trends and actionable insights that drive better decision-making."
+        description={process.env.REACT_APP_DESCRIPTION}
       />
       <Demo />
       <div style={{ marginTop: '0rem' }}>
