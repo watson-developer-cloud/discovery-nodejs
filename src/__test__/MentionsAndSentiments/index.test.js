@@ -6,236 +6,236 @@ import NoContent from '../../NoContent';
 import MentionsAndSentiments from '../../MentionsAndSentiments';
 
 describe('<MentionsAndSentiments />', () => {
-  let mentions_sample = {
-    'type': 'filter',
-    'match': 'enrichedTitle.entities.type::Company',
-    'matching_results': 10591,
-    'aggregations': [
+  const mentions_sample = {
+    type: 'filter',
+    match: 'enrichedTitle.entities.type::Company',
+    matching_results: 10591,
+    aggregations: [
       {
-        'type': 'term',
-        'field': 'enrichedTitle.entities.text',
-        'results': [
+        type: 'term',
+        field: 'enrichedTitle.entities.text',
+        results: [
           {
-            'key': 'Company One',
-            'matching_results': 20,
-            'aggregations': [
+            key: 'Company One',
+            matching_results: 20,
+            aggregations: [
               {
-                'type': 'timeslice',
-                'field': 'blekko.chrondate',
-                'interval': '1d',
-                'results': [
+                type: 'timeslice',
+                field: 'blekko.chrondate',
+                interval: '1d',
+                results: [
                   {
-                    'key_as_string': '1488412800',
-                    'key': 1488412800000,
-                    'matching_results': 20,
-                    'aggregations': [
+                    key_as_string: '1488412800',
+                    key: 1488412800000,
+                    matching_results: 20,
+                    aggregations: [
                       {
-                        'type': 'term',
-                        'field':'docSentiment.type',
-                        'results': [
+                        type: 'term',
+                        field: 'docSentiment.type',
+                        results: [
                           {
-                            'key':'positive',
-                            'matching_results': 5
+                            key: 'positive',
+                            matching_results: 5,
                           },
                           {
-                            'key':'negative',
-                            'matching_results': 7
+                            key: 'negative',
+                            matching_results: 7,
                           },
                           {
-                            'key':'neutral',
-                            'matching_results': 8
-                          }
-                        ]
-                      }
-                    ]
+                            key: 'neutral',
+                            matching_results: 8,
+                          },
+                        ],
+                      },
+                    ],
                   },
-                ]
-              }
-            ]
+                ],
+              },
+            ],
           },
           {
-            'key': 'Company Two',
-            'matching_results': 10,
-            'aggregations': [
+            key: 'Company Two',
+            matching_results: 10,
+            aggregations: [
               {
-                'type': 'timeslice',
-                'field': 'blekko.chrondate',
-                'interval': '1d',
-                'results': [
+                type: 'timeslice',
+                field: 'blekko.chrondate',
+                interval: '1d',
+                results: [
                   {
-                    'key_as_string': '1488326400',
-                    'key': 1488326400000,
-                    'matching_results': 1,
-                    'aggregations': [
+                    key_as_string: '1488326400',
+                    key: 1488326400000,
+                    matching_results: 1,
+                    aggregations: [
                       {
-                        'type': 'term',
-                        'field': 'docSentiment.type',
-                        'results': [
+                        type: 'term',
+                        field: 'docSentiment.type',
+                        results: [
                           {
-                            'key': 'positive',
-                            'matching_results': 1
-                          }
-                        ]
-                      }
-                    ]
+                            key: 'positive',
+                            matching_results: 1,
+                          },
+                        ],
+                      },
+                    ],
                   },
                   {
-                    'key_as_string': '1488412800',
-                    'key': 1488412800000,
-                    'matching_results': 9,
-                    'aggregations': [
+                    key_as_string: '1488412800',
+                    key: 1488412800000,
+                    matching_results: 9,
+                    aggregations: [
                       {
-                        'type': 'term',
-                        'field': 'docSentiment.type',
-                        'results': [
+                        type: 'term',
+                        field: 'docSentiment.type',
+                        results: [
                           {
-                            'key': 'positive',
-                            'matching_results': 2
+                            key: 'positive',
+                            matching_results: 2,
                           },
                           {
-                            'key': 'negative',
-                            'matching_results': 3
+                            key: 'negative',
+                            matching_results: 3,
                           },
                           {
-                            'key': 'neutral',
-                            'matching_results': 4
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
+                            key: 'neutral',
+                            matching_results: 4,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
           {
-            'key': 'Company Three',
-            'matching_results': 10,
-            'aggregations': [
+            key: 'Company Three',
+            matching_results: 10,
+            aggregations: [
               {
-                'type': 'timeslice',
-                'field': 'blekko.chrondate',
-                'interval': '1d',
-                'results': [
+                type: 'timeslice',
+                field: 'blekko.chrondate',
+                interval: '1d',
+                results: [
                   {
-                    'key_as_string': '1488326400',
-                    'key': 1488326400000,
-                    'matching_results': 1,
-                    'aggregations': [
+                    key_as_string: '1488326400',
+                    key: 1488326400000,
+                    matching_results: 1,
+                    aggregations: [
                       {
-                        'type': 'term',
-                        'field': 'docSentiment.type',
-                        'results': [
+                        type: 'term',
+                        field: 'docSentiment.type',
+                        results: [
                           {
-                            'key': 'positive',
-                            'matching_results': 1
-                          }
-                        ]
-                      }
-                    ]
+                            key: 'positive',
+                            matching_results: 1,
+                          },
+                        ],
+                      },
+                    ],
                   },
                   {
-                    'key_as_string': '1488412800',
-                    'key': 1488412800000,
-                    'matching_results': 9,
-                    'aggregations': [
+                    key_as_string: '1488412800',
+                    key: 1488412800000,
+                    matching_results: 9,
+                    aggregations: [
                       {
-                        'type': 'term',
-                        'field': 'docSentiment.type',
-                        'results': [
+                        type: 'term',
+                        field: 'docSentiment.type',
+                        results: [
                           {
-                            'key': 'positive',
-                            'matching_results': 2
+                            key: 'positive',
+                            matching_results: 2,
                           },
                           {
-                            'key': 'negative',
-                            'matching_results': 3
+                            key: 'negative',
+                            matching_results: 3,
                           },
                           {
-                            'key': 'neutral',
-                            'matching_results': 4
-                          }
-                        ]
-                      }
-                    ]
+                            key: 'neutral',
+                            matching_results: 4,
+                          },
+                        ],
+                      },
+                    ],
                   },
                   {
-                    'key_as_string': '1488412800',
-                    'key': 1488412800000,
-                    'matching_results': 18,
-                    'aggregations': [
+                    key_as_string: '1488412800',
+                    key: 1488412800000,
+                    matching_results: 18,
+                    aggregations: [
                       {
-                        'type': 'term',
-                        'field': 'docSentiment.type',
-                        'results': [
+                        type: 'term',
+                        field: 'docSentiment.type',
+                        results: [
                           {
-                            'key': 'positive',
-                            'matching_results': 5
+                            key: 'positive',
+                            matching_results: 5,
                           },
                           {
-                            'key': 'negative',
-                            'matching_results': 6
+                            key: 'negative',
+                            matching_results: 6,
                           },
                           {
-                            'key': 'neutral',
-                            'matching_results': 7
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
+                            key: 'neutral',
+                            matching_results: 7,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   };
 
-  let mentions_empty_sample = {
-    'type': 'filter',
-    'match': 'enrichedTitle.entities.type::Company',
-    'matching_results': '0',
-    'aggregations': [
+  const mentions_empty_sample = {
+    type: 'filter',
+    match: 'enrichedTitle.entities.type::Company',
+    matching_results: '0',
+    aggregations: [
       {
-        'type': 'term',
-        'field': 'enrichedTitle.entities.text',
-        'results': []
-      }
-    ]
+        type: 'term',
+        field: 'enrichedTitle.entities.text',
+        results: [],
+      },
+    ],
   };
 
-  let query_sample = {
+  const query_sample = {
     date: {
-      'from': '20170301',
-      'to': '20170501'
+      from: '20170301',
+      to: '20170501',
     },
-    'text': 'Sample Company'
+    text: 'Sample Company',
   };
 
   it('Orders results by number of mentions', () => {
-    let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
-    let firstMention = wrapper.find(Accordion).nodes[0].props.header.props.children[0].props.children;
-    let secondMention = wrapper.find(Accordion).nodes[1].props.header.props.children[0].props.children;
-    let thirdMention = wrapper.find(Accordion).nodes[2].props.header.props.children[0].props.children;
+    const wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
+    const firstMention = wrapper.find(Accordion).nodes[0].props.header.props.children[0].props.children;
+    const secondMention = wrapper.find(Accordion).nodes[1].props.header.props.children[0].props.children;
+    const thirdMention = wrapper.find(Accordion).nodes[2].props.header.props.children[0].props.children;
     assert.equal(firstMention, 'Sample Company + Company Three');
     assert.equal(secondMention, 'Sample Company + Company One');
     assert.equal(thirdMention, 'Sample Company + Company Two');
   });
 
   it('Mentions should equal the sum of positive, negative, and neutral mentions', () => {
-    let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
-    let firstMentionCount = wrapper.find(Accordion).nodes[0].props.header.props.children[1].props.children;
-    let secondMentionCount = wrapper.find(Accordion).nodes[1].props.header.props.children[1].props.children;
-    let thirdMentionCount = wrapper.find(Accordion).nodes[2].props.header.props.children[1].props.children;
+    const wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
+    const firstMentionCount = wrapper.find(Accordion).nodes[0].props.header.props.children[1].props.children;
+    const secondMentionCount = wrapper.find(Accordion).nodes[1].props.header.props.children[1].props.children;
+    const thirdMentionCount = wrapper.find(Accordion).nodes[2].props.header.props.children[1].props.children;
     assert.equal(firstMentionCount, 28);
     assert.equal(secondMentionCount, 20);
     assert.equal(thirdMentionCount, 10);
   });
 
   it('Shows the No Content component when there are no results', () => {
-    let wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_empty_sample} />);
+    const wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_empty_sample} />);
     assert.equal(wrapper.find(NoContent).length, 1);
   });
 });

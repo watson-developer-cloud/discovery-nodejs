@@ -9,5 +9,5 @@ module.exports.fields = {
   title_entity_type: 'enriched_title.entities.type',
   title_concept_text: 'enriched_title.concepts.text',
   text_document_sentiment_type: 'enriched_text.sentiment.document.label',
-  text_document_sentiment_score: 'enriched_text.sentiment.document.score'
+  text_document_sentiment_score: 'enriched_text.sentiment.document.score',
 };

@@ -7,20 +7,20 @@ describe('<Collapsed />', () => {
   describe('When Collapsed bar is loaded', () => {
     function onQueryChange() {}
 
-    let query_sample = {
+    const query_sample = {
       date: {
-        'from': '20170301',
-        'to': '20170501'
+        from: '20170301',
+        to: '20170501',
       },
-      'text': 'Sample Company'
+      text: 'Sample Company',
     };
 
-    let query_empty_sample = {
+    const query_empty_sample = {
       date: {
-        'from': '20170301',
-        'to': '20170501'
+        from: '20170301',
+        to: '20170501',
       },
-      'text': ''
+      text: '',
     };
 
     let wrapper;

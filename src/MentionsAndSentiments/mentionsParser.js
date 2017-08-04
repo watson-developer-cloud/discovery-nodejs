@@ -8,7 +8,7 @@ export function getNames(resultList) {
 }
 
 export function getItemsForName(resultList, name) {
-  const items = resultList.filter((item) => item.key === name);
+  const items = resultList.filter(item => item.key === name);
 
   if (items.length > 0) {
     const target = items[0];

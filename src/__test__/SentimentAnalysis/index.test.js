@@ -5,53 +5,51 @@ import SentimentAnalysis from '../../SentimentAnalysis';
 import SentimentBySource from '../../SentimentAnalysis/SentimentBySource';
 
 describe('<SentimentAnalysis />', () => {
-
   describe('When SentimentAnalysis is loaded', () => {
-
-    let partially_empty_sources = {
-      'type':'term',
-      'field':'blekko.basedomain',
-      'results':[
+    const partially_empty_sources = {
+      type: 'term',
+      field: 'blekko.basedomain',
+      results: [
         {
-          'key':'feedblitz.com',
-          'matching_results':58,
-          'aggregations':[
+          key: 'feedblitz.com',
+          matching_results: 58,
+          aggregations: [
             {
-              'type':'term',
-              'field':'docSentiment.type',
-              'results':[
+              type: 'term',
+              field: 'docSentiment.type',
+              results: [
                 {
-                  'key':'positive',
-                  'matching_results':56
-                }
-              ]}
-          ]
+                  key: 'positive',
+                  matching_results: 56,
+                },
+              ] },
+          ],
         },
         {
-          'key':'aolcdn.com',
-          'matching_results':1,
-          'aggregations':[
+          key: 'aolcdn.com',
+          matching_results: 1,
+          aggregations: [
             {
-              'type':'term',
-              'field':'docSentiment.type',
-              'results':[
+              type: 'term',
+              field: 'docSentiment.type',
+              results: [
 
-              ]
-            }]
-        }
-      ]
+              ],
+            }],
+        },
+      ],
     };
 
-    let sentiment_sample = {
-      'field':'',
-      'type':'',
-      'results':[]
+    const sentiment_sample = {
+      field: '',
+      type: '',
+      results: [],
     };
 
     let filtered_sentiments;
 
     beforeEach(() => {
-      let wrapper = shallow(<SentimentAnalysis sentiments={partially_empty_sources} sentiment={sentiment_sample} />);
+      const wrapper = shallow(<SentimentAnalysis sentiments={partially_empty_sources} sentiment={sentiment_sample} />);
       filtered_sentiments = wrapper.find(SentimentBySource).props().sentiments;
     });
 

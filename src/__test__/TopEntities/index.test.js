@@ -5,64 +5,64 @@ import { Tabs } from 'watson-react-components';
 import TopEntities from '../../TopEntities';
 
 describe('<TopEntities />', () => {
-  let query = {
+  const query = {
     text: 'IBM',
-    restrictedDateRange: false
+    restrictedDateRange: false,
   };
-  let entities_partially_empty_sample = {
-    'companies': [],
-    'people': [
+  const entities_partially_empty_sample = {
+    companies: [],
+    people: [
       {
-        'key': 'Madeleine Albright',
-        'matching_results': 3
+        key: 'Madeleine Albright',
+        matching_results: 3,
       },
       {
-        'key': 'Abu Dhabi',
-        'matching_results': 1
-      }
+        key: 'Abu Dhabi',
+        matching_results: 1,
+      },
     ],
-    'topics': [
+    topics: [
       {
-        'key': 'Israel',
-        'matching_results': 4
+        key: 'Israel',
+        matching_results: 4,
       },
       {
-        'key': 'Abu Dhabi',
-        'matching_results': 3
+        key: 'Abu Dhabi',
+        matching_results: 3,
       },
       {
-        'key': 'Arabic language',
-        'matching_results': 3
+        key: 'Arabic language',
+        matching_results: 3,
       },
       {
-        'key': 'Asia',
-        'matching_results': 3
+        key: 'Asia',
+        matching_results: 3,
       },
       {
-        'key': 'Far East',
-        'matching_results': 3
+        key: 'Far East',
+        matching_results: 3,
       },
       {
-        'key': 'Madeleine Albright',
-        'matching_results': 3
+        key: 'Madeleine Albright',
+        matching_results: 3,
       },
       {
-        'key': 'Middle East',
-        'matching_results': 3
+        key: 'Middle East',
+        matching_results: 3,
       },
       {
-        'key': 'Near East',
-        'matching_results': 3
+        key: 'Near East',
+        matching_results: 3,
       },
       {
-        'key': 'Orientalism',
-        'matching_results': 3
+        key: 'Orientalism',
+        matching_results: 3,
       },
       {
-        'key': 'United Arab Emirates',
-        'matching_results': 3
-      }
-    ]
+        key: 'United Arab Emirates',
+        matching_results: 3,
+      },
+    ],
   };
 
   describe('When the TopEntities widget has content for some tabs', () => {
@@ -73,17 +73,17 @@ describe('<TopEntities />', () => {
 
     beforeEach(() => {
       wrapper = shallow(<TopEntities
-                          entities={entities_partially_empty_sample}
-                          query={query}
-                        />);
+        entities={entities_partially_empty_sample}
+        query={query}
+      />);
       topics = wrapper.find(Tabs).nodes[0].props.children[0].props;
       companies = wrapper.find(Tabs).nodes[0].props.children[1].props;
       people = wrapper.find(Tabs).nodes[0].props.children[2].props;
     });
 
     it('Shows the Cloud component for a tab with results', () => {
-      let topics_cloud_content = topics.children.props.data;
-      let people_cloud_content = people.children.props.data;
+      const topics_cloud_content = topics.children.props.data;
+      const people_cloud_content = people.children.props.data;
       assert.equal(topics_cloud_content.length, 10);
       assert.equal(people_cloud_content.length, 2);
     });
