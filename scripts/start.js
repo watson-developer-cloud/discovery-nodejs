@@ -7,18 +7,21 @@ const client = spawn('./node_modules/.bin/react-scripts', ['start'], {
   }),
 });
 client.stdout.on('data', (data) => {
+  // eslint-disable-next-line no-console
   console.log(`${data}`);
 });
 
 client.stderr.on('data', (data) => {
+  // eslint-disable-next-line no-console
   console.log(`${data}`);
 });
 
-function kill_server(callback) {
+function killServer(callback) {
   const ppid = server.pid;
   const killer = spawn('pkill', ['-9', '-P', ppid]);
 
-  killer.on('exit', (code, signal) => {
+  killer.on('exit', () => {
+    // eslint-disable-next-line no-console
     console.log(`PPID ${ppid} killed`);
 
     if (callback) {
@@ -30,13 +33,13 @@ function kill_server(callback) {
 client.on('error', (error) => {
   // eslint-disable-next-line no-console
   console.log(`ERROR: ${error}`);
-  kill_server(() => {
+  killServer(() => {
     process.exit(1);
   });
 });
 
 client.on('close', () => {
-  kill_server(() => {
+  killServer(() => {
     process.exit(1);
   });
 });

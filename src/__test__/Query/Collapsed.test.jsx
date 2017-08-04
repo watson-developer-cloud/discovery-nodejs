@@ -7,7 +7,7 @@ describe('<Collapsed />', () => {
   describe('When Collapsed bar is loaded', () => {
     function onQueryChange() {}
 
-    const query_sample = {
+    const querySample = {
       date: {
         from: '20170301',
         to: '20170501',
@@ -15,7 +15,7 @@ describe('<Collapsed />', () => {
       text: 'Sample Company',
     };
 
-    const query_empty_sample = {
+    const queryEmptySample = {
       date: {
         from: '20170301',
         to: '20170501',
@@ -26,7 +26,12 @@ describe('<Collapsed />', () => {
     let wrapper;
 
     beforeEach(() => {
-      wrapper = shallow(<Collapsed onQueryChange={onQueryChange} query={query_empty_sample} />);
+      wrapper = shallow(
+        <Collapsed
+          onQueryChange={onQueryChange}
+          query={queryEmptySample}
+        />,
+      );
     });
 
     describe('When input text is empty', () => {
@@ -36,7 +41,12 @@ describe('<Collapsed />', () => {
 
       describe('Then when the input text is not empty', () => {
         beforeEach(() => {
-          wrapper = shallow(<Collapsed onQueryChange={onQueryChange} query={query_sample} />);
+          wrapper = shallow(
+            <Collapsed
+              onQueryChange={onQueryChange}
+              query={querySample}
+            />,
+          );
         });
 
         it('Does not disable the timeframe bar', () => {

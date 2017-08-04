@@ -1,21 +1,8 @@
 import React from 'react';
-import { object, string, oneOfType, func } from 'prop-types';
+import { string, oneOfType, shape, func } from 'prop-types';
 import { Tabs, Pane, Code } from 'watson-react-components';
 
-QuerySyntax.propTypes = {
-  query: oneOfType([
-    object,
-    string, // json string
-  ]).isRequired,
-  response: oneOfType([
-    object,
-    string, // json string
-  ]).isRequired,
-  title: string.isRequired,
-  onGoBack: func,
-}
-
-export default function QuerySyntax({ query, response, title, onGoBack }) {
+function QuerySyntax({ query, response, title, onGoBack }) {
   return (
     <div className="code-results">
       <div className="code-results--header-row">
@@ -65,3 +52,34 @@ export default function QuerySyntax({ query, response, title, onGoBack }) {
     </div>
   );
 }
+
+QuerySyntax.propTypes = {
+  query: oneOfType([
+    shape({
+      text: string.isRequired,
+      date: shape({
+        from: string.isRequired,
+        to: string.isRequired,
+      }).isRequired,
+    }),
+    string, // json string
+  ]).isRequired,
+  response: oneOfType([
+    shape({
+      text: string.isRequired,
+      date: shape({
+        from: string.isRequired,
+        to: string.isRequired,
+      }).isRequired,
+    }),
+    string, // json string
+  ]).isRequired,
+  title: string.isRequired,
+  onGoBack: func,
+};
+
+QuerySyntax.defaultProps = {
+  onGoBack: null,
+};
+
+export default QuerySyntax;

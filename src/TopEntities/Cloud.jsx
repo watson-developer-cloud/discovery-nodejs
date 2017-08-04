@@ -1,31 +1,24 @@
 import React from 'react';
-import { object, number, arrayOf } from 'prop-types';
+import { string, number, shape, arrayOf } from 'prop-types';
 
-Cloud.propTypes = {
-  data: arrayOf(object).isRequired,
-  max_size: number,
-  min_size: number
-}
-
-export default function Cloud({ data, max_size = 28, min_size = 12 }) {
+function Cloud({ data, maxSize, minSize }) {
   const largest = data
-                    ? data.reduce((prev, cur) => {
-                        return cur.matching_results > prev
-                                ? cur.matching_results
-                                : prev;
-                      }, 0)
-                    : 0;
-  const ratio = max_size / largest;
-  const computeSize = (value) => Math.max(min_size, value * ratio);
+    ? data.reduce((prev, cur) => (cur.matching_results > prev
+      ? cur.matching_results
+      : prev), 0)
+    : 0;
+  const ratio = maxSize / largest;
+  const computeSize = value => Math.max(minSize, value * ratio);
 
   return (
     <div className="top-entities--cloud">
       {
         data
-          ? data.map((item, index) =>
+          ? data.map(item =>
+            (
               <div
                 className="top-entities--word"
-                key={`${index}-${item.key}`}
+                key={`${item.key}`}
                 title={item.matching_results}
                 style={{
                   fontSize: `${computeSize(item.matching_results)}px`,
@@ -33,14 +26,31 @@ export default function Cloud({ data, max_size = 28, min_size = 12 }) {
                     computeSize(item.matching_results) < 13
                       ? 400
                       : null
-                  )
+                  ),
                 }}
               >
                 {item.key}
               </div>
-            )
+            ),
+          )
           : []
       }
     </div>
   );
 }
+
+Cloud.propTypes = {
+  data: arrayOf(shape({
+    key: string.isRequired,
+    matching_results: number.isRequired,
+  })).isRequired,
+  maxSize: number,
+  minSize: number,
+};
+
+Cloud.defaultProps = {
+  maxSize: 28,
+  minSize: 12,
+};
+
+export default Cloud;

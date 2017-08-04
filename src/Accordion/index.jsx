@@ -3,24 +3,15 @@ import { string, bool, element, oneOfType, func } from 'prop-types';
 import classNames from 'classnames';
 import { Icon } from 'watson-react-components';
 
-Accordion.propTypes = {
-  show: bool,
-  content: element.isRequired,
-  header: oneOfType([
-    element,
-    string,
-  ]).isRequired,
-  onClickToggle: func
-}
-
-export default function Accordion({ show = false, content, header, onClickToggle }) {
+function Accordion({ content, header, onClickToggle, show }) {
   return (
     <div className="accordion">
-      <div
+      <button
+        type="button"
         className={
           classNames('accordion--row', { close: !show })
         }
-        onClick={ onClickToggle ? onClickToggle : null }
+        onClick={onClickToggle || null}
       >
         <div className="accordion--icon-container">
           <Icon type="right" />
@@ -28,7 +19,7 @@ export default function Accordion({ show = false, content, header, onClickToggle
         <div className="accordion--header">
           { header }
         </div>
-      </div>
+      </button>
       <div className="accordion--content">
         <div className="accordion--inner-content">
           { content }
@@ -37,3 +28,19 @@ export default function Accordion({ show = false, content, header, onClickToggle
     </div>
   );
 }
+
+Accordion.propTypes = {
+  content: element.isRequired,
+  header: oneOfType([
+    element,
+    string,
+  ]).isRequired,
+  onClickToggle: func.isRequired,
+  show: bool,
+};
+
+Accordion.defaultProps = {
+  show: false,
+};
+
+export default Accordion;

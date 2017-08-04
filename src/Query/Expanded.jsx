@@ -10,7 +10,7 @@ export default class QueryExpanded extends Component {
   }
 
   state = {
-    query: null
+    query: null,
   }
 
   handleInputChange = (event) => {
@@ -21,7 +21,7 @@ export default class QueryExpanded extends Component {
           from: moment().subtract(2, 'months').format('YYYYMMDD'),
           to: moment().format('YYYYMMDD'),
         },
-      }
+      },
     });
   }
 
@@ -50,12 +50,13 @@ export default class QueryExpanded extends Component {
                 onInput={this.handleInputChange}
                 defaultValue={this.state.query ? this.state.query.text : null}
               />
-              <div
+              <button
+                type="button"
                 onClick={this.handleSearchClick}
                 className="query--icon-container"
               >
                 <Icon type="search" size="regular" fill="#ffffff" />
-              </div>
+              </button>
             </div>
           </div>
           <div className="query--right">

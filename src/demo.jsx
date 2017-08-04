@@ -1,16 +1,14 @@
-import 'whatwg-fetch';
 import React, { Component } from 'react';
 import { Icon } from 'watson-react-components';
-
 import { fields } from './fields';
-import Query from './Query/index.jsx';
-import TopEntities from './TopEntities/index.jsx';
-import TopStories from './TopStories/index.jsx';
-import SentimentAnalysis from './SentimentAnalysis/index.jsx';
-import MentionsAndSentiments from './MentionsAndSentiments/index.jsx';
-import NoResults from './NoResults/index.jsx';
+import Query from './Query/index';
+import TopEntities from './TopEntities/index';
+import TopStories from './TopStories/index';
+import SentimentAnalysis from './SentimentAnalysis/index';
+import MentionsAndSentiments from './MentionsAndSentiments/index';
+import NoResults from './NoResults/index';
 
-const hasResults = (entities) =>
+const hasResults = entities =>
   entities.aggregations && entities.aggregations.length > 0 &&
   entities.aggregations[0].field === fields.title_entity_text;
 
@@ -89,11 +87,10 @@ export default class Demo extends Component {
       } else {
         response.json().then((error) => {
           this.setState({ error, loading: false });
-        }).catch((errorMessage) => {
-          console.error(errorMessage);
+        }).catch(() => {
           this.setState({
             error: {
-              error: 'There was a problem with the request, please try again'
+              error: 'There was a problem with the request, please try again',
             },
             loading: false,
           });
@@ -120,53 +117,52 @@ export default class Demo extends Component {
         }
         {
           !this.state.loading &&
-          this.state.data
-            ? this.state.data.results.length > 0
-              ?
-                (
-                  <div className="results">
-                    <div className="_container _container_large">
-                      <div className="row">
-                        <div className="results--panel-1">
-                          <TopEntities
-                            query={this.state.query}
-                            entities={this.state.data.entities}
-                            onShowCode={this.toggleTopEntities}
-                          />
-                        </div>
-                        <div className="results--panel-2">
-                          <TopStories
-                            query={this.state.query}
-                            stories={this.state.data.results}
-                            onShowCode={this.toggleTopResults}
-                            onSortChange={this.handleQueryChange}
-                          />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="results--panel-3">
-                          <SentimentAnalysis
-                            query={this.state.query}
-                            sentiment={this.state.data.sentiment}
-                            sentiments={this.state.data.sentiments}
-                          />
-                        </div>
-                      </div>
-                      <div className="row">
-                        <div className="results--panel-4">
-                          <MentionsAndSentiments
-                            query={this.state.query}
-                            mentions={this.state.data.mentions}
-                          />
-                        </div>
-                      </div>
+          this.state.data &&
+          this.state.data.results.length > 0
+            ?
+            (
+              <div className="results">
+                <div className="_container _container_large">
+                  <div className="row">
+                    <div className="results--panel-1">
+                      <TopEntities
+                        query={this.state.query}
+                        entities={this.state.data.entities}
+                        onShowCode={this.toggleTopEntities}
+                      />
+                    </div>
+                    <div className="results--panel-2">
+                      <TopStories
+                        query={this.state.query}
+                        stories={this.state.data.results}
+                        onShowCode={this.toggleTopResults}
+                        onSortChange={this.handleQueryChange}
+                      />
                     </div>
                   </div>
-                )
-              : (
-                  <NoResults query={this.state.query} />
-                )
-            : null
+                  <div className="row">
+                    <div className="results--panel-3">
+                      <SentimentAnalysis
+                        query={this.state.query}
+                        sentiment={this.state.data.sentiment}
+                        sentiments={this.state.data.sentiments}
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="results--panel-4">
+                      <MentionsAndSentiments
+                        query={this.state.query}
+                        mentions={this.state.data.mentions}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )
+            : this.state.data && (
+              <NoResults query={this.state.query} />
+            )
         }
       </div>
     );

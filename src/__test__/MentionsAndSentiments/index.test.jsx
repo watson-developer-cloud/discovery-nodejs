@@ -6,7 +6,7 @@ import NoContent from '../../NoContent';
 import MentionsAndSentiments from '../../MentionsAndSentiments';
 
 describe('<MentionsAndSentiments />', () => {
-  const mentions_sample = {
+  const mentionsSample = {
     type: 'filter',
     match: 'enrichedTitle.entities.type::Company',
     matching_results: 10591,
@@ -193,7 +193,7 @@ describe('<MentionsAndSentiments />', () => {
     ],
   };
 
-  const mentions_empty_sample = {
+  const mentionsEmptySample = {
     type: 'filter',
     match: 'enrichedTitle.entities.type::Company',
     matching_results: '0',
@@ -206,7 +206,7 @@ describe('<MentionsAndSentiments />', () => {
     ],
   };
 
-  const query_sample = {
+  const querySample = {
     date: {
       from: '20170301',
       to: '20170501',
@@ -215,27 +215,48 @@ describe('<MentionsAndSentiments />', () => {
   };
 
   it('Orders results by number of mentions', () => {
-    const wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
-    const firstMention = wrapper.find(Accordion).nodes[0].props.header.props.children[0].props.children;
-    const secondMention = wrapper.find(Accordion).nodes[1].props.header.props.children[0].props.children;
-    const thirdMention = wrapper.find(Accordion).nodes[2].props.header.props.children[0].props.children;
+    const wrapper = shallow(
+      <MentionsAndSentiments
+        query={querySample}
+        mentions={mentionsSample}
+      />,
+    );
+    const firstMention = wrapper.find(Accordion).nodes[0]
+      .props.header.props.children[0].props.children;
+    const secondMention = wrapper.find(Accordion).nodes[1]
+      .props.header.props.children[0].props.children;
+    const thirdMention = wrapper.find(Accordion).nodes[2]
+      .props.header.props.children[0].props.children;
     assert.equal(firstMention, 'Sample Company + Company Three');
     assert.equal(secondMention, 'Sample Company + Company One');
     assert.equal(thirdMention, 'Sample Company + Company Two');
   });
 
   it('Mentions should equal the sum of positive, negative, and neutral mentions', () => {
-    const wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_sample} />);
-    const firstMentionCount = wrapper.find(Accordion).nodes[0].props.header.props.children[1].props.children;
-    const secondMentionCount = wrapper.find(Accordion).nodes[1].props.header.props.children[1].props.children;
-    const thirdMentionCount = wrapper.find(Accordion).nodes[2].props.header.props.children[1].props.children;
+    const wrapper = shallow(
+      <MentionsAndSentiments
+        query={querySample}
+        mentions={mentionsSample}
+      />,
+    );
+    const firstMentionCount = wrapper.find(Accordion).nodes[0]
+      .props.header.props.children[1].props.children;
+    const secondMentionCount = wrapper.find(Accordion).nodes[1]
+      .props.header.props.children[1].props.children;
+    const thirdMentionCount = wrapper.find(Accordion).nodes[2]
+      .props.header.props.children[1].props.children;
     assert.equal(firstMentionCount, 28);
     assert.equal(secondMentionCount, 20);
     assert.equal(thirdMentionCount, 10);
   });
 
   it('Shows the No Content component when there are no results', () => {
-    const wrapper = shallow(<MentionsAndSentiments query={query_sample} mentions={mentions_empty_sample} />);
+    const wrapper = shallow(
+      <MentionsAndSentiments
+        query={querySample}
+        mentions={mentionsEmptySample}
+      />,
+    );
     assert.equal(wrapper.find(NoContent).length, 1);
   });
 });

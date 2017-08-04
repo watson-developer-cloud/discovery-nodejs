@@ -19,8 +19,7 @@ const sentiments = [
 ];
 
 const mentions = [
-  // eslint-disable-next-line
-  `filter(${fields.title_entity_type}::Company).term(${fields.title_entity_text}).timeslice(${fields.publication_date},1day).term(${fields.text_document_sentiment_type})`
+  `filter(${fields.title_entity_type}::Company).term(${fields.title_entity_text}).timeslice(${fields.publication_date},1day).term(${fields.text_document_sentiment_type})`,
 ];
 
 module.exports = {

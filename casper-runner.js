@@ -15,16 +15,14 @@
  */
 
 require('dotenv').config();
+const app = require('./app');
+const spawn = require('child_process').spawn;
 
 if (!process.env.DISCOVERY_USERNAME) {
   // eslint-disable-next-line no-console
   console.log('Skipping integration tests because DISCOVERY_USERNAME is null');
 } else {
-  const spawn = require('child_process').spawn;
-
-  const app = require('./app');
   const port = 3000;
-
   const server = app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log('Server running on port: %d', port);

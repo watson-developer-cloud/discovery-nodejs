@@ -1,8 +1,8 @@
 import React from 'react';
-import Demo from './demo.jsx';
 import { Header, Jumbotron, Footer } from 'watson-react-components';
+import Demo from './demo';
 
-export default function Layout(props) {
+export default function Layout() {
   return (
     <div>
       <Header

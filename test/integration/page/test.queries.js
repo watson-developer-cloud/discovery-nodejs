@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-const path = require('path');
 // load default variables for testing
+const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+const app = require('../../../app');
+const request = require('supertest');
+const moment = require('moment');
 
 if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<username>') {
   // eslint-disable-next-line
   console.log('Skipping integration tests because DISCOVERY_USERNAME is null.');
 } else {
-  const app = require('../../../app');
-  const request = require('supertest');
   const API_ENDPOINT = '/api/query';
-  const moment = require('moment');
 
-  describe('queries', function () {
+  describe('queries', function run() {
     this.timeout(20000);
     it('Should work with "IBM"', () =>
       request(app)

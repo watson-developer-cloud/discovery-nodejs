@@ -20,8 +20,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan');
+const security = require('./security');
 
-module.exports = function (app) {
+module.exports = function newsApp(app) {
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
@@ -41,7 +42,7 @@ module.exports = function (app) {
 
   // Only loaded when running in Bluemix
   if (process.env.VCAP_APPLICATION) {
-    require('./security')(app);
+    security(app);
   }
 
   app.use(express.static(path.join(__dirname, '..', 'build')));

@@ -6,7 +6,7 @@ import SentimentBySource from '../../SentimentAnalysis/SentimentBySource';
 
 describe('<SentimentAnalysis />', () => {
   describe('When SentimentAnalysis is loaded', () => {
-    const partially_empty_sources = {
+    const partiallyEmptySources = {
       type: 'term',
       field: 'blekko.basedomain',
       results: [
@@ -40,21 +40,26 @@ describe('<SentimentAnalysis />', () => {
       ],
     };
 
-    const sentiment_sample = {
+    const sentimentSample = {
       field: '',
       type: '',
       results: [],
     };
 
-    let filtered_sentiments;
+    let filteredSentiments;
 
     beforeEach(() => {
-      const wrapper = shallow(<SentimentAnalysis sentiments={partially_empty_sources} sentiment={sentiment_sample} />);
-      filtered_sentiments = wrapper.find(SentimentBySource).props().sentiments;
+      const wrapper = shallow(
+        <SentimentAnalysis
+          sentiments={partiallyEmptySources}
+          sentiment={sentimentSample}
+        />,
+      );
+      filteredSentiments = wrapper.find(SentimentBySource).props().sentiments;
     });
 
     it('filters out sources with no results', () => {
-      assert.equal(filtered_sentiments.length, 1);
+      assert.equal(filteredSentiments.length, 1);
     });
   });
 });

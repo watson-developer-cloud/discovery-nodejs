@@ -9,7 +9,7 @@ describe('<TopEntities />', () => {
     text: 'IBM',
     restrictedDateRange: false,
   };
-  const entities_partially_empty_sample = {
+  const entitiesPartiallyEmptySample = {
     companies: [],
     people: [
       {
@@ -72,20 +72,22 @@ describe('<TopEntities />', () => {
     let people;
 
     beforeEach(() => {
-      wrapper = shallow(<TopEntities
-        entities={entities_partially_empty_sample}
-        query={query}
-      />);
+      wrapper = shallow(
+        <TopEntities
+          entities={entitiesPartiallyEmptySample}
+          query={query}
+        />,
+      );
       topics = wrapper.find(Tabs).nodes[0].props.children[0].props;
       companies = wrapper.find(Tabs).nodes[0].props.children[1].props;
       people = wrapper.find(Tabs).nodes[0].props.children[2].props;
     });
 
     it('Shows the Cloud component for a tab with results', () => {
-      const topics_cloud_content = topics.children.props.data;
-      const people_cloud_content = people.children.props.data;
-      assert.equal(topics_cloud_content.length, 10);
-      assert.equal(people_cloud_content.length, 2);
+      const topicsCloudContent = topics.children.props.data;
+      const peopleCloudContent = people.children.props.data;
+      assert.equal(topicsCloudContent.length, 10);
+      assert.equal(peopleCloudContent.length, 2);
     });
 
     it('Shows the NoContent component for a tab with no results', () => {

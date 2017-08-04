@@ -12,7 +12,7 @@ export default class Collapsed extends Component {
         from: string,
         to: string,
       }),
-      enabled: bool
+      enabled: bool,
     }).isRequired,
   }
 
@@ -20,7 +20,7 @@ export default class Collapsed extends Component {
     startDate: moment(this.props.query.date.from),
     endDate: moment(this.props.query.date.to),
     query: Object.assign({}, this.props.query, {
-      enabled: this.props.query.text.length > 0
+      enabled: this.props.query.text.length > 0,
     }),
     restrictedDateRange: false,
     dateButtons: [
@@ -28,38 +28,32 @@ export default class Collapsed extends Component {
         value: 'lastweek',
         id: 'rb-1',
         text: 'Last Week',
-        startDate: moment().subtract(1,'w'),
-        endDate: moment()
+        startDate: moment().subtract(1, 'w'),
+        endDate: moment(),
       },
       {
         value: 'lasttwoweeks',
         id: 'rb-2',
         text: 'Last 2 Weeks',
-        startDate: moment().subtract(2,'w'),
-        endDate: moment()
+        startDate: moment().subtract(2, 'w'),
+        endDate: moment(),
       },
       {
         value: 'lastmonth',
         id: 'rb-3',
         text: 'Last Month',
-        startDate: moment().subtract(30,'d'),
-        endDate: moment()
+        startDate: moment().subtract(30, 'd'),
+        endDate: moment(),
       },
       {
         value: 'lasttwomonths',
         id: 'rb-4',
         text: 'Last 2 Months',
         selected: true,
-        startDate: moment().subtract(60,'d'),
-        endDate: moment()
-      }
-    ]
-  }
-
-  buttonState = () => {
-    return this.state.query.enabled ?
-        ("query--date-buttons-container") :
-        ("query--date-buttons-disabled query--date-buttons-container")
+        startDate: moment().subtract(60, 'd'),
+        endDate: moment(),
+      },
+    ],
   }
 
   onDatesChange = () => {
@@ -73,12 +67,18 @@ export default class Collapsed extends Component {
     });
   }
 
+  buttonState = () => (this.state.query.enabled ?
+    ('query--date-buttons-container') :
+    ('query--date-buttons-disabled query--date-buttons-container'))
+
   handleInputChange = (event) => {
+    const value = event.target.value;
+
     this.setState({
       query: {
-        text: event.target.value,
-        enabled: event.target.value.length > 0
-      }
+        text: value,
+        enabled: value.length > 0,
+      },
     });
   }
 
@@ -110,24 +110,26 @@ export default class Collapsed extends Component {
 
   dateButtonChanged = (e) => {
     let newDates = {};
-    let largestValue = "lasttwomonths";
+    const largestValue = 'lasttwomonths';
     let restrictedDateRange;
-    let newButtonState = this.state.dateButtons.map((item) => {
-      item.selected = item.value === e.target.value ? true : false;
-      if (item.selected) {
+    const newButtonState = this.state.dateButtons.map((item) => {
+      const newItem = Object.assign({}, item, {
+        selected: item.value === e.target.value,
+      });
+      if (newItem.selected) {
         newDates = {
-          startDate: item.startDate,
-          endDate: item.endDate
+          startDate: newItem.startDate,
+          endDate: newItem.endDate,
         };
-        restrictedDateRange = item.value !== largestValue;
+        restrictedDateRange = newItem.value !== largestValue;
       }
-      return item;
+      return newItem;
     });
     this.setState({
-      restrictedDateRange: restrictedDateRange,
+      restrictedDateRange,
       dateButtons: newButtonState,
       startDate: newDates.startDate,
-      endDate: newDates.endDate
+      endDate: newDates.endDate,
     }, this.onDatesChange);
   }
 
@@ -143,13 +145,14 @@ export default class Collapsed extends Component {
                   onKeyPress={this.handleKeyPress}
                   defaultValue={this.state.query.text || ''}
                   placeholder="What company are you interested in?"
-                  />
-                <div
+                />
+                <button
+                  type="button"
                   onClick={this.handleSearchClick}
                   className="query--icon-container"
                 >
                   <Icon type="search" size="regular" fill="#ffffff" />
-                </div>
+                </button>
               </div>
             </div>
             <div className={this.buttonState()}>

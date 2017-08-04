@@ -6,7 +6,7 @@ import TopStories from '../../TopStories';
 
 describe('<TopStories />', () => {
   const stories = [];
-  const query_sample = {
+  const querySample = {
     date: {
       from: '20170301',
       to: '20170501',
@@ -14,10 +14,18 @@ describe('<TopStories />', () => {
     text: 'Sample Company',
   };
   const onSortChangeSpy = sinon.spy();
-  const wrapper = shallow(<TopStories stories={stories} query={query_sample} onSortChange={onSortChangeSpy} />);
+  const wrapper = shallow(
+    <TopStories
+      stories={stories}
+      query={querySample}
+      onSortChange={onSortChangeSpy}
+    />,
+  );
 
   function select(selectValue) {
-    wrapper.find('.sort-option').nodes[0].props.children[1].props.children.props.onChange({ target: { value: selectValue } });
+    wrapper.find('.sort-option').nodes[0]
+      .props.children[1].props.children.props
+      .onChange({ target: { value: selectValue } });
   }
 
   describe('When I select Date', () => {
@@ -26,7 +34,7 @@ describe('<TopStories />', () => {
     });
 
     it('calls onSortChange with Date', () => {
-      const expected = Object.assign({}, query_sample, {
+      const expected = Object.assign({}, querySample, {
         sort: 'date',
       });
       assert.ok(onSortChangeSpy.calledWith(expected));
@@ -38,7 +46,7 @@ describe('<TopStories />', () => {
       });
 
       it('calls onSortChange with Relevance', () => {
-        const expected = Object.assign({}, query_sample, {
+        const expected = Object.assign({}, querySample, {
           sort: 'relevance',
         });
         assert.ok(onSortChangeSpy.calledWith(expected));
