@@ -46,11 +46,20 @@ describe('<SentimentAnalysis />', () => {
       results: [],
     };
 
+    const querySample = {
+      date: {
+        from: '20170301',
+        to: '20170501',
+      },
+      text: 'Sample Company',
+    };
+
     let filteredSentiments;
 
     beforeEach(() => {
       const wrapper = shallow(
         <SentimentAnalysis
+          query={querySample}
           sentiments={partiallyEmptySources}
           sentiment={sentimentSample}
         />,

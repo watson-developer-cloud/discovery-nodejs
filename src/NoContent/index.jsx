@@ -30,7 +30,7 @@ function NoContent({ message, query }) {
 
 NoContent.propTypes = {
   query: shape({
-    restrictedDateRange: bool.isRequired,
+    restrictedDateRange: bool,
   }).isRequired,
   message: string.isRequired,
 };
