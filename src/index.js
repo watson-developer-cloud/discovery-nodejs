@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'watson-react-components/dist/css/watson-react-components.css';
@@ -16,7 +17,7 @@ if (process.env.REACT_APP_BLUEMIX_ANALYTICS) {
       },
       pageInfo: {
         pageID: 'discovery-news-demo',
-      }
+      },
     },
   };
 
@@ -26,7 +27,7 @@ if (process.env.REACT_APP_BLUEMIX_ANALYTICS) {
 
   // eslint-disable-next-line no-native-reassign
   window.digitalData = digitalData;
-  // eslint-disable-next-line no-native-reassign
+  // eslint-disable-next-line no-native-reassign, no-underscore-dangle
   window._analytics = {
     googleAddServices: false,
     coremetrics: false,

@@ -60,8 +60,9 @@ QuerySyntax.propTypes = {
     query: string.isRequired,
     aggregations: arrayOf(string),
     filter: string,
-    sort: string
+    sort: string,
   }).isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   response: object.isRequired,
   title: string.isRequired,
   onGoBack: func,

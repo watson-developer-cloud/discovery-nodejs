@@ -12,7 +12,7 @@ let runningAtMessage;
 client.stdout.on('data', (data) => {
   if (data.indexOf('Starting the development server') >= 0) {
     // eslint-disable-next-line no-console
-    console.log('\033c');
+    console.log('\x1Bc');
   }
 
   if (data.indexOf('You can now view') >= 0) {
@@ -21,12 +21,12 @@ client.stdout.on('data', (data) => {
 
   if (data.indexOf('Compiling') >= 0) {
     // eslint-disable-next-line no-console
-    console.log('\033c');
+    console.log('\x1Bc');
   }
 
   if (data.indexOf('Compiled successfully!') >= 0 && runningAtMessage) {
     // eslint-disable-next-line no-console
-    console.log('\033c');
+    console.log('\x1Bc');
     // eslint-disable-next-line no-console
     console.log(`${data}`);
     // eslint-disable-next-line no-console

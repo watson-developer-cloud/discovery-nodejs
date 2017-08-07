@@ -42,7 +42,7 @@ SentimentBySource.propTypes = {
         key: string.isRequired,
       })).isRequired,
     })).isRequired,
-  })).isRequired
+  })).isRequired,
 };
 
 export default SentimentBySource;
