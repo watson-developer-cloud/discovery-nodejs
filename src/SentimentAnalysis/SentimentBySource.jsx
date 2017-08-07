@@ -35,18 +35,14 @@ function SentimentBySource({ sentiments }) {
 }
 
 SentimentBySource.propTypes = {
-  sentiments: shape({
+  sentiments: arrayOf(shape({
+    key: string.isRequired,
     aggregations: arrayOf(shape({
       results: arrayOf(shape({
         key: string.isRequired,
-        aggregations: arrayOf(shape({
-          results: arrayOf(shape({
-            key: string.isRequired,
-          })).isRequired,
-        })).isRequired,
       })).isRequired,
     })).isRequired,
-  }).isRequired,
+  })).isRequired
 };
 
 export default SentimentBySource;

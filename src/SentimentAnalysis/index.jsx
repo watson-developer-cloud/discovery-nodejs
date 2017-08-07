@@ -14,13 +14,11 @@ export default class SentimentAnalysis extends Component {
       })).isRequired,
     }).isRequired,
     sentiments: shape({
-      aggregations: arrayOf(shape({
-        results: arrayOf(shape({
-          key: string.isRequired,
-          aggregations: arrayOf(shape({
-            results: arrayOf(shape({
-              key: string.isRequired,
-            })).isRequired,
+      results: arrayOf(shape({
+        key: string.isRequired,
+        aggregations: arrayOf(shape({
+          results: arrayOf(shape({
+            key: string.isRequired,
           })).isRequired,
         })).isRequired,
       })).isRequired,

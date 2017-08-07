@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, oneOfType, shape, func } from 'prop-types';
+import { string, number, func, object, shape, arrayOf } from 'prop-types';
 import { Tabs, Pane, Code } from 'watson-react-components';
 
 function QuerySyntax({ query, response, title, onGoBack }) {
@@ -54,26 +54,15 @@ function QuerySyntax({ query, response, title, onGoBack }) {
 }
 
 QuerySyntax.propTypes = {
-  query: oneOfType([
-    shape({
-      text: string.isRequired,
-      date: shape({
-        from: string.isRequired,
-        to: string.isRequired,
-      }).isRequired,
-    }),
-    string, // json string
-  ]).isRequired,
-  response: oneOfType([
-    shape({
-      text: string.isRequired,
-      date: shape({
-        from: string.isRequired,
-        to: string.isRequired,
-      }).isRequired,
-    }),
-    string, // json string
-  ]).isRequired,
+  query: shape({
+    count: number.isRequired,
+    return: string.isRequired,
+    query: string.isRequired,
+    aggregations: arrayOf(string),
+    filter: string,
+    sort: string
+  }).isRequired,
+  response: object.isRequired,
   title: string.isRequired,
   onGoBack: func,
 };

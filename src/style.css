@@ -919,9 +919,16 @@ html {
   display: inline-block;
   margin-top: 0rem;
   position: absolute;
+  padding: 0;
   right: 1.5rem;
   bottom: 1rem;
-  cursor: pointer;
+  border: none;
+}
+
+.query--icon-container:hover,
+.query--icon-container:focus {
+  transform: none;
+  transition: none;
 }
 
 .query--icon-container .icon {
@@ -1607,6 +1614,11 @@ input:focus, button:focus, textarea:focus {
   margin-top: 0rem;
 }
 .accordion--row {
+  border: none;
+  width: 100%;
+  color: #323232;
+  transition: none;
+  transform: none;
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1615,6 +1627,12 @@ input:focus, button:focus, textarea:focus {
       -ms-flex-align: center;
           align-items: center;
 }
+
+.accordion--row:hover,
+.accordion--row:focus {
+  color: #323232;
+}
+
 .accordion--icon-container {
   margin-right: 2rem;
 }
