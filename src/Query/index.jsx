@@ -23,7 +23,7 @@ Query.propTypes = {
       to: string.isRequired,
     }).isRequired,
     sort: string,
-    restrictedDateRange: bool.isRequired,
+    restrictedDateRange: bool,
   }),
   onQueryChange: func.isRequired,
 };
