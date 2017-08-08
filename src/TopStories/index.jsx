@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { string, object, func, arrayOf, shape } from 'prop-types';
+import WidgetHeader from '../WidgetHeader/index';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 import Story from './Story';
@@ -17,6 +18,14 @@ export default class TopStories extends Component {
       }).isRequired,
     }).isRequired,
     onSortChange: func.isRequired,
+  }
+
+  static widgetTitle() {
+    return 'Top Stories';
+  }
+
+  static widgetDescription() {
+    return 'Find the most recent and relevant news articles.';
   }
 
   state = {
@@ -50,21 +59,11 @@ export default class TopStories extends Component {
           !this.state.showQuery
             ? (
               <div className="top-stories widget">
-                <div className="widget--header">
-                  <h2 className="base--h2 widget--header-title">
-                      Top Stories
-                  </h2>
-                  <div className="widget--header-spacer" />
-                  <button
-                    className="base--button widget--header-button"
-                    onClick={this.onShowQuery}
-                  >
-                      View Query
-                  </button>
-                </div>
-                <p className="base--p top-stories--description">
-                    Find the most recent and relevant news articles.
-                </p>
+                <WidgetHeader
+                  title={TopStories.widgetTitle()}
+                  description={TopStories.widgetDescription()}
+                  onShowQuery={this.onShowQuery}
+                />
                 <div className="sort-option">
                   <span id="sort-label">
                       Sort by:

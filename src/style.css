@@ -1190,10 +1190,6 @@ html {
   }
 }
 
-.top-entities--description {
-  margin-bottom: 2rem;
-}
-
 .top-entities--cloud {
   display: block;
 /*  transform: scale(.9, .9);
@@ -1217,14 +1213,6 @@ html {
     font-size: 1em;
     margin-right: 2rem;
   }
-}
-
-.top-stories--description {
-  margin-bottom: 2rem;
-}
-
-.top-stories--list {
-  /*max-height: 300px;*/
 }
 
 .story {
@@ -1261,8 +1249,8 @@ html {
   font-size: 0.9em;
 }
 
-.sentiment--description {
-  margin-bottom: 3rem;
+.sentiment.widget > .sentiment--chart-container {
+  margin-top: 3rem;
 }
 
 .sentiment--chart {

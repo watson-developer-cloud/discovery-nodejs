@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'recharts';
 import moment from 'moment';
+import WidgetHeader from '../WidgetHeader/index';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 import Accordion from '../Accordion/index';
@@ -54,6 +55,10 @@ export default class MentionsAndSentiments extends Component {
 
   static widgetTitle() {
     return 'Co-Mentions & Trends';
+  }
+
+  static widgetDescription() {
+    return 'Identify frequently co-mentioned entities and follow trends in sentiment.';
   }
 
   state = {
@@ -136,21 +141,11 @@ export default class MentionsAndSentiments extends Component {
           !this.state.showQuery
             ? (
               <div className="mentions-sentiments widget">
-                <div className="widget--header">
-                  <h2 className="base--h2 widget--header-title">
-                    { MentionsAndSentiments.widgetTitle() }
-                  </h2>
-                  <div className="widget--header-spacer" />
-                  <button
-                    className="base--button widget--header-button"
-                    onClick={this.onShowQuery}
-                  >
-                    View Query
-                  </button>
-                </div>
-                <p className="base--p mentions-sentiments--description">
-                  Identify frequently co-mentioned entities and follow trends in sentiment.
-                </p>
+                <WidgetHeader
+                  title={MentionsAndSentiments.widgetTitle()}
+                  description={MentionsAndSentiments.widgetDescription()}
+                  onShowQuery={this.onShowQuery}
+                />
                 <div className="accordions--wrapper">
                   {
                     this.state.mentions.length > 0
