@@ -160,7 +160,7 @@ export default class Demo extends Component {
                 </div>
               </div>
             )
-            : this.state.data && (
+            : !this.state.loading && this.state.data && (
               <NoResults query={this.state.query} />
             )
         }
