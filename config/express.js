@@ -27,7 +27,8 @@ module.exports = function newsApp(app) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
       'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept',
+      // eslint-disable-next-line comma-dangle
+      'Origin, X-Requested-With, Content-Type, Accept'
     );
 
     if (req.method === 'OPTIONS') {
