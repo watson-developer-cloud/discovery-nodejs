@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-const queryBuilder = require('./query-builder');
+const queryBuilder = require('./src/query-builder');
 
 const NEWS_ENVIRONMENT_ID = 'system';
 const NEWS_COLLECTION_ID = 'news';
 
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+
 const discovery = new DiscoveryV1({
   // If unspecified here, the DISCOVERY_USERNAME and
   // DISCOVERY_PASSWORD env properties will be checked
@@ -32,20 +33,20 @@ const discovery = new DiscoveryV1({
 
 // Bootstrap application settings
 const express = require('express');
+const path = require('path');
+
 const app = express();
 require('./config/express')(app);
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    BLUEMIX_ANALYTICS: process.env.BLUEMIX_ANALYTICS,
-  });
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // setup query endpoint for news
 app.post('/api/query', (req, res, next) => {
   const params = Object.assign({}, queryBuilder.build(req.body), {
     environment_id: NEWS_ENVIRONMENT_ID,
-    collection_id: NEWS_COLLECTION_ID
+    collection_id: NEWS_COLLECTION_ID,
   });
 
   discovery.query(params, (error, response) => {
