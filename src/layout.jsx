@@ -21,7 +21,7 @@ export default function Layout() {
         description="Add a cognitive search and content analytics engine to applications to identify patterns, trends and actionable insights that drive better decision-making."
       />
       <Demo />
-      <div style={{ marginTop: '0rem' }}>
+      <div className="footer-container--div">
         <Footer />
       </div>
     </div>

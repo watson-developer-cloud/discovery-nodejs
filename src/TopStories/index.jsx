@@ -33,8 +33,8 @@ export default class TopStories extends Component {
   }
 
   onChangeSort = (e) => {
-    this.setState({ sortType: e.target.value });
     const sortVal = e.target.value;
+    this.setState({ sortType: sortVal });
     const newQuery = Object.assign({}, this.props.query, {
       sort: sortVal,
     });
@@ -57,7 +57,6 @@ export default class TopStories extends Component {
                   <div className="widget--header-spacer" />
                   <button
                     className="base--button widget--header-button"
-                    href="#"
                     onClick={this.onShowQuery}
                   >
                       View Query

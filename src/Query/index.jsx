@@ -16,6 +16,7 @@ function Query({ query, onQueryChange }) {
 }
 
 Query.propTypes = {
+  onQueryChange: func.isRequired,
   query: shape({
     text: string.isRequired,
     date: shape({
@@ -25,7 +26,6 @@ Query.propTypes = {
     sort: string,
     restrictedDateRange: bool,
   }),
-  onQueryChange: func.isRequired,
 };
 
 Query.defaultProps = {

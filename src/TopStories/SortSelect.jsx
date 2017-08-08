@@ -16,15 +16,7 @@ function SortSelect({ onChange, currSelected }) {
         <option value="date">Date</option>
       </select>
       <span className="sort-select--icon">
-        <Icon
-          style={{
-            transform: 'rotateZ(90deg)',
-            width: '0.8rem',
-            height: '0.8rem',
-            fill: '#5A5A5A',
-          }}
-          type="right"
-        />
+        <Icon type="right" />
       </span>
     </span>
   );

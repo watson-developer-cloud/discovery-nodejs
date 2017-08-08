@@ -2,6 +2,13 @@ import React from 'react';
 import { string, number, func, object, shape, arrayOf } from 'prop-types';
 import { Tabs, Pane, Code } from 'watson-react-components';
 
+const stringifyObject = input =>
+  (
+    typeof input === 'object'
+      ? JSON.stringify(input, null, 2)
+      : input
+  );
+
 function QuerySyntax({ query, response, title, onGoBack }) {
   return (
     <div className="code-results">
@@ -29,11 +36,7 @@ function QuerySyntax({ query, response, title, onGoBack }) {
             <div className="code-results--fake-border" />
           </div>
           <Code language="json">
-            {
-              typeof query === 'object'
-                ? JSON.stringify(query, null, 2)
-                : query
-            }
+            { stringifyObject(query) }
           </Code>
         </Pane>
         <Pane label="Response">
@@ -41,11 +44,7 @@ function QuerySyntax({ query, response, title, onGoBack }) {
             <div className="code-results--fake-border" />
           </div>
           <Code language="json">
-            {
-              typeof response === 'object'
-                ? JSON.stringify(response, null, 2)
-                : response
-            }
+            { stringifyObject(response) }
           </Code>
         </Pane>
       </Tabs>

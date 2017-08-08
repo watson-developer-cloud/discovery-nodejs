@@ -59,6 +59,10 @@ html {
   color: #9753e1;
 }
 
+.demo-container--div {
+  margin-top: 0;
+}
+
 #sort-label {
   padding-right: 0.5rem;
   font-size: 0.8em;
@@ -87,6 +91,13 @@ html {
   position: relative;
   margin-left: -0.76rem;
   z-index: -1;
+}
+
+.sort-select--icon svg {
+  transform: rotateZ(90deg);
+  width: 0.8rem;
+  height: 0.8rem;
+  fill: #5A5A5A;
 }
 
 /* react-dates styles */
@@ -1403,6 +1414,10 @@ html {
   }
 }
 
+.footer-container--div {
+  margin-top: 0;
+}
+
 .footer {
   margin-top: 0rem;
 }
@@ -1631,6 +1646,10 @@ input:focus, button:focus, textarea:focus {
 .accordion--row:hover,
 .accordion--row:focus {
   color: #323232;
+}
+
+.accordion--row:active {
+  transform: none;
 }
 
 .accordion--icon-container {

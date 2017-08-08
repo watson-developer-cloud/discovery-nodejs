@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, bool, element, oneOfType, func } from 'prop-types';
+import { string, bool, node, oneOfType, func } from 'prop-types';
 import classNames from 'classnames';
 import { Icon } from 'watson-react-components';
 
@@ -30,9 +30,9 @@ function Accordion({ content, header, onClickToggle, show }) {
 }
 
 Accordion.propTypes = {
-  content: element.isRequired,
+  content: node.isRequired,
   header: oneOfType([
-    element,
+    node,
     string,
   ]).isRequired,
   onClickToggle: func.isRequired,

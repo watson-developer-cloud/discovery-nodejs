@@ -64,7 +64,6 @@ export default class SentimentAnalysis extends Component {
                   <div className="widget--header-spacer" />
                   <button
                     className="base--button widget--header-button"
-                    href="#"
                     onClick={this.onShowQuery}
                   >
                       View Query
@@ -90,10 +89,7 @@ export default class SentimentAnalysis extends Component {
               <QuerySyntax
                 title="Sentiment Analysis"
                 query={queryBuilder.build(query, true)}
-                response={{
-                  sentiment,
-                  sentiments,
-                }}
+                response={{ sentiment, sentiments }}
                 onGoBack={this.onShowResults}
               />
             )

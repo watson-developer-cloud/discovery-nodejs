@@ -69,7 +69,6 @@ export default class TopEntities extends Component {
                   <div className="widget--header-spacer" />
                   <button
                     className="base--button widget--header-button"
-                    href="#"
                     onClick={this.onShowQuery}
                   >
                       View Query

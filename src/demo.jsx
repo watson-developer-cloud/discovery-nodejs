@@ -103,7 +103,7 @@ export default class Demo extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: '0rem' }}>
+      <div className="demo-container--div">
         <Query onQueryChange={this.handleQueryChange} query={this.state.query} />
         {
           this.state.loading &&
