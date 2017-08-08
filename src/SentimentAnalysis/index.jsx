@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { string, number, shape, arrayOf } from 'prop-types';
+import WidgetHeader from '../WidgetHeader/index';
 import SentimentChart from './SentimentChart';
 import SentimentBySource from './SentimentBySource';
 import QuerySyntax from '../QuerySyntax/index';
@@ -32,6 +33,14 @@ export default class SentimentAnalysis extends Component {
     }).isRequired,
   }
 
+  static widgetTitle() {
+    return 'Sentiment Analysis';
+  }
+
+  static widgetDescription() {
+    return 'Extract sentiment from news articles across a variety of news sources (10 random sources used below).';
+  }
+
   static filterEmptySentimentResults(sentiments) {
     return sentiments.results.filter(result => result.aggregations[0].results.length > 0);
   }
@@ -57,22 +66,11 @@ export default class SentimentAnalysis extends Component {
           !this.state.showQuery
             ? (
               <div className="sentiment widget">
-                <div className="widget--header">
-                  <h2 className="base--h2 widget--header-title">
-                      Sentiment Analysis
-                  </h2>
-                  <div className="widget--header-spacer" />
-                  <button
-                    className="base--button widget--header-button"
-                    onClick={this.onShowQuery}
-                  >
-                      View Query
-                  </button>
-                </div>
-                <p className="base--p sentiment--description">
-                    Extract sentiment from news articles across a variety of
-                    news sources (10 random sources used below).
-                </p>
+                <WidgetHeader
+                  title={SentimentAnalysis.widgetTitle()}
+                  description={SentimentAnalysis.widgetDescription()}
+                  onShowQuery={this.onShowQuery}
+                />
                 <SentimentChart
                   sentiment={sentiment}
                   showLabels

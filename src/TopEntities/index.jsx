@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { string, number, shape, arrayOf } from 'prop-types';
 import { Tabs, Pane } from 'watson-react-components';
+import WidgetHeader from '../WidgetHeader/index';
 import Cloud from './Cloud';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
@@ -29,6 +30,14 @@ export default class TopEntities extends Component {
         to: string.isRequired,
       }),
     }).isRequired,
+  }
+
+  static widgetTitle() {
+    return 'Top Entities';
+  }
+
+  static widgetDescription() {
+    return 'Easily extract frequently mentioned entities - such as people, topics and companies with Pre-enriched News.';
   }
 
   state = {
@@ -62,22 +71,11 @@ export default class TopEntities extends Component {
           !this.state.showQuery
             ? (
               <div className="top-entities widget">
-                <div className="widget--header">
-                  <h2 className="base--h2 widget--header-title">
-                      Top Entities
-                  </h2>
-                  <div className="widget--header-spacer" />
-                  <button
-                    className="base--button widget--header-button"
-                    onClick={this.onShowQuery}
-                  >
-                      View Query
-                  </button>
-                </div>
-                <p className="base--p top-entities--description">
-                    Easily extract frequently mentioned entities -
-                    such as people, topics and companies with Pre-enriched News.
-                </p>
+                <WidgetHeader
+                  title={TopEntities.widgetTitle()}
+                  description={TopEntities.widgetDescription()}
+                  onShowQuery={this.onShowQuery}
+                />
                 <Tabs selected={0}>
                   <Pane label="Topics">
                     {
