@@ -28,11 +28,13 @@ export default class AnomalyDetection extends Component {
     }).isRequired,
     colorAnomaly: string.isRequired,
     colorAnomalyActive: string.isRequired,
+    colorLine: string.isRequired,
   }
 
   static defaultProps = {
     colorAnomaly: '#8c101c',
     colorAnomalyActive: '#ff5050',
+    colorLine: '#00a78f',
   }
 
   static widgetTitle() {
@@ -66,12 +68,12 @@ export default class AnomalyDetection extends Component {
   renderDot = (dotProps, color) => {
     const dotColor = color || this.props.colorAnomaly;
     const { payload } = dotProps;
-    const newProps = Object.assign({}, dotProps, {
+    const newDotProps = Object.assign({}, dotProps, {
       fill: AnomalyDetection.hasAnomaly(payload) ? dotColor : dotProps.fill,
       stroke: AnomalyDetection.hasAnomaly(payload) ? dotColor : dotProps.stroke,
     });
 
-    return <Dot {...newProps} />;
+    return <Dot {...newDotProps} />;
   }
 
   renderActiveDot = props =>
@@ -88,17 +90,17 @@ export default class AnomalyDetection extends Component {
         value: payload[0].payload.anomaly,
       };
     }
-    const newProps = Object.assign({}, tooltipProps, {
+    const newTooltipProps = Object.assign({}, tooltipProps, {
       content: null,
       payload: additionalEntry
         ? tooltipProps.payload.concat(additionalEntry)
         : tooltipProps.payload,
     });
-    return <Tooltip {...newProps} />;
+    return <Tooltip {...newTooltipProps} />;
   }
 
   render() {
-    const { query, anomalyData } = this.props;
+    const { query, anomalyData, colorLine } = this.props;
 
     return (
       <div>
@@ -131,7 +133,7 @@ export default class AnomalyDetection extends Component {
                           type="linear"
                           dataKey="matching_results"
                           name="Matching Results"
-                          stroke="#00a78f"
+                          stroke={colorLine}
                           strokeWidth="3"
                           dot={this.renderDot}
                           activeDot={this.renderActiveDot}
