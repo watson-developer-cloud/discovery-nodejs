@@ -22,8 +22,12 @@ const mentions = [
   `filter(${fields.title_entity_type}::Company).term(${fields.title_entity_text}).timeslice(${fields.publication_date},1day).term(${fields.text_document_sentiment_type})`,
 ];
 
+const anomalies = [
+  `timeslice(field:${fields.publication_date},interval:1day,time_zone:America/New_York,anomaly:true)`,
+];
+
 module.exports = {
-  aggregations: [].concat(entities, sentiments, mentions),
+  aggregations: [].concat(entities, sentiments, mentions, anomalies),
   entities,
   sentiments,
   mentions,

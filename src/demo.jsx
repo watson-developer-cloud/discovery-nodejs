@@ -4,6 +4,7 @@ import { fields } from './fields';
 import Query from './Query/index';
 import TopEntities from './TopEntities/index';
 import TopStories from './TopStories/index';
+import AnomalyDetection from './AnomalyDetection/index';
 import SentimentAnalysis from './SentimentAnalysis/index';
 import MentionsAndSentiments from './MentionsAndSentiments/index';
 import NoResults from './NoResults/index';
@@ -19,6 +20,7 @@ const parseQueryResults = (data) => {
     sentiments: null, // Sentiment by source
     sentiment: null, // Overall sentiment
     mentions: null, // Mentions and Sentiments
+    anomalyData: null, // Anomaly data
   };
 
   data.aggregations.forEach((aggregation) => {
@@ -52,6 +54,10 @@ const parseQueryResults = (data) => {
           parsedData.entities.people = entities[0].aggregations[0].results;
         }
       }
+    }
+
+    if (aggregation.type === 'timeslice' && aggregation.anomaly) {
+      parsedData.anomalyData = aggregation.results;
     }
   });
 
@@ -148,6 +154,12 @@ export default class Demo extends Component {
                         sentiments={this.state.data.sentiments}
                       />
                     </div>
+                  </div>
+                  <div className="row">
+                    <AnomalyDetection
+                      query={this.state.query}
+                      anomalyData={this.state.data.anomalyData}
+                    />
                   </div>
                   <div className="row">
                     <div className="results--panel-4">
