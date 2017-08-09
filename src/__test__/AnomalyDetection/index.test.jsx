@@ -156,7 +156,7 @@ describe('<AnomalyDetection />', () => {
 
         expect(querySyntaxProps.query.query).toEqual(expectedQuery);
         expect(querySyntaxProps.title).toEqual(AnomalyDetection.widgetTitle());
-        expect(querySyntaxProps.response).toEqual({ anomalyData: props.anomalyData });
+        expect(querySyntaxProps.response).toEqual({ results: props.anomalyData });
       });
     });
   });

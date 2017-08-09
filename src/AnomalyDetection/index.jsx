@@ -170,7 +170,7 @@ export default class AnomalyDetection extends Component {
             <QuerySyntax
               title={AnomalyDetection.widgetTitle()}
               query={queryBuilder.build(query, true)}
-              response={{ anomalyData }}
+              response={{ results: anomalyData }}
               onGoBack={this.onShowResults}
             />
           )
