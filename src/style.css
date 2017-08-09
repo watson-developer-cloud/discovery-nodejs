@@ -1844,14 +1844,6 @@ input:focus, button:focus, textarea:focus {
 .recharts-legend-item {
   margin-right: 2rem !important;
 }
-.recharts-x-axis .recharts-cartesian-axis-ticks {
-  -webkit-transform: translateY(0.5rem);
-          transform: translateY(0.5rem);
-}
-.recharts-y-axis .recharts-cartesian-axis-ticks {
-  -webkit-transform: translateX(-0.5rem);
-          transform: translateX(-0.5rem);
-}
 .recharts-responsive-container {
   min-width: 417px;
 }
