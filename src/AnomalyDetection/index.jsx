@@ -65,12 +65,25 @@ export default class AnomalyDetection extends Component {
     this.setState({ showQuery: false });
   }
 
+  getAdditionalTooltip = (payload) => {
+    if (payload.length > 0 && AnomalyDetection.hasAnomaly(payload[0].payload)) {
+      return {
+        dataKey: 'anomaly',
+        name: 'Anomaly',
+        color: this.props.colorAnomalyActive,
+        value: payload[0].payload.anomaly,
+      };
+    }
+    return null;
+  }
+
   renderDot = (dotProps, color) => {
-    const dotColor = color || this.props.colorAnomaly;
     const { payload } = dotProps;
+    const dotColor = color || this.props.colorAnomaly;
+    const hasAnomaly = AnomalyDetection.hasAnomaly(payload);
     const newDotProps = Object.assign({}, dotProps, {
-      fill: AnomalyDetection.hasAnomaly(payload) ? dotColor : dotProps.fill,
-      stroke: AnomalyDetection.hasAnomaly(payload) ? dotColor : dotProps.stroke,
+      fill: hasAnomaly ? dotColor : dotProps.fill,
+      stroke: hasAnomaly ? dotColor : dotProps.stroke,
     });
 
     return <Dot {...newDotProps} />;
@@ -81,20 +94,10 @@ export default class AnomalyDetection extends Component {
 
   renderTooltip = (tooltipProps) => {
     const { payload } = tooltipProps;
-    let additionalEntry;
-    if (payload.length > 0 && AnomalyDetection.hasAnomaly(payload[0].payload)) {
-      additionalEntry = {
-        dataKey: 'anomaly',
-        name: 'Anomaly',
-        color: this.props.colorAnomalyActive,
-        value: payload[0].payload.anomaly,
-      };
-    }
+    const additionalTooltip = this.getAdditionalTooltip(payload);
     const newTooltipProps = Object.assign({}, tooltipProps, {
       content: null,
-      payload: additionalEntry
-        ? tooltipProps.payload.concat(additionalEntry)
-        : tooltipProps.payload,
+      payload: additionalTooltip ? payload.concat(additionalTooltip) : payload,
     });
     return <Tooltip {...newTooltipProps} />;
   }
