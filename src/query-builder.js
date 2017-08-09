@@ -38,7 +38,7 @@ module.exports = {
       query: `"${query.text}",${fields.language}:(english|en)`,
     };
     if (full) {
-      params.aggregations = [].concat(entities, sentiments, mentions);
+      params.aggregations = [].concat(entities, sentiments, mentions, anomalies);
     }
     if (query.date) {
       params.filter = `${fields.publication_date}>${moment(query.date.from).format(ISO_8601)},${fields.publication_date}<${moment(query.date.to).format(ISO_8601)}`;
