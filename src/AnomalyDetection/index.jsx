@@ -129,7 +129,7 @@ export default class AnomalyDetection extends Component {
                           top: 40,
                           right: 30,
                           bottom: 0,
-                          left: -20,
+                          left: -10,
                         }}
                       >
                         <Line
@@ -148,10 +148,10 @@ export default class AnomalyDetection extends Component {
                           tickLine={false}
                         />
                         <YAxis
-                          padding={{ top: 10 }}
                           label="&nbsp;&#x23; of articles"
                           allowDecimals={false}
                           tickLine={false}
+                          padding={{ top: 10 }}
                         />
                         <Tooltip
                           labelFormatter={AnomalyDetection.formatDate}

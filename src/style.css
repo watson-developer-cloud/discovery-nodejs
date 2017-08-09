@@ -1838,6 +1838,10 @@ input:focus, button:focus, textarea:focus {
   }
 }
 
+.recharts-x-axis .recharts-cartesian-axis-ticks {
+  transform: translateY(0.5rem);
+}
+
 .recharts-legend-wrapper {
   padding-left: 3.45rem;
 }
