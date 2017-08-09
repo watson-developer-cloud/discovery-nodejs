@@ -7,6 +7,10 @@ stages:
     service: ${SAMPLE_REPO}
   triggers:
   - type: commit
+  properties:
+  - name: REACT_APP_BLUEMIX_ANALYTICS
+    value: https://console.bluemix.net/analytics/build/bluemix-analytics.min.js
+    type: text
   jobs:
   - name: Build
     type: builder
@@ -43,9 +47,6 @@ stages:
     type: text
   - name: ROUTE_DOMAIN
     value: mybluemix.net
-    type: text
-  - name: REACT_APP_BLUEMIX_ANALYTICS
-    value: https://console.bluemix.net/analytics/build/bluemix-analytics.min.js
     type: text
   jobs:
   - name: Deploy Dark
