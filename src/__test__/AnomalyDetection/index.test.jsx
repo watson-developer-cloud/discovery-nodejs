@@ -11,7 +11,7 @@ describe('<AnomalyDetection />', () => {
   const props = {
     anomalyData: [
       {
-        key_as_string: '2017-08-02T00:00:00.000Z',
+        key_as_string: '2017-08-01T00:00:00.000-04:00',
         matching_results: 10,
         anomaly: 0.5,
       },
