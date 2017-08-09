@@ -108,76 +108,76 @@ export default class AnomalyDetection extends Component {
     return (
       <div>
         {
-        !this.state.showQuery
-          ? (
-            <div className="anomaly-detection widget">
-              <WidgetHeader
-                title={AnomalyDetection.widgetTitle()}
-                description={AnomalyDetection.widgetDescription()}
-                onShowQuery={this.onShowQuery}
-              />
-              {
-                anomalyData.length > 0
-                  ? (
-                    <ResponsiveContainer
-                      width={'100%'}
-                      height={250}
-                    >
-                      <LineChart
-                        data={anomalyData}
-                        margin={{
-                          top: 40,
-                          right: 30,
-                          bottom: 0,
-                          left: -10,
-                        }}
+          !this.state.showQuery
+            ? (
+              <div className="anomaly-detection widget">
+                <WidgetHeader
+                  title={AnomalyDetection.widgetTitle()}
+                  description={AnomalyDetection.widgetDescription()}
+                  onShowQuery={this.onShowQuery}
+                />
+                {
+                  anomalyData.length > 0
+                    ? (
+                      <ResponsiveContainer
+                        width={'100%'}
+                        height={250}
                       >
-                        <Line
-                          type="linear"
-                          dataKey="matching_results"
-                          name="Matching Results"
-                          stroke={colorLine}
-                          strokeWidth="3"
-                          dot={this.renderDot}
-                          activeDot={this.renderActiveDot}
-                        />
-                        <CartesianGrid stroke="#ccc" />
-                        <XAxis
-                          dataKey="key_as_string"
-                          tickFormatter={AnomalyDetection.formatDate}
-                          tickLine={false}
-                        />
-                        <YAxis
-                          label="&nbsp;&#x23; of articles"
-                          allowDecimals={false}
-                          tickLine={false}
-                          padding={{ top: 10 }}
-                        />
-                        <Tooltip
-                          labelFormatter={AnomalyDetection.formatDate}
-                          content={this.renderTooltip}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  )
-                  : (
-                    <NoContent
-                      query={query}
-                      message={'There are no analytics available for your query.'}
-                    />
-                  )
-              }
-            </div>
-          )
-          : (
-            <QuerySyntax
-              title={AnomalyDetection.widgetTitle()}
-              query={queryBuilder.build(query, true)}
-              response={{ results: anomalyData }}
-              onGoBack={this.onShowResults}
-            />
-          )
-      }
+                        <LineChart
+                          data={anomalyData}
+                          margin={{
+                            top: 40,
+                            right: 30,
+                            bottom: 0,
+                            left: -10,
+                          }}
+                        >
+                          <Line
+                            type="linear"
+                            dataKey="matching_results"
+                            name="Matching Results"
+                            stroke={colorLine}
+                            strokeWidth="3"
+                            dot={this.renderDot}
+                            activeDot={this.renderActiveDot}
+                          />
+                          <CartesianGrid stroke="#ccc" />
+                          <XAxis
+                            dataKey="key_as_string"
+                            tickFormatter={AnomalyDetection.formatDate}
+                            tickLine={false}
+                          />
+                          <YAxis
+                            label="&nbsp;&#x23; of articles"
+                            allowDecimals={false}
+                            tickLine={false}
+                            padding={{ top: 10 }}
+                          />
+                          <Tooltip
+                            labelFormatter={AnomalyDetection.formatDate}
+                            content={this.renderTooltip}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    )
+                    : (
+                      <NoContent
+                        query={query}
+                        message={'There are no analytics available for your query.'}
+                      />
+                    )
+                }
+              </div>
+            )
+            : (
+              <QuerySyntax
+                title={AnomalyDetection.widgetTitle()}
+                query={queryBuilder.build(query, true)}
+                response={{ results: anomalyData }}
+                onGoBack={this.onShowResults}
+              />
+            )
+        }
       </div>
     );
   }
