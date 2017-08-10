@@ -116,7 +116,7 @@ describe('<AnomalyTooltip />', () => {
       wrapper = shallow(<AnomalyTooltip {...props} />);
     });
 
-    it('show have the article title', () => {
+    it('should show the article title', () => {
       const actual = wrapper.find('.anomaly-tooltip-title--p');
 
       expect(actual.text()).toEqual('Article Title');
