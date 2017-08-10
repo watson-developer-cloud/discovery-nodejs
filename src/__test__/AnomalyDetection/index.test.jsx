@@ -39,48 +39,6 @@ describe('<AnomalyDetection />', () => {
       wrapper = shallow(<AnomalyDetection {...props} />);
     });
 
-    describe('when dotProps does not have an anomaly', () => {
-      const dotProps = {
-        payload: {},
-      };
-
-      it('does not pass any color to the <Dot /> for renderDot', () => {
-        const actual = wrapper.instance().renderDot(dotProps).props;
-
-        expect(actual.fill).toBeUndefined();
-        expect(actual.stroke).toBeUndefined();
-      });
-
-      it('does not pass any color to the <Dot /> for renderActiveDot', () => {
-        const actual = wrapper.instance().renderActiveDot(dotProps).props;
-
-        expect(actual.fill).toBeUndefined();
-        expect(actual.stroke).toBeUndefined();
-      });
-    });
-
-    describe('when dotProps has an anomaly', () => {
-      const dotProps = {
-        payload: {
-          anomaly: 0.5,
-        },
-      };
-
-      it('passes the anomaly color to <Dot /> for renderDot', () => {
-        const actual = wrapper.instance().renderDot(dotProps).props;
-
-        expect(actual.fill).toEqual(AnomalyDetection.defaultProps.colorAnomaly);
-        expect(actual.stroke).toEqual(AnomalyDetection.defaultProps.colorAnomaly);
-      });
-
-      it('passes the active anomaly color to <Dot /> for renderActiveDot', () => {
-        const actual = wrapper.instance().renderActiveDot(dotProps).props;
-
-        expect(actual.fill).toEqual(AnomalyDetection.defaultProps.colorAnomalyActive);
-        expect(actual.stroke).toEqual(AnomalyDetection.defaultProps.colorAnomalyActive);
-      });
-    });
-
     describe('when tooltipProps has an anomaly', () => {
       const tooltipProps = {
         payload: [

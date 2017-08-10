@@ -8,13 +8,13 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Dot,
 } from 'recharts';
 import moment from 'moment';
 import WidgetHeader from '../WidgetHeader/index';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 import NoContent from '../NoContent/index';
+import AnomalyDot from './AnomalyDot';
 
 export default class AnomalyDetection extends Component {
   static propTypes = {
@@ -26,13 +26,11 @@ export default class AnomalyDetection extends Component {
     query: shape({
       text: string.isRequired,
     }).isRequired,
-    colorAnomaly: string.isRequired,
     colorAnomalyActive: string.isRequired,
     colorLine: string.isRequired,
   }
 
   static defaultProps = {
-    colorAnomaly: '#8c101c',
     colorAnomalyActive: '#ff5050',
     colorLine: '#00a78f',
   }
@@ -50,7 +48,7 @@ export default class AnomalyDetection extends Component {
   }
 
   static hasAnomaly(payload) {
-    return payload.anomaly;
+    return payload && payload.anomaly;
   }
 
   state = {
@@ -76,21 +74,6 @@ export default class AnomalyDetection extends Component {
     }
     return null;
   }
-
-  renderDot = (dotProps, color) => {
-    const { payload } = dotProps;
-    const dotColor = color || this.props.colorAnomaly;
-    const hasAnomaly = AnomalyDetection.hasAnomaly(payload);
-    const newDotProps = Object.assign({}, dotProps, {
-      fill: hasAnomaly ? dotColor : dotProps.fill,
-      stroke: hasAnomaly ? dotColor : dotProps.stroke,
-    });
-
-    return <Dot {...newDotProps} />;
-  }
-
-  renderActiveDot = props =>
-    this.renderDot(props, this.props.colorAnomalyActive);
 
   renderTooltip = (tooltipProps) => {
     const { payload } = tooltipProps;
@@ -138,8 +121,8 @@ export default class AnomalyDetection extends Component {
                             name="Matching Results"
                             stroke={colorLine}
                             strokeWidth="3"
-                            dot={this.renderDot}
-                            activeDot={this.renderActiveDot}
+                            dot={<AnomalyDot />}
+                            activeDot={<AnomalyDot active />}
                           />
                           <CartesianGrid stroke="#ccc" />
                           <XAxis
