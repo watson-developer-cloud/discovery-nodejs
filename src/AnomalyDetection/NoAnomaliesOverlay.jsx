@@ -5,16 +5,12 @@ import './style.css';
 function NoAnomaliesOverlay({ text, onViewData }) {
   return (
     <div className="anomaly-overlay--div">
-      <p
-        className="anomaly-overlay-title--p"
-      >
+      <h3>
         {`There are no anomalies in "${text}" for this date range`}
-      </p>
-      <p
-        className="anomaly-overlay-subtitle--p"
-      >
+      </h3>
+      <h4>
         Try changing the date range or searching for a different company
-      </p>
+      </h4>
       <div className="anomaly-overlay-button-container--div">
         <button type="button" onClick={onViewData}>
           View Data

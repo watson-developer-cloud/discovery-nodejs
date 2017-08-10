@@ -8,7 +8,7 @@
 }
 
 .anomaly-chart--svg.faded {
-  opacity: 0.3;
+  opacity: 0.1;
 }
 
 .anomaly-dot circle {
@@ -56,4 +56,13 @@
   top: 0;
   text-align: center;
   padding-top: 3rem;
+}
+
+.anomaly-overlay--div h3 {
+  color: #e2237e;
+}
+
+.anomaly-overlay--div button {
+  color: #e2237e;
+  border-color: #e2237e;
 }
