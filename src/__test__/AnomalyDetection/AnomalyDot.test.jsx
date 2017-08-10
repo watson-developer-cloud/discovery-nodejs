@@ -59,7 +59,7 @@ describe('<AnomalyDot />', () => {
 
     describe('and it is active', () => {
       const propsWithActive = Object.assign({}, props, {
-        active: true
+        active: true,
       });
 
       beforeEach(() => {

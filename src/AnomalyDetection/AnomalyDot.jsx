@@ -49,6 +49,7 @@ AnomalyDot.defaultProps = {
   activeDotStrokeWidth: 3,
   dotColor: '#e2237e',
   dotStrokeWidth: 1,
+  payload: null,
 };
 
 export default AnomalyDot;
