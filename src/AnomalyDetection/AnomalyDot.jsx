@@ -1,32 +1,23 @@
 import React from 'react';
-import { string, number, bool, shape } from 'prop-types';
+import classNames from 'classnames';
+import { number, bool, shape } from 'prop-types';
 import { Dot } from 'recharts';
 import AnomalyDetection from './index';
+import './style.css';
 
-function AnomalyDot({
-  active,
-  dotColor,
-  dotStrokeWidth,
-  activeDotStrokeWidth,
-  ...props
-}) {
+function AnomalyDot({ active, ...props }) {
   const hasAnomaly = AnomalyDetection.hasAnomaly(props.payload);
 
   if (hasAnomaly) {
     return (
       <g className="anomaly-dot">
         <Dot
+          className="anomaly-dot-inside"
           {...props}
-          stroke={dotColor}
-          fill={dotColor}
-          r={6.5}
         />
         <Dot
+          className={classNames('anomaly-dot-outside', { active })}
           {...props}
-          stroke={dotColor}
-          strokeWidth={active ? activeDotStrokeWidth : dotStrokeWidth}
-          fill="none"
-          r={10.5}
         />
       </g>
     );
@@ -36,9 +27,6 @@ function AnomalyDot({
 
 AnomalyDot.propTypes = {
   active: bool.isRequired,
-  activeDotStrokeWidth: number.isRequired,
-  dotColor: string.isRequired,
-  dotStrokeWidth: number.isRequired,
   payload: shape({
     anomaly: number,
   }),
@@ -46,9 +34,6 @@ AnomalyDot.propTypes = {
 
 AnomalyDot.defaultProps = {
   active: false,
-  activeDotStrokeWidth: 3,
-  dotColor: '#e2237e',
-  dotStrokeWidth: 1,
   payload: null,
 };
 

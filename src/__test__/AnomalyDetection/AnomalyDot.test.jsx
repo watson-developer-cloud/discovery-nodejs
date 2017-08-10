@@ -43,17 +43,13 @@ describe('<AnomalyDot />', () => {
         wrapper = shallow(<AnomalyDot {...props} />);
       });
 
-      it('should render 2 <Dot /> with expected props', () => {
+      it('should render 2 <Dot /> with expected className', () => {
         const actualDots = wrapper.find(Dot);
         const firstDotProps = actualDots.get(0).props;
         const secondDotProps = actualDots.get(1).props;
-        const { dotColor, dotStrokeWidth } = AnomalyDot.defaultProps;
 
-        expect(firstDotProps.fill).toEqual(dotColor);
-        expect(firstDotProps.stroke).toEqual(dotColor);
-        expect(secondDotProps.fill).toEqual('none');
-        expect(secondDotProps.stroke).toEqual(dotColor);
-        expect(secondDotProps.strokeWidth).toEqual(dotStrokeWidth);
+        expect(firstDotProps.className).toEqual('anomaly-dot-inside');
+        expect(secondDotProps.className).toEqual('anomaly-dot-outside');
       });
     });
 
@@ -66,17 +62,13 @@ describe('<AnomalyDot />', () => {
         wrapper = shallow(<AnomalyDot {...propsWithActive} />);
       });
 
-      it('should render 2 <Dot /> with expected props', () => {
+      it('should render 2 <Dot /> with expected className', () => {
         const actualDots = wrapper.find(Dot);
         const firstDotProps = actualDots.get(0).props;
         const secondDotProps = actualDots.get(1).props;
-        const { dotColor, activeDotStrokeWidth } = AnomalyDot.defaultProps;
 
-        expect(firstDotProps.fill).toEqual(dotColor);
-        expect(firstDotProps.stroke).toEqual(dotColor);
-        expect(secondDotProps.fill).toEqual('none');
-        expect(secondDotProps.stroke).toEqual(dotColor);
-        expect(secondDotProps.strokeWidth).toEqual(activeDotStrokeWidth);
+        expect(firstDotProps.className).toEqual('anomaly-dot-inside');
+        expect(secondDotProps.className).toEqual('anomaly-dot-outside active');
       });
     });
   });
