@@ -15,6 +15,17 @@ describe('<AnomalyTooltip />', () => {
         payload: {
           matching_results: 100,
           anomaly: 0.5,
+          aggregations: [
+            {
+              hits: {
+                hits: [
+                  {
+                    title: 'Article Title',
+                  },
+                ],
+              },
+            },
+          ],
         },
       },
     ],
@@ -105,6 +116,12 @@ describe('<AnomalyTooltip />', () => {
       wrapper = shallow(<AnomalyTooltip {...props} />);
     });
 
+    it('should show the article title', () => {
+      const actual = wrapper.find('.anomaly-tooltip-title--p');
+
+      expect(actual.text()).toEqual('Article Title');
+    });
+
     it('should have an extra className on the tooltip articles span', () => {
       const actual = wrapper.find('.anomaly-tooltip-articles--span');
 
@@ -116,6 +133,22 @@ describe('<AnomalyTooltip />', () => {
       const actual = wrapper.find('.anomaly-tooltip-data--p');
 
       expect(actual.text()).toEqual('100 Articles (Anomalous)');
+    });
+  });
+
+  describe('when rendering a tooltip without a title', () => {
+    const propsWithoutTitle = Object.assign({}, props, {
+      payload: [],
+    });
+
+    beforeEach(() => {
+      wrapper = shallow(<AnomalyTooltip {...propsWithoutTitle} />);
+    });
+
+    it('shows "No Title" for the title', () => {
+      const actual = wrapper.find('.anomaly-tooltip-title--p');
+
+      expect(actual.text()).toEqual('No Title');
     });
   });
 });

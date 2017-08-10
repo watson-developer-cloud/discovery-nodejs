@@ -23,7 +23,7 @@ const mentions = [
 ];
 
 const anomalies = [
-  `timeslice(field:${fields.publication_date},interval:1day,time_zone:America/New_York,anomaly:true)`,
+  `timeslice(field:${fields.publication_date},interval:1day,time_zone:America/New_York,anomaly:true).top_hits(1)`,
 ];
 
 module.exports = {

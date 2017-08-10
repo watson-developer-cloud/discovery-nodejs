@@ -7,6 +7,17 @@ import './style.css';
 const getArticles = payload =>
   (payload && payload.matching_results ? payload.matching_results : 0);
 
+const getTitle = payload =>
+  (payload
+    && payload.aggregations
+    && payload.aggregations.length > 0
+    && payload.aggregations[0].hits
+    && payload.aggregations[0].hits.hits
+    && payload.aggregations[0].hits.hits.length > 0
+    && payload.aggregations[0].hits.hits[0].title
+    ? payload.aggregations[0].hits.hits[0].title
+    : 'No Title');
+
 function AnomalyTooltip({ label, payload, labelFormatter }) {
   const realPayload = payload && payload.length > 0
     ? payload[0].payload
@@ -18,6 +29,9 @@ function AnomalyTooltip({ label, payload, labelFormatter }) {
     <div className="anomaly-tooltip--div">
       <p className="recharts-tooltip-label">
         { labelFormatter(label) }
+      </p>
+      <p className="anomaly-tooltip-title--p">
+        { getTitle(realPayload) }
       </p>
       <p className="anomaly-tooltip-data--p">
         <span
@@ -44,6 +58,13 @@ AnomalyTooltip.propTypes = {
     payload: shape({
       anomaly: number,
       matching_results: number,
+      aggregations: arrayOf(shape({
+        hits: shape({
+          hits: arrayOf(shape({
+            title: string,
+          })),
+        }),
+      })),
     }),
   })),
 };
