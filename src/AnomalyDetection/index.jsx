@@ -15,6 +15,7 @@ import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 import NoContent from '../NoContent/index';
 import AnomalyDot from './AnomalyDot';
+import AnomalyTooltip from './AnomalyTooltip';
 
 export default class AnomalyDetection extends Component {
   static propTypes = {
@@ -26,12 +27,10 @@ export default class AnomalyDetection extends Component {
     query: shape({
       text: string.isRequired,
     }).isRequired,
-    colorAnomalyActive: string.isRequired,
     colorLine: string.isRequired,
   }
 
   static defaultProps = {
-    colorAnomalyActive: '#ff5050',
     colorLine: '#00a78f',
   }
 
@@ -61,28 +60,6 @@ export default class AnomalyDetection extends Component {
 
   onShowResults = () => {
     this.setState({ showQuery: false });
-  }
-
-  getAdditionalTooltip = (payload) => {
-    if (payload.length > 0 && AnomalyDetection.hasAnomaly(payload[0].payload)) {
-      return {
-        dataKey: 'anomaly',
-        name: 'Anomaly',
-        color: this.props.colorAnomalyActive,
-        value: payload[0].payload.anomaly,
-      };
-    }
-    return null;
-  }
-
-  renderTooltip = (tooltipProps) => {
-    const { payload } = tooltipProps;
-    const additionalTooltip = this.getAdditionalTooltip(payload);
-    const newTooltipProps = Object.assign({}, tooltipProps, {
-      content: null,
-      payload: additionalTooltip ? payload.concat(additionalTooltip) : payload,
-    });
-    return <Tooltip {...newTooltipProps} />;
   }
 
   render() {
@@ -138,7 +115,7 @@ export default class AnomalyDetection extends Component {
                           />
                           <Tooltip
                             labelFormatter={AnomalyDetection.formatDate}
-                            content={this.renderTooltip}
+                            content={<AnomalyTooltip />}
                           />
                         </LineChart>
                       </ResponsiveContainer>

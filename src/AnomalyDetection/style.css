@@ -17,3 +17,21 @@
 .anomaly-dot-outside.active {
   stroke-width: 3;
 }
+
+.anomaly-tooltip--div {
+  border: 1px solid #ccc;
+  background-color: white;
+  padding: 0.5rem;
+}
+
+.anomaly-tooltip-articles--span {
+  color: #00a78f;
+}
+
+.anomaly-tooltip-articles--span.hasAnomaly {
+  color: #e2237e;
+}
+
+.anomaly-tooltip-flag--span {
+  color: #e2237e;
+}
