@@ -2,14 +2,14 @@ import React from 'react';
 import { string, number, func, object, shape, arrayOf } from 'prop-types';
 import { Tabs, Pane, Code } from 'watson-react-components';
 
-const stringifyObject = input =>
-  (
-    typeof input === 'object'
-      ? JSON.stringify(input, null, 2)
-      : input
-  );
+const queryWithoutAggregation = queryInput => {
+  const { aggregation, ...queryParams } = queryInput;
+  return queryParams;
+}
 
 function QuerySyntax({ query, response, title, onGoBack }) {
+  const queryParams = queryWithoutAggregation(query);
+
   return (
     <div className="code-results">
       <div className="code-results--header-row">
@@ -36,7 +36,7 @@ function QuerySyntax({ query, response, title, onGoBack }) {
             <div className="code-results--fake-border" />
           </div>
           <Code language="json">
-            { stringifyObject(query) }
+            { JSON.stringify(queryParams, null, 2) }
           </Code>
         </Pane>
         <Pane label="Response">
@@ -44,7 +44,7 @@ function QuerySyntax({ query, response, title, onGoBack }) {
             <div className="code-results--fake-border" />
           </div>
           <Code language="json">
-            { stringifyObject(response) }
+            { JSON.stringify(response, null, 2) }
           </Code>
         </Pane>
       </Tabs>
@@ -54,8 +54,8 @@ function QuerySyntax({ query, response, title, onGoBack }) {
 
 QuerySyntax.propTypes = {
   query: shape({
-    count: number.isRequired,
-    return: string.isRequired,
+    count: number,
+    return: string,
     query: string.isRequired,
     aggregations: arrayOf(string),
     filter: string,

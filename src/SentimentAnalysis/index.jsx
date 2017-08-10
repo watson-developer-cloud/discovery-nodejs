@@ -5,6 +5,7 @@ import SentimentChart from './SentimentChart';
 import SentimentBySource from './SentimentBySource';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
+import widgetQuery from './query';
 
 export default class SentimentAnalysis extends Component {
   static propTypes = {
@@ -86,7 +87,7 @@ export default class SentimentAnalysis extends Component {
             : (
               <QuerySyntax
                 title="Sentiment Analysis"
-                query={queryBuilder.build(query, true)}
+                query={queryBuilder.build(query, widgetQuery)}
                 response={{ sentiment, sentiments }}
                 onGoBack={this.onShowResults}
               />

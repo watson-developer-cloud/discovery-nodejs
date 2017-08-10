@@ -28,7 +28,6 @@ const discovery = new DiscoveryV1({
   // username: '<username>',
   // password: '<password>',
   version_date: '2017-08-01',
-  qs: { aggregation: `[${queryBuilder.aggregations.join(',')}]` },
 });
 
 // Bootstrap application settings
@@ -44,7 +43,11 @@ app.get('/', (req, res) => {
 
 // setup query endpoint for news
 app.post('/api/query', (req, res, next) => {
-  const params = Object.assign({}, queryBuilder.build(req.body), {
+  const queryParams = queryBuilder.build(req.body);
+  if (queryParams.aggregations) {
+    delete queryParams.aggregations;
+  }
+  const params = Object.assign({}, queryParams, {
     environment_id: NEWS_ENVIRONMENT_ID,
     collection_id: NEWS_COLLECTION_ID,
   });
