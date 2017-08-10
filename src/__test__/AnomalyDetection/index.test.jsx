@@ -34,61 +34,6 @@ describe('<AnomalyDetection />', () => {
     });
   });
 
-  describe('when rendering charts', () => {
-    beforeEach(() => {
-      wrapper = shallow(<AnomalyDetection {...props} />);
-    });
-
-    describe('when tooltipProps has an anomaly', () => {
-      const tooltipProps = {
-        payload: [
-          {
-            payload: {
-              anomaly: 0.5,
-            },
-          },
-        ],
-      };
-
-      it('passes expected props to <Tooltip />', () => {
-        const actual = wrapper.instance().renderTooltip(tooltipProps).props;
-        const expectedPayload = [
-          {
-            payload: {
-              anomaly: 0.5,
-            },
-          },
-          {
-            dataKey: 'anomaly',
-            name: 'Anomaly',
-            color: AnomalyDetection.defaultProps.colorAnomalyActive,
-            value: 0.5,
-          },
-        ];
-
-        expect(actual.content).toBeNull();
-        expect(actual.payload).toEqual(expectedPayload);
-      });
-    });
-
-    describe('when tooltipProps does not have an anomaly', () => {
-      const tooltipProps = {
-        payload: [
-          {
-            payload: {},
-          },
-        ],
-      };
-
-      it('does not pass anything to <Tooltip />', () => {
-        const actual = wrapper.instance().renderTooltip(tooltipProps).props;
-
-        expect(actual.content).toBeNull();
-        expect(actual.payload).toEqual(tooltipProps.payload);
-      });
-    });
-  });
-
   describe('when loading for the first time', () => {
     beforeEach(() => {
       wrapper = shallow(<AnomalyDetection {...props} />);
