@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { string, number, shape, arrayOf } from 'prop-types';
 import {
   ResponsiveContainer,
@@ -16,6 +17,7 @@ import queryBuilder from '../query-builder';
 import NoContent from '../NoContent/index';
 import AnomalyDot from './AnomalyDot';
 import AnomalyTooltip from './AnomalyTooltip';
+import NoAnomaliesOverlay from './NoAnomaliesOverlay';
 
 export default class AnomalyDetection extends Component {
   static propTypes = {
@@ -50,8 +52,13 @@ export default class AnomalyDetection extends Component {
     return payload && payload.anomaly;
   }
 
+  static hasAnomalies(anomalyData) {
+    return anomalyData.some(result => result.anomaly);
+  }
+
   state = {
     showQuery: false,
+    showOverlay: !AnomalyDetection.hasAnomalies(this.props.anomalyData),
   }
 
   onShowQuery = () => {
@@ -60,6 +67,10 @@ export default class AnomalyDetection extends Component {
 
   onShowResults = () => {
     this.setState({ showQuery: false });
+  }
+
+  handleViewData = () => {
+    this.setState({ showOverlay: false });
   }
 
   render() {
@@ -79,46 +90,62 @@ export default class AnomalyDetection extends Component {
                 {
                   anomalyData.length > 0
                     ? (
-                      <ResponsiveContainer
-                        width={'100%'}
-                        height={250}
-                      >
-                        <LineChart
-                          data={anomalyData}
-                          margin={{
-                            top: 40,
-                            right: 30,
-                            bottom: 0,
-                            left: -10,
-                          }}
+                      <div className="anomaly-chart-container--div">
+                        <ResponsiveContainer
+                          height={250}
                         >
-                          <Line
-                            type="linear"
-                            dataKey="matching_results"
-                            name="Matching Results"
-                            stroke={colorLine}
-                            strokeWidth="3"
-                            dot={<AnomalyDot />}
-                            activeDot={<AnomalyDot active />}
-                          />
-                          <CartesianGrid stroke="#ccc" />
-                          <XAxis
-                            dataKey="key_as_string"
-                            tickFormatter={AnomalyDetection.formatDate}
-                            tickLine={false}
-                          />
-                          <YAxis
-                            label="&nbsp;&#x23; of articles"
-                            allowDecimals={false}
-                            tickLine={false}
-                            padding={{ top: 10 }}
-                          />
-                          <Tooltip
-                            labelFormatter={AnomalyDetection.formatDate}
-                            content={<AnomalyTooltip />}
-                          />
-                        </LineChart>
-                      </ResponsiveContainer>
+                          <LineChart
+                            data={anomalyData}
+                            className={
+                              classNames('anomaly-chart--svg',
+                                {
+                                  faded: this.state.showOverlay,
+                                },
+                              )
+                            }
+                            margin={{
+                              top: 40,
+                              right: 30,
+                              bottom: 0,
+                              left: -10,
+                            }}
+                          >
+                            <Line
+                              type="linear"
+                              dataKey="matching_results"
+                              name="Matching Results"
+                              stroke={colorLine}
+                              strokeWidth="3"
+                              dot={<AnomalyDot />}
+                              activeDot={<AnomalyDot active />}
+                            />
+                            <CartesianGrid stroke="#ccc" />
+                            <XAxis
+                              dataKey="key_as_string"
+                              tickFormatter={AnomalyDetection.formatDate}
+                              tickLine={false}
+                            />
+                            <YAxis
+                              label="&nbsp;&#x23; of articles"
+                              allowDecimals={false}
+                              tickLine={false}
+                              padding={{ top: 10 }}
+                            />
+                            <Tooltip
+                              labelFormatter={AnomalyDetection.formatDate}
+                              content={<AnomalyTooltip />}
+                            />
+                          </LineChart>
+                        </ResponsiveContainer>
+                        {
+                          this.state.showOverlay && (
+                            <NoAnomaliesOverlay
+                              text={query.text}
+                              onViewData={this.handleViewData}
+                            />
+                          )
+                        }
+                      </div>
                     )
                     : (
                       <NoContent

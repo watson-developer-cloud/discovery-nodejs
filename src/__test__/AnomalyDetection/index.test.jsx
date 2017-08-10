@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
+import { LineChart } from 'recharts';
 import AnomalyDetection from '../../AnomalyDetection/index';
+import NoAnomaliesOverlay from '../../AnomalyDetection/NoAnomaliesOverlay';
 import QuerySyntax from '../../QuerySyntax/index';
 import NoContent from '../../NoContent/index';
 
@@ -24,6 +26,46 @@ describe('<AnomalyDetection />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<AnomalyDetection {...props} />, div);
+  });
+
+  describe('when the anomalyData has no anomalies', () => {
+    const propsWithNoAnomalies = Object.assign({}, props, {
+      anomalyData: [
+        {
+          key_as_string: '2017-08-01T00:00:00.000-04:00',
+          matching_results: 10,
+        },
+      ],
+    });
+
+    beforeEach(() => {
+      wrapper = shallow(<AnomalyDetection {...propsWithNoAnomalies} />);
+    });
+
+    it('should add a "faded" className to the <LineChart />', () => {
+      const actual = wrapper.find(LineChart).props();
+
+      expect(actual.className).toEqual(expect.stringContaining('faded'));
+    });
+
+    it('show have a <NoAnomaliesOverlay />', () => {
+      const actual = wrapper.find(NoAnomaliesOverlay);
+
+      expect(actual).toHaveLength(1);
+      expect(actual.props().text).toEqual('foo');
+    });
+
+    describe('and the handleViewData is clicked invoked', () => {
+      beforeEach(() => {
+        wrapper.instance().handleViewData();
+      });
+
+      it('removes the overlay', () => {
+        const actual = wrapper.find(NoAnomaliesOverlay);
+
+        expect(actual).toHaveLength(0);
+      });
+    });
   });
 
   describe('formatDate', () => {

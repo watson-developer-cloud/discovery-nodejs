@@ -1,4 +1,16 @@
 
+.anomaly-chart-container--div {
+  position: relative;
+}
+
+.anomaly-chart--svg {
+  transition: opacity 0.3s;
+}
+
+.anomaly-chart--svg.faded {
+  opacity: 0.3;
+}
+
 .anomaly-dot circle {
   stroke: #e2237e;
 }
@@ -35,4 +47,13 @@
 
 .anomaly-tooltip-flag--span {
   color: #e2237e;
+}
+
+.anomaly-overlay--div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  text-align: center;
+  padding-top: 3rem;
 }
