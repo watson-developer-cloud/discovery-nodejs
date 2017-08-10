@@ -8,7 +8,7 @@ function NoAnomaliesOverlay({ text, onViewData }) {
       <p
         className="anomaly-overlay-title--p"
       >
-        {`There are no anomalies in ${text} for this date range`}
+        {`There are no anomalies in "${text}" for this date range`}
       </p>
       <p
         className="anomaly-overlay-subtitle--p"
