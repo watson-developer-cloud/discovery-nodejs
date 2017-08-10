@@ -1,0 +1,19 @@
+
+.anomaly-dot circle {
+  stroke: #e2237e;
+}
+
+.anomaly-dot-inside {
+  r: 6.5;
+  fill: #e2237e;
+}
+
+.anomaly-dot-outside {
+  r: 10.5;
+  fill: none;
+  stroke-width: 1;
+}
+
+.anomaly-dot-outside.active {
+  stroke-width: 3;
+}
