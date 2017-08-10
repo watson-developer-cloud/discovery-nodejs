@@ -55,9 +55,15 @@ describe('<AnomalyDetection />', () => {
       expect(actual.props().text).toEqual('foo');
     });
 
-    describe('and the handleViewData is clicked invoked', () => {
+    describe('and handleViewData is invoked', () => {
       beforeEach(() => {
         wrapper.instance().handleViewData();
+      });
+
+      it('should not have a "faded" className on the <LineChart />', () => {
+        const actual = wrapper.find(LineChart).props();
+
+        expect(actual.className).not.toEqual(expect.stringContaining('faded'));
       });
 
       it('removes the overlay', () => {
