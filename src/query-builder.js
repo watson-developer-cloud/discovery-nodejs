@@ -27,16 +27,15 @@ module.exports = {
         params.aggregation = `[${widgetQueryCopy.aggregations.join(',')}]`;
       }
       return Object.assign({}, params, widgetQueryCopy);
-    } else {
-      const allWidgetAggregations = [].concat(
-        TopEntitiesQuery.aggregations,
-        SentimentAnalysisQuery.aggregations,
-        MentionsAndSentimentsQuery.aggregations,
-        AnomalyDetectionQuery.aggregations,
-      );
-      params.aggregation = `[${allWidgetAggregations.join(',')}]`;
-      // add in TopStoriesQuery since it is the only one without aggregations
-      return Object.assign({}, params, TopStoriesQuery);
     }
+    const allWidgetAggregations = [].concat(
+      TopEntitiesQuery.aggregations,
+      SentimentAnalysisQuery.aggregations,
+      MentionsAndSentimentsQuery.aggregations,
+      AnomalyDetectionQuery.aggregations,
+    );
+    params.aggregation = `[${allWidgetAggregations.join(',')}]`;
+    // add in TopStoriesQuery since it is the only one without aggregations
+    return Object.assign({}, params, TopStoriesQuery);
   },
 };

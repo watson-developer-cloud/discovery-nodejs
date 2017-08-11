@@ -9,5 +9,5 @@ const timesliceParams = [
 const anomalyAgg = `timeslice(${timesliceParams}).top_hits(1)`;
 
 module.exports = {
-  aggregations: [ anomalyAgg ],
+  aggregations: [anomalyAgg],
 };

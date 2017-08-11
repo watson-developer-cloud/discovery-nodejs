@@ -7,5 +7,5 @@ const sentimentByHostAgg = [
 const overallSentimentAgg = `term(${fields.text_document_sentiment_type})`;
 
 module.exports = {
-  aggregations: [ sentimentByHostAgg, overallSentimentAgg ],
+  aggregations: [sentimentByHostAgg, overallSentimentAgg],
 };

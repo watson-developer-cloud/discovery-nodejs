@@ -13,5 +13,5 @@ const peopleAgg = [
 const conceptAgg = `term(${fields.title_concept_text})`;
 
 module.exports = {
-  aggregations: [ companiesAgg, peopleAgg, conceptAgg ],
+  aggregations: [companiesAgg, peopleAgg, conceptAgg],
 };

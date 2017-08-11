@@ -8,5 +8,5 @@ const mentionsAgg = [
 ].join('.');
 
 module.exports = {
-  aggregations: [ mentionsAgg ],
+  aggregations: [mentionsAgg],
 };

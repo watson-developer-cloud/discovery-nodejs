@@ -2,10 +2,10 @@ import React from 'react';
 import { string, number, func, object, shape, arrayOf } from 'prop-types';
 import { Tabs, Pane, Code } from 'watson-react-components';
 
-const queryWithoutAggregation = queryInput => {
+const queryWithoutAggregation = (queryInput) => {
   const { aggregation, ...queryParams } = queryInput;
   return queryParams;
-}
+};
 
 function QuerySyntax({ query, response, title, onGoBack }) {
   const queryParams = queryWithoutAggregation(query);
