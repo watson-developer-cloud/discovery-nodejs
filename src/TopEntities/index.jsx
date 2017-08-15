@@ -127,7 +127,7 @@ export default class TopEntities extends Component {
             : (
               <QuerySyntax
                 title="Top Entities"
-                query={queryBuilder.build(query, true)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.topEntities)}
                 response={this.props.entities}
                 onGoBack={this.onShowResults}
               />

@@ -56,6 +56,21 @@ export default class AnomalyDetection extends Component {
     return anomalyData.some(result => result.anomaly);
   }
 
+  static trimAnomalyResultsForDisplay(anomalyData) {
+    return anomalyData.map((timesliceResult) => {
+      const aggregations = timesliceResult.aggregations.map((topHitAgg) => {
+        const hits = Object.assign({}, topHitAgg.hits, {
+          hits: topHitAgg.hits.hits.map(topHit =>
+            // returning all the fields makes everything slow
+            ({ title: topHit.title }),
+          ),
+        });
+        return Object.assign({}, topHitAgg, { hits });
+      });
+      return Object.assign({}, timesliceResult, { aggregations });
+    });
+  }
+
   state = {
     showQuery: false,
     showOverlay: !AnomalyDetection.hasAnomalies(this.props.anomalyData),
@@ -159,8 +174,8 @@ export default class AnomalyDetection extends Component {
             : (
               <QuerySyntax
                 title={AnomalyDetection.widgetTitle()}
-                query={queryBuilder.build(query, true)}
-                response={{ results: anomalyData }}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.anomalyDetection)}
+                response={{ results: AnomalyDetection.trimAnomalyResultsForDisplay(anomalyData) }}
                 onGoBack={this.onShowResults}
               />
             )

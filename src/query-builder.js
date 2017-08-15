@@ -1,51 +1,46 @@
-
-const { fields } = require('./fields');
-// Aggregations used to build the different parts of the UI
 const moment = require('moment');
+const { fields } = require('./fields');
+const TopStoriesQuery = require('./TopStories/query');
+const TopEntitiesQuery = require('./TopEntities/query');
+const SentimentAnalysisQuery = require('./SentimentAnalysis/query');
+const MentionsAndSentimentsQuery = require('./MentionsAndSentiments/query');
+const AnomalyDetectionQuery = require('./AnomalyDetection/query');
+
 // ISO 8601 date format accepted by the service
 const ISO_8601 = 'YYYY-MM-DDThh:mm:ssZZ';
 
-const entities = [
-  `nested(${fields.title_entity}).filter(${fields.title_entity_type}:Company).term(${fields.title_entity_text})`,
-  `nested(${fields.title_entity}).filter(${fields.title_entity_type}:Person).term(${fields.title_entity_text})`,
-  `term(${fields.title_concept_text})`,
-];
-
-const sentiments = [
-  `term(${fields.host}).term(${fields.text_document_sentiment_type})`,
-  `term(${fields.text_document_sentiment_type})`,
-  `min(${fields.text_document_sentiment_score})`,
-  `max(${fields.text_document_sentiment_score})`,
-];
-
-const mentions = [
-  `filter(${fields.title_entity_type}::Company).term(${fields.title_entity_text}).timeslice(${fields.publication_date},1day).term(${fields.text_document_sentiment_type})`,
-];
-
-const anomalies = [
-  `timeslice(field:${fields.publication_date},interval:1day,time_zone:America/New_York,anomaly:true).top_hits(1)`,
-];
-
 module.exports = {
-  aggregations: [].concat(entities, sentiments, mentions, anomalies),
-  entities,
-  sentiments,
-  mentions,
-  build(query, full) {
+  widgetQueries: {
+    topStories: TopStoriesQuery,
+    topEntities: TopEntitiesQuery,
+    sentimentAnalysis: SentimentAnalysisQuery,
+    mentionsAndSentiments: MentionsAndSentimentsQuery,
+    anomalyDetection: AnomalyDetectionQuery,
+  },
+  build(query, widgetQuery) {
     const params = {
-      count: 5,
-      return: `${fields.title},${fields.url},${fields.host},${fields.publication_date}`,
       query: `"${query.text}",${fields.language}:(english|en)`,
     };
-    if (full) {
-      params.aggregations = [].concat(entities, sentiments, mentions, anomalies);
-    }
     if (query.date) {
       params.filter = `${fields.publication_date}>${moment(query.date.from).format(ISO_8601)},${fields.publication_date}<${moment(query.date.to).format(ISO_8601)}`;
     }
     if (query.sort) {
       params.sort = query.sort === 'date' ? `-${fields.publication_date},-_score` : '-_score';
     }
-    return params;
+    if (widgetQuery) {
+      return Object.assign({}, params, widgetQuery);
+    }
+
+    // do a full query
+    const allWidgetAggregations = [].concat(
+      TopEntitiesQuery.aggregations,
+      SentimentAnalysisQuery.aggregations,
+      MentionsAndSentimentsQuery.aggregations,
+      // eslint-disable-next-line comma-dangle
+      AnomalyDetectionQuery.aggregations
+    );
+    params.aggregation = `[${allWidgetAggregations.join(',')}]`;
+    // add in TopStoriesQuery since it is the only one without aggregations
+    return Object.assign({}, params, TopStoriesQuery);
   },
 };

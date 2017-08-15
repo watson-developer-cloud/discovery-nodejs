@@ -28,7 +28,6 @@ const discovery = new DiscoveryV1({
   // username: '<username>',
   // password: '<password>',
   version_date: '2017-08-01',
-  qs: { aggregation: `[${queryBuilder.aggregations.join(',')}]` },
 });
 
 // Bootstrap application settings
@@ -38,13 +37,46 @@ const path = require('path');
 const app = express();
 require('./config/express')(app);
 
+function getWidgetQuery(request) {
+  const widgetQueries = request.query.widgetQueries;
+
+  if (!widgetQueries) {
+    return null;
+  }
+
+  return widgetQueries.split(',').reduce((widgetQuery, finalWidgetQuery) => {
+    const queryBuilderWidgetQuery = queryBuilder.widgetQueries[widgetQuery];
+
+    if (queryBuilderWidgetQuery) {
+      const widgetAggregations = queryBuilderWidgetQuery.aggregations;
+
+      if (widgetAggregations) {
+        const currentAggregations = finalWidgetQuery.aggregations || [];
+        delete queryBuilderWidgetQuery.aggregations;
+
+        return Object.assign({}, finalWidgetQuery, queryBuilderWidgetQuery, {
+          aggregations: currentAggregations.concat(widgetAggregations),
+        });
+      }
+    }
+    return Object.assign({}, finalWidgetQuery, queryBuilderWidgetQuery);
+  }, {});
+}
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // setup query endpoint for news
 app.post('/api/query', (req, res, next) => {
-  const params = Object.assign({}, queryBuilder.build(req.body), {
+  const queryParams = queryBuilder.build(req.body, getWidgetQuery(req));
+
+  if (queryParams.aggregations) {
+    queryParams.aggregation = `[${queryParams.aggregations.join(',')}]`;
+    delete queryParams.aggregations;
+  }
+
+  const params = Object.assign({}, queryParams, {
     environment_id: NEWS_ENVIRONMENT_ID,
     collection_id: NEWS_COLLECTION_ID,
   });

@@ -270,7 +270,7 @@ export default class MentionsAndSentiments extends Component {
             : (
               <QuerySyntax
                 title={MentionsAndSentiments.widgetTitle()}
-                query={queryBuilder.build(query, true)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.mentionsAndSentiments)}
                 response={{ mentions }}
                 onGoBack={this.onShowResults}
               />

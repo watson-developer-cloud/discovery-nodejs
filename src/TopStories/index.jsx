@@ -93,7 +93,7 @@ export default class TopStories extends Component {
             : (
               <QuerySyntax
                 title="Top Stories"
-                query={queryBuilder.build(query, true)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.topStories)}
                 response={{ results: stories }}
                 onGoBack={this.onShowResults}
               />

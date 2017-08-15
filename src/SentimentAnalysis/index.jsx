@@ -86,7 +86,7 @@ export default class SentimentAnalysis extends Component {
             : (
               <QuerySyntax
                 title="Sentiment Analysis"
-                query={queryBuilder.build(query, true)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.sentimentAnalysis)}
                 response={{ sentiment, sentiments }}
                 onGoBack={this.onShowResults}
               />
