@@ -10,6 +10,13 @@ const AnomalyDetectionQuery = require('./AnomalyDetection/query');
 const ISO_8601 = 'YYYY-MM-DDThh:mm:ssZZ';
 
 module.exports = {
+  widgetQueries: {
+    topStories: TopStoriesQuery,
+    topEntities: TopEntitiesQuery,
+    sentimentAnalysis: SentimentAnalysisQuery,
+    mentionsAndSentiments: MentionsAndSentimentsQuery,
+    anomalyDetection: AnomalyDetectionQuery,
+  },
   build(query, widgetQuery) {
     const params = {
       query: `"${query.text}",${fields.language}:(english|en)`,
@@ -21,13 +28,10 @@ module.exports = {
       params.sort = query.sort === 'date' ? `-${fields.publication_date},-_score` : '-_score';
     }
     if (widgetQuery) {
-      const widgetQueryCopy = Object.assign({}, widgetQuery);
-
-      if (widgetQueryCopy.aggregations) {
-        params.aggregation = `[${widgetQueryCopy.aggregations.join(',')}]`;
-      }
-      return Object.assign({}, params, widgetQueryCopy);
+      return Object.assign({}, params, widgetQuery);
     }
+
+    // do a full query
     const allWidgetAggregations = [].concat(
       TopEntitiesQuery.aggregations,
       SentimentAnalysisQuery.aggregations,
