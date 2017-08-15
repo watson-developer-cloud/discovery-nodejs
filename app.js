@@ -52,8 +52,11 @@ function getWidgetQuery(request) {
 
       if (widgetAggregations) {
         const currentAggregations = finalWidgetQuery.aggregations || [];
-        finalWidgetQuery.aggregations = currentAggregations.concat(widgetAggregations);
         delete queryBuilderWidgetQuery.aggregations;
+
+        return Object.assign({}, finalWidgetQuery, queryBuilderWidgetQuery, {
+          aggregations: currentAggregations.concat(widgetAggregations),
+        });
       }
     }
     return Object.assign({}, finalWidgetQuery, queryBuilderWidgetQuery);
