@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon } from 'watson-react-components';
+import { Icon, Alert } from 'watson-react-components';
 import { fields } from './fields';
 import Query from './Query/index';
 import TopEntities from './TopEntities/index';
@@ -122,6 +122,18 @@ export default class Demo extends Component {
             )
         }
         {
+          this.state.error && (
+            <div className="error--container">
+              <Alert type="error" color="red">
+                <p className="base--p">
+                  { this.state.error.error }
+                </p>
+              </Alert>
+            </div>
+          )
+        }
+        {
+          !this.state.error &&
           !this.state.loading &&
           this.state.data &&
           this.state.data.results.length > 0
