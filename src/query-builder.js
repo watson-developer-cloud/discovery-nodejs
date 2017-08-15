@@ -36,7 +36,8 @@ module.exports = {
       TopEntitiesQuery.aggregations,
       SentimentAnalysisQuery.aggregations,
       MentionsAndSentimentsQuery.aggregations,
-      AnomalyDetectionQuery.aggregations,
+      // eslint-disable-next-line comma-dangle
+      AnomalyDetectionQuery.aggregations
     );
     params.aggregation = `[${allWidgetAggregations.join(',')}]`;
     // add in TopStoriesQuery since it is the only one without aggregations
