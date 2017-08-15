@@ -6,7 +6,6 @@ import Cloud from './Cloud';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 import NoContent from '../NoContent/index';
-import widgetQuery from './query';
 
 export default class TopEntities extends Component {
   static propTypes = {
@@ -128,7 +127,7 @@ export default class TopEntities extends Component {
             : (
               <QuerySyntax
                 title="Top Entities"
-                query={queryBuilder.build(query, widgetQuery)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.topEntities)}
                 response={this.props.entities}
                 onGoBack={this.onShowResults}
               />

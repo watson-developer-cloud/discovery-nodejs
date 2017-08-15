@@ -18,7 +18,6 @@ import Accordion from '../Accordion/index';
 import NoContent from '../NoContent/index';
 import { getNames, getItemsForName } from './mentionsParser';
 import capitalize from './capitalize';
-import widgetQuery from './query';
 
 export default class MentionsAndSentiments extends Component {
   static propTypes = {
@@ -271,7 +270,7 @@ export default class MentionsAndSentiments extends Component {
             : (
               <QuerySyntax
                 title={MentionsAndSentiments.widgetTitle()}
-                query={queryBuilder.build(query, widgetQuery)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.mentionsAndSentiments)}
                 response={{ mentions }}
                 onGoBack={this.onShowResults}
               />

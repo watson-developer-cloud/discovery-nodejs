@@ -18,7 +18,6 @@ import NoContent from '../NoContent/index';
 import AnomalyDot from './AnomalyDot';
 import AnomalyTooltip from './AnomalyTooltip';
 import NoAnomaliesOverlay from './NoAnomaliesOverlay';
-import widgetQuery from './query';
 
 export default class AnomalyDetection extends Component {
   static propTypes = {
@@ -175,7 +174,7 @@ export default class AnomalyDetection extends Component {
             : (
               <QuerySyntax
                 title={AnomalyDetection.widgetTitle()}
-                query={queryBuilder.build(query, widgetQuery)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.anomalyDetection)}
                 response={{ results: AnomalyDetection.trimAnomalyResultsForDisplay(anomalyData) }}
                 onGoBack={this.onShowResults}
               />

@@ -6,7 +6,6 @@ import queryBuilder from '../query-builder';
 import Story from './Story';
 import SortSelect from './SortSelect';
 import { fields } from '../fields';
-import widgetQuery from './query';
 
 export default class TopStories extends Component {
   static propTypes = {
@@ -94,7 +93,7 @@ export default class TopStories extends Component {
             : (
               <QuerySyntax
                 title="Top Stories"
-                query={queryBuilder.build(query, widgetQuery)}
+                query={queryBuilder.build(query, queryBuilder.widgetQueries.topStories)}
                 response={{ results: stories }}
                 onGoBack={this.onShowResults}
               />
