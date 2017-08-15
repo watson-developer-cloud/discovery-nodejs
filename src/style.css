@@ -1410,9 +1410,12 @@ html {
   margin-top: 0rem;
 }
 
-.loader--container {
+.loader--container,
+.error--container {
   text-align: center;
+  margin: 0 auto;
   padding: 3rem;
+  max-width: 30rem;
 }
 
 .code-results {
