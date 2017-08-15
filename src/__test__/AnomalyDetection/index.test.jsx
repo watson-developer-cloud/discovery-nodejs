@@ -16,6 +16,23 @@ describe('<AnomalyDetection />', () => {
         key_as_string: '2017-08-01T00:00:00.000-04:00',
         matching_results: 10,
         anomaly: 0.5,
+        aggregations: [
+          {
+            type: 'top_hits',
+            size: 1,
+            hits: {
+              matching_results: 123,
+              hits: [
+                {
+                  id: 'im an id',
+                  score: 1.0,
+                  field: 'im some field',
+                  title: 'the real title',
+                },
+              ],
+            },
+          },
+        ],
       },
     ],
     query: {
@@ -107,7 +124,29 @@ describe('<AnomalyDetection />', () => {
 
         expect(querySyntaxProps.query.query).toEqual(expectedQuery);
         expect(querySyntaxProps.title).toEqual(AnomalyDetection.widgetTitle());
-        expect(querySyntaxProps.response).toEqual({ results: props.anomalyData });
+
+        const expectedResults = [
+          {
+            key_as_string: '2017-08-01T00:00:00.000-04:00',
+            matching_results: 10,
+            anomaly: 0.5,
+            aggregations: [
+              {
+                type: 'top_hits',
+                size: 1,
+                hits: {
+                  matching_results: 123,
+                  hits: [
+                    {
+                      title: 'the real title',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ];
+        expect(querySyntaxProps.response).toEqual({ results: expectedResults });
       });
     });
   });
