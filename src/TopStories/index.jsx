@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { string, object, func, arrayOf, shape } from 'prop-types';
+import { string, object, arrayOf, shape } from 'prop-types';
 import WidgetHeader from '../WidgetHeader/index';
 import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 import Story from './Story';
-import SortSelect from './SortSelect';
 import { fields } from '../fields';
 
 export default class TopStories extends Component {
@@ -17,7 +16,6 @@ export default class TopStories extends Component {
         to: string.isRequired,
       }).isRequired,
     }).isRequired,
-    onSortChange: func.isRequired,
   }
 
   static widgetTitle() {
@@ -30,7 +28,6 @@ export default class TopStories extends Component {
 
   state = {
     showQuery: false,
-    sortType: (typeof this.props.query.sort === 'undefined' || this.props.query.sort === 'relevance') ? 'relevance' : 'date',
   }
 
   onShowQuery = () => {
@@ -39,15 +36,6 @@ export default class TopStories extends Component {
 
   onShowResults = () => {
     this.setState({ showQuery: false });
-  }
-
-  onChangeSort = (e) => {
-    const sortVal = e.target.value;
-    this.setState({ sortType: sortVal });
-    const newQuery = Object.assign({}, this.props.query, {
-      sort: sortVal,
-    });
-    this.props.onSortChange(newQuery);
   }
 
   render() {
@@ -64,17 +52,6 @@ export default class TopStories extends Component {
                   description={TopStories.widgetDescription()}
                   onShowQuery={this.onShowQuery}
                 />
-                <div className="sort-option">
-                  <span id="sort-label">
-                      Sort by:
-                  </span>
-                  <span>
-                    <SortSelect
-                      onChange={this.onChangeSort}
-                      currSelected={this.state.sortType}
-                    />
-                  </span>
-                </div>
                 <div className="top-stories--list">
                   {
                     stories.map(item =>
