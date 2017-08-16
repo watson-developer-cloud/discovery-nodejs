@@ -23,7 +23,7 @@ export default class TopStories extends Component {
   }
 
   static widgetDescription() {
-    return 'Find the most recent and relevant news articles.';
+    return 'Find the most relevant news articles.';
   }
 
   state = {
