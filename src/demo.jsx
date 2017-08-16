@@ -154,7 +154,6 @@ export default class Demo extends Component {
                         query={this.state.query}
                         stories={this.state.data.results}
                         onShowCode={this.toggleTopResults}
-                        onSortChange={this.handleQueryChange}
                       />
                     </div>
                   </div>

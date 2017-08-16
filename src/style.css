@@ -63,43 +63,6 @@ html {
   margin-top: 0;
 }
 
-#sort-label {
-  padding-right: 0.5rem;
-  font-size: 0.8em;
-  color: #121212;
-}
-
-#sort-by {
-  display: inline;
-  width: 10rem;
-  padding: 0.4rem 0.1rem;
-}
-
-.sort--select {
-  border-style: none;
-  border-bottom: thin solid #5A5A5A;
-  background: transparent;
-  font-size: 0.9em;
-}
-
-.sort--select:focus {
-  outline: none;
-  border-bottom: thin solid #9753e1;
-}
-
-.sort-select--icon {
-  position: relative;
-  margin-left: -0.76rem;
-  z-index: -1;
-}
-
-.sort-select--icon svg {
-  transform: rotateZ(90deg);
-  width: 0.8rem;
-  height: 0.8rem;
-  fill: #5A5A5A;
-}
-
 /* react-dates styles */
 
 .CalendarDay {

@@ -24,9 +24,6 @@ module.exports = {
     if (query.date) {
       params.filter = `${fields.publication_date}>${moment(query.date.from).format(ISO_8601)},${fields.publication_date}<${moment(query.date.to).format(ISO_8601)}`;
     }
-    if (query.sort) {
-      params.sort = query.sort === 'date' ? `-${fields.publication_date},-_score` : '-_score';
-    }
     if (widgetQuery) {
       return Object.assign({}, params, widgetQuery);
     }
