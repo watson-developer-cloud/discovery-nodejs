@@ -14,10 +14,12 @@ function AnomalyDot({ active, ...props }) {
         <Dot
           className="anomaly-dot-inside"
           {...props}
+          r={6.5}
         />
         <Dot
           className={classNames('anomaly-dot-outside', { active })}
           {...props}
+          r={10.5}
         />
       </g>
     );
