@@ -79,7 +79,7 @@ export default class Demo extends Component {
    * Call the query API every time the query change.
    */
   fetchNewData = (query) => {
-    this.setState({ query, loading: true });
+    this.setState({ query, loading: true, error: null, data: null });
     const host = process.env.REACT_APP_SERVER || '';
     fetch(`${host}/api/query`, {
       method: 'POST',
