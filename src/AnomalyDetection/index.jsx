@@ -118,12 +118,6 @@ export default class AnomalyDetection extends Component {
                                 },
                               )
                             }
-                            margin={{
-                              top: 40,
-                              right: 30,
-                              bottom: 0,
-                              left: -10,
-                            }}
                           >
                             <Line
                               type="linear"
@@ -141,10 +135,8 @@ export default class AnomalyDetection extends Component {
                               tickLine={false}
                             />
                             <YAxis
-                              label="&nbsp;&#x23; of articles"
-                              allowDecimals={false}
+                              domain={['auto', 'auto']}
                               tickLine={false}
-                              padding={{ top: 10 }}
                             />
                             <Tooltip
                               labelFormatter={AnomalyDetection.formatDate}
