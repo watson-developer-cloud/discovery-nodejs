@@ -38,7 +38,7 @@ export default class SentimentAnalysis extends Component {
   }
 
   static widgetDescription() {
-    return 'Extract sentiment from news articles across a variety of news sources (10 random sources used below).';
+    return 'Sentiment can be extracted from news articles across a variety of sources.';
   }
 
   static filterEmptySentimentResults(sentiments) {

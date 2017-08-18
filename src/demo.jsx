@@ -143,17 +143,17 @@ export default class Demo extends Component {
                 <div className="_container _container_large">
                   <div className="row">
                     <div className="results--panel-1">
-                      <TopEntities
-                        query={this.state.query}
-                        entities={this.state.data.entities}
-                        onShowCode={this.toggleTopEntities}
-                      />
-                    </div>
-                    <div className="results--panel-2">
                       <TopStories
                         query={this.state.query}
                         stories={this.state.data.results}
                         onShowCode={this.toggleTopResults}
+                      />
+                    </div>
+                    <div className="results--panel-2">
+                      <TopEntities
+                        query={this.state.query}
+                        entities={this.state.data.entities}
+                        onShowCode={this.toggleTopEntities}
                       />
                     </div>
                   </div>

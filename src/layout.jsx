@@ -18,7 +18,7 @@ export default function Layout() {
         apiReference="http://www.ibm.com/watson/developercloud/discovery/api"
         startInBluemix="https://console.ng.bluemix.net/registration/?target=/catalog/services/discovery/"
         version="GA"
-        description="Add a cognitive search and content analytics engine to applications to identify patterns, trends and actionable insights that drive better decision-making."
+        description="Unlock hidden value in data to find answers, monitor trends and surface patterns, with the world’s most advanced cloud-native insight engine."
       />
       <Demo />
       <div className="footer-container--div">

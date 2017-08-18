@@ -41,7 +41,7 @@ export default class AnomalyDetection extends Component {
   }
 
   static widgetDescription() {
-    return 'Identify anomalies in total number of articles over the specified timeframe';
+    return 'Anomalies - days with an unusually high number of mentions - can be detected in news articles over a specified timeframe.';
   }
 
   static formatDate(date) {
