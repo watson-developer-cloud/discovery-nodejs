@@ -713,9 +713,7 @@ html {
 }
 .query {
   padding: 0rem;
-  background-color: #9753e1;
-  position: relative;
-  min-height: 500px;
+  background: linear-gradient(90deg, #9753e1 50%, #ffffff 50%);
 }
 .query--no-results-wrapper {
   width: 100%;
@@ -736,51 +734,21 @@ html {
   overflow-y: auto;
   text-overflow: initial;
 }
-.query--right-bg {
-  height: 100%;
-  background-color: white;
-  position:absolute;
-  width: 50%;
-  position: absolute;
-  z-index: 0;
-  right: 0rem;
-}
 .query--row {
-  z-index: 100;
-  position: relative;
-  height: 100%;
-  padding: 0rem;
+  display: block;
+  padding: 0;
 }
 .query--left {
-  background-color: #9753e1;
-  display: block;
   padding: 4rem 1rem;
+  width: 100%;
+  background-color: #9753e1;
 }
+
 .query--right {
-  background-color: white;
-  display: block;
+  width: 100%;
   margin-top: 0rem;
   padding: 4rem 1rem;
-}
-@media (min-width: 768px) {
-  .query--left {
-    width: 65.95745%;
-    float: left;
-    height: 100%;
-    padding: 4rem 4rem 4rem 0rem;
-  }
-  .query--right {
-    width: 34.04255%;
-    float: left;
-    height: 100%;
-    padding: 4rem 0rem 4rem 4rem;
-  }
-  .query--row {
-    padding: 0rem 1rem;
-  }
-  .query {
-    height: 500px;
-  }
+  background-color: #ffffff;
 }
 .query--search-description {
   font-size: 1.3em;
@@ -816,8 +784,8 @@ html {
 .query .text-input--input {
   background: transparent;
   color: white;
-  font-size: 1em;
-  max-width: calc(100% - 5rem);
+  font-size: 1rem;
+  max-width: calc(100% - 3rem);
   box-shadow: none;
   padding-bottom: 1.1rem;
 }
@@ -887,6 +855,7 @@ html {
 
 .query--search-container {
   position: relative;
+  width: 100%;
 }
 
 .query--icon-container {
@@ -894,9 +863,14 @@ html {
   margin-top: 0rem;
   position: absolute;
   padding: 0;
-  right: 1.5rem;
+  right: 1rem;
   bottom: 1rem;
   border: none;
+}
+
+.query--icon-container .icon {
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .query--icon-container:hover,
@@ -905,28 +879,10 @@ html {
   transition: none;
 }
 
-.query--icon-container .icon {
-  height: 1.25rem;
-  width: 1.25rem;
-}
-
 .query--date-container {
   display: block;
   margin-top: 0rem;
   padding-top: 0rem;
-}
-
-.query_collapsed {
-  height: auto;
-  min-height: auto;
-  padding: 4rem 0rem;
-}
-.query_collapsed .query--search-container {
-  margin-top: 0rem;
-}
-
-.query_collapsed .text-input {
-  padding-left: 1.25rem;
 }
 
 @media (min-width: 415px) {
@@ -992,9 +948,16 @@ html {
 }
 
 @media (min-width: 768px) {
+  .query--row {
+    display: flex;
+  }
+  .query--right {
+    padding: 4rem;
+  }
   .query .text-input--input {
     font-size: 1.25em;
     padding-bottom: 1.1rem;
+    width: 25rem !important;
   }
   .query .text-input--dummy {
     font-size: 1.25em;
@@ -1018,6 +981,7 @@ html {
   .query .text-input--input {
     font-size: 1.5em;
     padding-bottom: 0.75rem;
+    width: 30rem !important;
   }
   .query .text-input--dummy {
     font-size: 1.5em;
@@ -1037,6 +1001,7 @@ html {
 @media (min-width: 885px) {
   .query .text-input--input {
     padding-left: 0rem;
+    width: 32rem !important;
   }
   .query--text-input-container {
     width: 48.93617%;
@@ -1063,9 +1028,18 @@ html {
 }
 
 @media (min-width: 1005px) {
+  .query--left {
+    width: 65%;
+  }
+
+  .query-right {
+    width: 35%;
+  }
+
   .query .text-input--input {
     font-size: 2em;
     padding-bottom: 0.35rem;
+    width: 35rem !important;
   }
   .query .text-input--dummy {
     font-size: 2em;
@@ -1096,6 +1070,21 @@ html {
   .query_collapsed .DateInput {
     font-size: 1.5em;
   }
+}
+
+.query_collapsed {
+  height: auto;
+  min-height: auto;
+  padding: 4rem 0rem;
+  background: none;
+  background-color: #9753e1;
+}
+.query_collapsed .query--search-container {
+  margin-top: 0rem;
+}
+
+.query_collapsed .text-input {
+  padding-left: 1.25rem;
 }
 
 .results {

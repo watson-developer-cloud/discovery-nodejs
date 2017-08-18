@@ -40,7 +40,6 @@ export default class QueryExpanded extends Component {
   render() {
     return (
       <section className="_full-width-row query">
-        <div className="query--right-bg" />
         <div className="row query--row _container _container_large">
           <div className="query--left">
             <div className="query--search-container">
@@ -60,13 +59,19 @@ export default class QueryExpanded extends Component {
             </div>
           </div>
           <div className="query--right">
-            <p className="base--p query--query-description">This interactive demo shows how to query news content to</p>
+            <p className="base--p query--query-description">
+              This interactive demo shows you how to quickly find insights in recent news articles using Watson Discovery News data collection. See how you can easily explore a company's:
+            </p>
             <ul className="base--ul query--query-list">
-              <li className="base--li query--query-list-item">Find top entities (people, topics, companies)</li>
-              <li className="base--li query--query-list-item">Extract sentiment over time</li>
-              <li className="base--li query--query-list-item">Sentiment Analysis</li>
-              <li className="base--li query--query-list-item">Analyze most frequently co-mentioned entities</li>
+              <li className="base--li query--query-list-item">Top stories over the last two months</li>
+              <li className="base--li query--query-list-item">Top entities (people, topics, companies) mentioned in those articles</li>
+              <li className="base--li query--query-list-item">Trend of public sentiment in news</li>
+              <li className="base--li query--query-list-item">Anomalous periods of high press coverage</li>
+              <li className="base--li query--query-list-item">Trend of most commonly paired entities (co-mentions)</li>
             </ul>
+            <p className="base--p query--query-description">
+              Watson Discovery also lets you do the same analysis with your own data. Learn more <a href="https://ibm.biz/WatsonDiscovery">here</a>.
+            </p>
           </div>
         </div>
       </section>
