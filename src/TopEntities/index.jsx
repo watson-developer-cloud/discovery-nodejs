@@ -37,7 +37,7 @@ export default class TopEntities extends Component {
   }
 
   static widgetDescription() {
-    return 'Easily extract frequently mentioned entities - such as people, topics and companies with Pre-enriched News.';
+    return 'Discovery can easily extract frequently mentioned entities - such as people, topics and companies - from the set of articles.';
   }
 
   state = {

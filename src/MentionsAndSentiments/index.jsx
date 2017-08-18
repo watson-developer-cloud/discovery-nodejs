@@ -58,7 +58,7 @@ export default class MentionsAndSentiments extends Component {
   }
 
   static widgetDescription() {
-    return 'Identify frequently co-mentioned entities and follow trends in sentiment.';
+    return 'Discovery can identify frequently co-mentioned entities and follow trends in sentiment.';
   }
 
   state = {
