@@ -739,7 +739,7 @@ html {
   padding: 0;
 }
 .query--left {
-  padding: 4rem 1rem;
+  padding: 4rem 2rem;
   width: 100%;
   background-color: #9753e1;
 }
@@ -952,7 +952,7 @@ html {
     display: flex;
   }
   .query--right {
-    padding: 4rem;
+    padding: 3rem;
   }
   .query .text-input--input {
     font-size: 1.25em;
