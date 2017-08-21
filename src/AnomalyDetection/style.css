@@ -1,7 +1,8 @@
 
 .anomaly-chart-container--div {
   position: relative;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .anomaly-chart--svg {
