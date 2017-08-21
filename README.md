@@ -66,15 +66,20 @@ For more details about developing applications that use Watson Developer Cloud s
 
 1. Start the application locally:
 
-   ```none
-   npm start
-   ```
+
+  1. in one tab, run (client runs on port 3000)
+     ```none
+     npm start
+     ```
+  1. in another tab, run (server runs on port 5000)
+     ```none
+     node server.js
+     ```
+
 
 1. Point your browser to [http://localhost:3000](http://localhost:3000).
 
-* *Hot Reload* is recommended for developing changes.
-    * This will allow changes to the code to immediately be reflected on the locally running instance of the application, rather than manually rebooting it.
-    * Install and use [this](https://github.com/remy/nodemon) according to the instructions found in the readme.
+You may build the optimized production build by running `npm run build`. Then you only require to run the `node server.js` to see your code hosted at [http://localhost:5000](http://localhost:5000)
 
 ## Troubleshooting
 
@@ -100,8 +105,10 @@ For more details about developing applications that use Watson Developer Cloud s
 ├── package.json
 ├── public                      // static resources
 ├── server.js                   // entry point
-├── test                        // tests
-└── views                       // react components
+├── test                        // integration tests
+└── src                         // react client
+    ├── __test__                // unit tests
+    └── index.js                // app entry point
 ```
 
 ## License

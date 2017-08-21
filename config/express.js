@@ -18,40 +18,35 @@
 // Module dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
-const expressBrowserify = require('express-browserify');
 const path = require('path');
 const morgan = require('morgan');
+const security = require('./security');
 
-module.exports = function (app) {
+module.exports = function newsApp(app) {
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      // eslint-disable-next-line comma-dangle
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
+  });
   app.enable('trust proxy');
-  app.set('view engine', 'jsx');
-  app.engine('jsx', require('express-react-views').createEngine());
-
+  app.use(bodyParser.json({ limit: '1mb' }));
+  app.use(bodyParser.urlencoded({ extended: false }));
 
   // Only loaded when running in Bluemix
   if (process.env.VCAP_APPLICATION) {
-    require('./security')(app);
+    security(app);
   }
 
-  // automatically bundle the front-end js on the fly
-  // note: this should come before the express.static since bundle.js is in the public folder
-  const isDev = (app.get('env') === 'development');
-  const browserifyier = expressBrowserify('./public/js/bundle.jsx', {
-    watch: isDev,
-    debug: isDev,
-    extension: ['jsx'],
-    transform: ['babelify'],
-  });
-  if (!isDev) {
-    browserifyier.browserify.transform('uglifyify', { global: true });
-  }
-  app.get('/js/bundle.js', browserifyier);
-
-  // Configure Express
-  app.use(bodyParser.json({ limit: '1mb' }));
-  app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(express.static(path.join(__dirname, '..', 'public')));
-  app.use(express.static(path.join(__dirname, '..', 'node_modules/watson-react-components/dist/')));
+  app.use(express.static(path.join(__dirname, '..', 'build')));
   app.use(morgan('dev'));
 };
 
