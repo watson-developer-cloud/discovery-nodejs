@@ -9,6 +9,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  ComposedChart,
 } from 'recharts';
 import moment from 'moment';
 import WidgetHeader from '../WidgetHeader/index';
@@ -117,6 +118,11 @@ export default class AnomalyDetection extends Component {
                                   faded: this.state.showOverlay,
                                 },
                               )
+                            }
+                            margin={
+                              Object.assign({}, ComposedChart.defaultProps.margin, {
+                                top: 15,
+                              })
                             }
                           >
                             <Line

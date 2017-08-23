@@ -62,6 +62,10 @@ describe('<AnomalyTooltip />', () => {
       expect(actual.text()).toEqual('01/01');
     });
 
+    it('does not have a title', () => {
+      expect(wrapper.find('.anomaly-tooltip-title--p')).toHaveLength(0);
+    });
+
     it('should render the expected article count', () => {
       const actual = wrapper.find('.anomaly-tooltip-data--p');
 
@@ -136,19 +140,37 @@ describe('<AnomalyTooltip />', () => {
     });
   });
 
-  describe('when rendering a tooltip without a title', () => {
-    const propsWithoutTitle = Object.assign({}, props, {
-      payload: [],
+  describe('when rendering a tooltip with a long title', () => {
+    const longTitle = Array(122).join('a');
+    const propsWithLongTitle = Object.assign({}, props, {
+      payload: [
+        {
+          payload: {
+            aggregations: [
+              {
+                hits: {
+                  hits: [
+                    {
+                      title: longTitle,
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ],
     });
 
     beforeEach(() => {
-      wrapper = shallow(<AnomalyTooltip {...propsWithoutTitle} />);
+      wrapper = shallow(<AnomalyTooltip {...propsWithLongTitle} />);
     });
 
-    it('shows "No Title" for the title', () => {
+    it('shows a truncated title', () => {
       const actual = wrapper.find('.anomaly-tooltip-title--p');
+      const expected = `${Array(121).join('a')}…`;
 
-      expect(actual.text()).toEqual('No Title');
+      expect(actual.text()).toEqual(expected);
     });
   });
 });
