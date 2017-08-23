@@ -8,7 +8,7 @@ const getArticles = payload =>
   (payload && payload.matching_results ? payload.matching_results : 0);
 
 const truncateTitle = title =>
-  title.length > 120 ? title.substr(0, 120) + '…' : title;
+  (title.length > 120 ? `${title.substr(0, 120)}…` : title);
 
 const getTitle = payload =>
   (payload
