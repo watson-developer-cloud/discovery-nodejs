@@ -1635,8 +1635,16 @@ input:focus, button:focus, textarea:focus {
 .accordion--inner-content {
   padding: 2rem 0rem 4rem;
   min-height: 200px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
+
+@media (min-width: 485px) {
+  .accordion--inner-content {
+    overflow: hidden;
+  }
+}
+
 .accordion--graph {
 }
 .no-content--wrapper {
