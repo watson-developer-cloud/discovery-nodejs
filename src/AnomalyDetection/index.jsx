@@ -122,6 +122,7 @@ export default class AnomalyDetection extends Component {
                             margin={
                               Object.assign({}, ComposedChart.defaultProps.margin, {
                                 top: 15,
+                                right: 15,
                               })
                             }
                           >
