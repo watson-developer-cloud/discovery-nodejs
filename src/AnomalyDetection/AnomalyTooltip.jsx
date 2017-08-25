@@ -7,6 +7,9 @@ import './style.css';
 const getArticles = payload =>
   (payload && payload.matching_results ? payload.matching_results : 0);
 
+const truncateTitle = title =>
+  (title.length > 120 ? `${title.substr(0, 120)}…` : title);
+
 const getTitle = payload =>
   (payload
     && payload.aggregations
@@ -15,8 +18,8 @@ const getTitle = payload =>
     && payload.aggregations[0].hits.hits
     && payload.aggregations[0].hits.hits.length > 0
     && payload.aggregations[0].hits.hits[0].title
-    ? payload.aggregations[0].hits.hits[0].title
-    : 'No Title');
+    ? truncateTitle(payload.aggregations[0].hits.hits[0].title)
+    : '');
 
 function AnomalyTooltip({ label, payload, labelFormatter }) {
   const realPayload = payload && payload.length > 0
@@ -24,15 +27,20 @@ function AnomalyTooltip({ label, payload, labelFormatter }) {
     : {};
   const anomaly = AnomalyDetection.hasAnomaly(realPayload);
   const articles = getArticles(realPayload);
+  const title = getTitle(realPayload);
 
   return (
     <div className="anomaly-tooltip--div">
       <p className="recharts-tooltip-label">
         { labelFormatter(label) }
       </p>
-      <p className="anomaly-tooltip-title--p">
-        { getTitle(realPayload) }
-      </p>
+      {
+        title.length > 0 && (
+          <p className="anomaly-tooltip-title--p">
+            { title }
+          </p>
+        )
+      }
       <p className="anomaly-tooltip-data--p">
         <span
           className={
