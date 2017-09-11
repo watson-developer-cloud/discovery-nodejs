@@ -19,10 +19,15 @@ module.exports = {
   },
   build(query, widgetQuery) {
     const params = {
-      query: `"${query.text}",${fields.language}:(english|en)`,
+      query: `"${query.text}"`,
     };
+    params.filter = `${fields.language}:(english|en)`;
     if (query.date) {
-      params.filter = `${fields.publication_date}>${moment(query.date.from).format(ISO_8601)},${fields.publication_date}<${moment(query.date.to).format(ISO_8601)}`;
+      params.filter = [
+        params.filter,
+        `${fields.publication_date}>${moment(query.date.from).format(ISO_8601)}`,
+        `${fields.publication_date}<${moment(query.date.to).format(ISO_8601)}`,
+      ].join(',');
     }
     if (widgetQuery) {
       return Object.assign({}, params, widgetQuery);
