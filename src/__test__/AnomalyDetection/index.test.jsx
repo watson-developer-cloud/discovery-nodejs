@@ -120,7 +120,7 @@ describe('<AnomalyDetection />', () => {
         expect(querySyntax).toHaveLength(1);
 
         const querySyntaxProps = querySyntax.props();
-        const expectedQuery = '"foo",language:(english|en)';
+        const expectedQuery = '"foo"';
 
         expect(querySyntaxProps.query.query).toEqual(expectedQuery);
         expect(querySyntaxProps.title).toEqual(AnomalyDetection.widgetTitle());
