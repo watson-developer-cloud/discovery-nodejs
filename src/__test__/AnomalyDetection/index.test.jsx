@@ -13,26 +13,36 @@ describe('<AnomalyDetection />', () => {
   const props = {
     anomalyData: [
       {
-        key_as_string: '2017-08-01T00:00:00.000-04:00',
-        matching_results: 10,
-        anomaly: 0.5,
+        key_as_string: '2017-08-18T00:00:00.000-04:00',
+        key: 1503028800000,
+        matching_results: 3744,
         aggregations: [
           {
-            type: 'top_hits',
-            size: 1,
-            hits: {
-              matching_results: 123,
-              hits: [
-                {
-                  id: 'im an id',
-                  score: 1.0,
-                  field: 'im some field',
-                  title: 'the real title',
-                },
-              ],
-            },
+            type: 'term',
+            field: 'enriched_text.keywords.text',
+            count: 1,
+            results: [
+              {
+                key: 'total solar eclipse',
+                matching_results: 1107,
+                aggregations: [
+                  {
+                    type: 'term',
+                    field: 'title',
+                    count: 1,
+                    results: [
+                      {
+                        key: 'Eclipse mania sends Americans scurrying to find safe glasses',
+                        matching_results: 87,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
         ],
+        anomaly: 0.715223,
       },
     ],
     query: {
@@ -95,7 +105,7 @@ describe('<AnomalyDetection />', () => {
     it('formats a date in MM/DD', () => {
       const actual = AnomalyDetection.formatDate(props.anomalyData[0].key_as_string);
 
-      expect(actual).toEqual('08/01');
+      expect(actual).toEqual('08/18');
     });
   });
 
@@ -124,29 +134,7 @@ describe('<AnomalyDetection />', () => {
 
         expect(querySyntaxProps.query.query).toEqual(expectedQuery);
         expect(querySyntaxProps.title).toEqual(AnomalyDetection.widgetTitle());
-
-        const expectedResults = [
-          {
-            key_as_string: '2017-08-01T00:00:00.000-04:00',
-            matching_results: 10,
-            anomaly: 0.5,
-            aggregations: [
-              {
-                type: 'top_hits',
-                size: 1,
-                hits: {
-                  matching_results: 123,
-                  hits: [
-                    {
-                      title: 'the real title',
-                    },
-                  ],
-                },
-              },
-            ],
-          },
-        ];
-        expect(querySyntaxProps.response).toEqual({ results: expectedResults });
+        expect(querySyntaxProps.response).toEqual({ results: props.anomalyData });
       });
     });
   });

@@ -10,4 +10,5 @@ module.exports.fields = {
   title_concept_text: 'enriched_title.concepts.text',
   text_document_sentiment_type: 'enriched_text.sentiment.document.label',
   text_document_sentiment_score: 'enriched_text.sentiment.document.score',
+  text_keyword_text: 'enriched_text.keywords.text',
 };

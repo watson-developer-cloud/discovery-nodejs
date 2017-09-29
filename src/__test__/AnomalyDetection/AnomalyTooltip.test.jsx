@@ -17,13 +17,28 @@ describe('<AnomalyTooltip />', () => {
           anomaly: 0.5,
           aggregations: [
             {
-              hits: {
-                hits: [
-                  {
-                    title: 'Article Title',
-                  },
-                ],
-              },
+              type: 'term',
+              field: 'enriched_text.keywords.text',
+              count: 1,
+              results: [
+                {
+                  key: 'total solar eclipse',
+                  matching_results: 1107,
+                  aggregations: [
+                    {
+                      type: 'term',
+                      field: 'title',
+                      count: 1,
+                      results: [
+                        {
+                          key: 'Article Title',
+                          matching_results: 87,
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },
@@ -148,13 +163,28 @@ describe('<AnomalyTooltip />', () => {
           payload: {
             aggregations: [
               {
-                hits: {
-                  hits: [
-                    {
-                      title: longTitle,
-                    },
-                  ],
-                },
+                type: 'term',
+                field: 'enriched_text.keywords.text',
+                count: 1,
+                results: [
+                  {
+                    key: 'total solar eclipse',
+                    matching_results: 1107,
+                    aggregations: [
+                      {
+                        type: 'term',
+                        field: 'title',
+                        count: 1,
+                        results: [
+                          {
+                            key: longTitle,
+                            matching_results: 87,
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },
