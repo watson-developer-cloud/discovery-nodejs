@@ -11,6 +11,9 @@ stages:
   - name: REACT_APP_BLUEMIX_ANALYTICS
     value: https://console.bluemix.net/analytics/build/bluemix-analytics.min.js
     type: text
+  - name: REACT_APP_SEGMENT_KEY
+    value: P1YMMnwSrsufGrHpg6uUzgVhaQXaP921
+    type: text
   jobs:
   - name: Build
     type: builder
