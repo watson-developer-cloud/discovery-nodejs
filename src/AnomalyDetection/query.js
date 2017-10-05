@@ -6,8 +6,11 @@ const timesliceParams = [
   'time_zone:America/New_York',
   'anomaly:true',
 ].join(',');
-const anomalyAgg = `timeslice(${timesliceParams}).top_hits(1)`;
-
+const anomalyAgg = [
+  `timeslice(${timesliceParams})`,
+  `term(${fields.text_keyword_text},count:1)`,
+  `term(${fields.title},count:1)`,
+].join('.');
 module.exports = {
   aggregations: [anomalyAgg],
 };
