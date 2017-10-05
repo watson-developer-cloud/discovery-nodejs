@@ -81,6 +81,16 @@ For more details about developing applications that use Watson Developer Cloud s
 
 You may build the optimized production build by running `npm run build`. Then you only require to run the `node server.js` to see your code hosted at [http://localhost:5000](http://localhost:5000)
 
+### Run tests
+
+#### Unit tests
+Run unit tests with `npm run test-unit`, then `a` to run all tests. See the output for more info.
+
+#### Integration tests
+First you have to make sure your code is built: `npm run build`
+
+Then run integration tests with: `npm run test-integration-runner`
+
 ## Troubleshooting
 
 * The main source of troubleshooting and recovery information is the Bluemix log. To view the log, run this command:
