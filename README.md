@@ -113,7 +113,7 @@ You may build the optimized production build by running `npm run build`. Then yo
 
 ## License
 
-  This sample code is licensed under Apache 2.0.
+  This sample code is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Contributing
 

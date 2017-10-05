@@ -14,11 +14,11 @@ const getTitle = payload =>
   (payload
     && payload.aggregations
     && payload.aggregations.length > 0
-    && payload.aggregations[0].hits
-    && payload.aggregations[0].hits.hits
-    && payload.aggregations[0].hits.hits.length > 0
-    && payload.aggregations[0].hits.hits[0].title
-    ? truncateTitle(payload.aggregations[0].hits.hits[0].title)
+    && payload.aggregations[0].results[0]
+    && payload.aggregations[0].results[0].aggregations[0]
+    && payload.aggregations[0].results[0].aggregations[0].results.length > 0
+    && payload.aggregations[0].results[0].aggregations[0].results[0].key
+    ? truncateTitle(payload.aggregations[0].results[0].aggregations[0].results[0].key)
     : '');
 
 function AnomalyTooltip({ label, payload, labelFormatter }) {
