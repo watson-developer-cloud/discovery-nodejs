@@ -7,13 +7,6 @@ stages:
     service: ${SAMPLE_REPO}
   triggers:
   - type: commit
-  properties:
-  - name: REACT_APP_BLUEMIX_ANALYTICS
-    value: https://console.bluemix.net/analytics/build/bluemix-analytics.min.js
-    type: text
-  - name: REACT_APP_SEGMENT_KEY
-    value: P1YMMnwSrsufGrHpg6uUzgVhaQXaP921
-    type: text
   jobs:
   - name: Build
     type: builder
@@ -85,8 +78,6 @@ stages:
       command: node server.js
       services:
         - ${DISCOVERY_SERVICE_NAME}
-      env:
-        REACT_APP_BLUEMIX_ANALYICS: ${REACT_APP_BLUEMIX_ANALYICS}
 
       EOL
 
