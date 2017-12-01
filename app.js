@@ -1,4 +1,6 @@
-const queryBuilder = require('./src/query-builder');
+const path = require('path');
+
+const queryBuilder = require(path.join(__dirname, 'src', 'query-builder'));
 
 const NEWS_ENVIRONMENT_ID = 'system';
 const NEWS_COLLECTION_ID = 'news';
@@ -16,10 +18,9 @@ const discovery = new DiscoveryV1({
 
 // Bootstrap application settings
 const express = require('express');
-const path = require('path');
 
 const app = express();
-require('./config/express')(app);
+require(path.join(__dirname, 'config', 'express'))(app);
 
 function getWidgetQuery(request) {
   const widgetQueries = request.query.widgetQueries;
@@ -75,6 +76,6 @@ app.post('/api/query', (req, res, next) => {
 });
 
 // error-handler settings for all other routes
-require('./config/error-handler')(app);
+require(path.join(__dirname, 'config', 'error-handler'))(app);
 
 module.exports = app;

@@ -4,5 +4,8 @@
         "react",
         "jsx-a11y",
         "import"
-    ]
+    ],
+    "rules": {
+        "import/no-dynamic-require": 0
+    }
 }

@@ -1,5 +1,7 @@
 require('dotenv').config();
-const app = require('./app');
+const path = require('path');
+
+const app = require(path.join(__dirname, 'app'));
 const spawn = require('child_process').spawn;
 
 if (!process.env.DISCOVERY_USERNAME) {
