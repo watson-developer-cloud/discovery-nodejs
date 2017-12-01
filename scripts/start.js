@@ -1,7 +1,9 @@
+const path = require('path');
 const spawn = require('child_process').spawn;
-const server = require('../server');
 
-const client = spawn('./node_modules/.bin/react-scripts', ['start'], {
+const server = require(path.join(__dirname, '..', 'server'));
+
+const client = spawn(path.join(__dirname, '..', 'node_modules', '.bin', 'react-scripts'), ['start'], {
   env: Object.assign({}, process.env, {
     REACT_APP_SERVER: 'http://localhost:5000',
   }),
