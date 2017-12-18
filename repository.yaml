@@ -1,0 +1,8 @@
+id: https://github.com/watson-developer-cloud/discovery-nodejs
+runtimes:
+ - Cloud Foundry
+services:
+ - Discovery
+event_id: web
+event_organizer: dev-journeys
+language: nodejs
