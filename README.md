@@ -5,13 +5,13 @@ Use the IBM Watson [Discovery][service_url] service to add a cognitive search an
 
 ![Demo](readme-images/new-demo.gif)
 
-Demo: https://discovery-news-demo.mybluemix.net/
+Demo: https://discovery-news-demo.ng.bluemix.net/
 
 ## Getting started
 
-To deploy this repository as-is, click the "Deploy to Bluemix" button
+To deploy this repository as-is, click the "Deploy to IBM Cloud" button
 
-[![Deploy to Bluemix][deploy_button_url]][deploy_url]
+[![Deploy to IBM Cloud][deploy_button_url]][deploy_url]
 
 When this button is clicked, it will begin the process of creating a deployment toolchain based on the master branch of the repo into Bluemix and you will have to modify the application name to the name of the host you want to put it at. The default will get mapped to {organization/user}-{repo_name}-{timestamp}.
 
@@ -66,15 +66,9 @@ For more details about developing applications that use Watson Developer Cloud s
 
 1. Start the application locally:
 
-
-  1. in one tab, run (client runs on port 3000)
-     ```none
-     npm start
-     ```
-  1. in another tab, run (server runs on port 5000)
-     ```none
-     node server.js
-     ```
+   ```none
+   npm start
+   ```
 
 
 1. Point your browser to [http://localhost:3000](http://localhost:3000).
@@ -132,26 +126,34 @@ Then run integration tests with: `npm run test-integration-runner`
 ## Open Source @ IBM
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
-## Privacy Notice
+# Privacy Notice
 
-Sample web applications that include this package may be configured to track deployments to [IBM Bluemix](https://www.bluemix.net/) and other Cloud Foundry platforms. The following information is sent to a [Deployment Tracker](https://github.com/IBM-Bluemix/cf-deployment-tracker-service) service on each deployment:
+Sample web applications that include this package may be configured to track deployments to [IBM Cloud](https://www.bluemix.net/) and other Cloud Foundry platforms. The following information is sent to a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) service on each deployment:
 
 * Node.js package version
 * Node.js repository URL
 * Application Name (`application_name`)
-* Space ID (`space_id`)
+* Application GUID (`application_id`)
+* Application instance index number (`instance_index`)
+* Space ID (`space_id`) or OS username
 * Application Version (`application_version`)
 * Application URIs (`application_uris`)
+* Cloud Foundry API (`cf_api`)
 * Labels of bound services
 * Number of instances for each bound service and associated plan information
+* Metadata in the repository.yaml file
 
-This data is collected from the `package.json` file in the sample application and the `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables in IBM Bluemix and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Bluemix to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
+This data is collected from the `package.json` and `repository.yaml` file in the sample application and the `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables in IBM Cloud and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
 
-[deploy_track_url]: https://github.com/cloudant-labs/deployment-tracker
+If you want to disable deployment tracking, follow these steps:
+
+- Set the environment variable `DEMO_DEPLOY` to `1` OR
+- remove the `tracker.track();` line in the `./server.js` file
+
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [getting_started]: https://www.ibm.com/watson/developercloud/doc/common/index.html
 [service_url]: http://www.ibm.com/watson/developercloud/discovery.html
 [docs]: http://www.ibm.com/watson/developercloud/doc/discovery/index.html
 [sign_up]: https://console.ng.bluemix.net/registration/
-[deploy_button_url]: https://deployment-tracker.mybluemix.net/stats/790012bd5928500d2f22b1e09648756b/button.svg
+[deploy_button_url]: https://metrics-tracker.mybluemix.net/stats/_replace_me_/button.svg
 [deploy_url]: https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/discovery-nodejs.git

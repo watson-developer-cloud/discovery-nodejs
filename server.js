@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 require('dotenv').config({ silent: true });
-const tracker = require('cf-deployment-tracker-client');
+const tracker = require('metrics-tracker-client');
 
 // Deployment tracking
 if (!process.env.DEMO_DEPLOY) {
