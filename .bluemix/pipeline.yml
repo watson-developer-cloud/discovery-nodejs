@@ -73,6 +73,7 @@ stages:
 
       cat > ./manifest.yml <<EOL
       name: ${TEMP_APP_NAME}
+      domain: ${ROUTE_DOMAIN}
       instances: ${CF_INSTANCES}
       memory: ${CF_MEMORY}
       command: node server.js
@@ -172,7 +173,7 @@ stages:
       echo "Public route bindings:"
       cf routes | { grep $CF_APP || true; }
       cf app $CF_APP
-      export APP_URL=https://$(cf app $CF_APP | grep urls: | awk '{print $2}')
+      export APP_URL=https://$(cf app $CF_APP | grep routes: | awk '{print $2}')
       echo "##############################################################"
       echo "You have successfully executed a rolling deployment of $CF_APP"
       echo "at: $APP_URL"
