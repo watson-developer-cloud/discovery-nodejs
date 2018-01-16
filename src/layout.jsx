@@ -9,7 +9,7 @@ export default function Layout() {
         mainBreadcrumbs="Discovery"
         mainBreadcrumbsUrl="http://www.ibm.com/watson/developercloud/discovery.html"
         subBreadcrumbs="Discovery Demo"
-        subBreadcrumbsUrl="https://discovery-news-demo.mybluemix.net"
+        subBreadcrumbsUrl="/"
       />
       <Jumbotron
         serviceName="Discovery"

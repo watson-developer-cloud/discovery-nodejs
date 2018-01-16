@@ -13,10 +13,11 @@ if (process.env.REACT_APP_BLUEMIX_ANALYTICS) {
   let digitalData = {
     page: {
       category: {
-        primaryCategory: 'watson-demos',
+        primaryCategory: 'watson-demos discovery-news-demo',
       },
       pageInfo: {
-        pageID: 'discovery-news-demo',
+        pageID: 'discovery-news-demo-homepage',
+        productTitle: 'discovery-news-demo',
       },
     },
   };
@@ -36,6 +37,11 @@ if (process.env.REACT_APP_BLUEMIX_ANALYTICS) {
     intercom: false,
     fullStory: false,
   };
+  if (process.env.REACT_APP_SEGMENT_KEY) {
+    const analyticsKey = { segment_key: process.env.REACT_APP_SEGMENT_KEY };
+    // eslint-disable-next-line no-native-reassign, no-underscore-dangle
+    window._analytics = Object.assign({}, window._analytics, analyticsKey);
+  }
 
   document.head.appendChild(bluemixAnalyticsScript);
 }

@@ -7,10 +7,6 @@ stages:
     service: ${SAMPLE_REPO}
   triggers:
   - type: commit
-  properties:
-  - name: REACT_APP_BLUEMIX_ANALYTICS
-    value: https://console.bluemix.net/analytics/build/bluemix-analytics.min.js
-    type: text
   jobs:
   - name: Build
     type: builder
@@ -77,13 +73,12 @@ stages:
 
       cat > ./manifest.yml <<EOL
       name: ${TEMP_APP_NAME}
+      domain: ${ROUTE_DOMAIN}
       instances: ${CF_INSTANCES}
       memory: ${CF_MEMORY}
       command: node server.js
       services:
         - ${DISCOVERY_SERVICE_NAME}
-      env:
-        REACT_APP_BLUEMIX_ANALYICS: ${REACT_APP_BLUEMIX_ANALYICS}
 
       EOL
 
@@ -178,7 +173,7 @@ stages:
       echo "Public route bindings:"
       cf routes | { grep $CF_APP || true; }
       cf app $CF_APP
-      export APP_URL=https://$(cf app $CF_APP | grep urls: | awk '{print $2}')
+      export APP_URL=https://$(cf app $CF_APP | grep routes: | awk '{print $2}')
       echo "##############################################################"
       echo "You have successfully executed a rolling deployment of $CF_APP"
       echo "at: $APP_URL"

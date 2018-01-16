@@ -8,6 +8,7 @@ const returnFields = [
 ].join(',');
 
 module.exports = {
+  deduplicate: true,
   count: 5,
   return: returnFields,
 };
