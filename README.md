@@ -155,5 +155,5 @@ If you want to disable deployment tracking, follow these steps:
 [service_url]: http://www.ibm.com/watson/developercloud/discovery.html
 [docs]: http://www.ibm.com/watson/developercloud/doc/discovery/index.html
 [sign_up]: https://console.ng.bluemix.net/registration/
-[deploy_button_url]: https://metrics-tracker.mybluemix.net/stats/_replace_me_/button.svg
+[deploy_button_url]: https://metrics-tracker.mybluemix.net/stats/77edd7e5d6ad4cedf9bc7afaddc29f05/button.svg
 [deploy_url]: https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/discovery-nodejs.git
