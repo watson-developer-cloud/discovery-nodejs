@@ -6,12 +6,12 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "react-scripts build",
-    "test-page": "./node_modules/mocha/bin/_mocha test/integration/page",
+    "test-page": "_mocha test/integration/page",
     "test-integration": "casperjs test ./test/integration/test.*.js",
     "test-integration-runner": "NODE_ENV=test node casper-runner.js",
     "test": "npm run lint && npm run test-unit && npm run test-page && npm run build && npm run test-integration-runner",
     "test-unit": "react-scripts test --env=jsdom",
-    "lint": "./node_modules/eslint/bin/eslint.js --ext .jsx --ext .js . test"
+    "lint": "eslint --ext .jsx --ext .js . test"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
+    "cross-spawn": "^6.0.5",
     "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "express-rate-limit": "^2.9.0",

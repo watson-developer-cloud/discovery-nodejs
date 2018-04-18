@@ -1,37 +1,19 @@
-const spawn = require('child_process').spawn;
+const spawn = require('cross-spawn');
 const server = require('../server');
 
-const client = spawn('./node_modules/.bin/react-scripts', ['start'], {
+const client = spawn('./node_modules/react-scripts/bin/react-scripts.js', ['start'], {
   env: Object.assign({}, process.env, {
     REACT_APP_SERVER: 'http://localhost:5000',
   }),
   stdio: 'inherit',
 });
 
-function killServer(callback) {
-  const ppid = server.pid;
-  const killer = spawn('pkill', ['-9', '-P', ppid]);
-
-  killer.on('exit', () => {
-    // eslint-disable-next-line no-console
-    console.log(`PPID ${ppid} killed`);
-
-    if (callback) {
-      callback();
-    }
-  });
-}
-
 client.on('error', (error) => {
   // eslint-disable-next-line no-console
   console.log(`ERROR: ${error}`);
-  killServer(() => {
-    process.exit(1);
-  });
+  server.close();
 });
 
 client.on('close', () => {
-  killServer(() => {
-    process.exit(1);
-  });
+  server.close();
 });
