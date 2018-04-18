@@ -1358,8 +1358,20 @@ html {
   margin-top: 0;
 }
 
+.footer-container--div div {
+  margin-top: 0;
+}
+
 .footer {
   margin-top: 0rem;
+}
+
+.footer-gdpr--section {
+  text-align: center;
+  padding: 1rem 0 0 0;
+  background-color: #323232;
+  color: #aeaeae;
+  font-size: 0.7rem;
 }
 
 .loader--container,
