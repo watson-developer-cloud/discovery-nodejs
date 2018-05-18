@@ -12,12 +12,8 @@ function loadAnalytics() {
 }
 
 if (process.env.REACT_APP_BLUEMIX_ANALYTICS) {
-  if (process.env.REACT_APP_SEGMENT_KEY) {
-    const analyticsKey = { segment_key: process.env.REACT_APP_SEGMENT_KEY };
-    // eslint-disable-next-line no-native-reassign, no-underscore-dangle
-    window._analytics = Object.assign({}, window._analytics, analyticsKey);
-  }
-
+  // eslint-disable-next-line no-native-reassign, no-underscore-dangle
+  window._analytics = Object.assign({}, window._analytics);
   window.addEventListener('load', loadAnalytics);
 }
 
