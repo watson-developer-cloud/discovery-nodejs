@@ -8,6 +8,14 @@ import queryBuilder from '../query-builder';
 import NoContent from '../NoContent/index';
 
 export default class TopEntities extends Component {
+  static widgetTitle() {
+    return 'Top Entities';
+  }
+
+  static widgetDescription() {
+    return 'Discovery can easily extract frequently mentioned entities - such as people, topics and companies - from the set of articles.';
+  }
+
   static propTypes = {
     entities: shape({
       topics: arrayOf(shape({
@@ -30,14 +38,6 @@ export default class TopEntities extends Component {
         to: string.isRequired,
       }),
     }).isRequired,
-  }
-
-  static widgetTitle() {
-    return 'Top Entities';
-  }
-
-  static widgetDescription() {
-    return 'Discovery can easily extract frequently mentioned entities - such as people, topics and companies - from the set of articles.';
   }
 
   state = {

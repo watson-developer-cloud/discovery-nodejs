@@ -20,6 +20,18 @@ import { getNames, getItemsForName } from './mentionsParser';
 import capitalize from './capitalize';
 
 export default class MentionsAndSentiments extends Component {
+  static calculateMentionCount(data) {
+    return data.reduce((acc, item) => acc + item.positive + item.neutral + item.negative, 0);
+  }
+
+  static widgetTitle() {
+    return 'Co-Mentions & Trends';
+  }
+
+  static widgetDescription() {
+    return 'Discovery can identify frequently co-mentioned entities and follow trends in sentiment.';
+  }
+
   static propTypes = {
     mentions: shape({
       aggregations: arrayOf(shape({
@@ -47,18 +59,6 @@ export default class MentionsAndSentiments extends Component {
     query: shape({
       text: string.isRequired,
     }).isRequired,
-  }
-
-  static calculateMentionCount(data) {
-    return data.reduce((acc, item) => acc + item.positive + item.neutral + item.negative, 0);
-  }
-
-  static widgetTitle() {
-    return 'Co-Mentions & Trends';
-  }
-
-  static widgetDescription() {
-    return 'Discovery can identify frequently co-mentioned entities and follow trends in sentiment.';
   }
 
   state = {

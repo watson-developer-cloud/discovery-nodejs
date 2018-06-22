@@ -7,6 +7,18 @@ import QuerySyntax from '../QuerySyntax/index';
 import queryBuilder from '../query-builder';
 
 export default class SentimentAnalysis extends Component {
+  static widgetTitle() {
+    return 'Sentiment Analysis';
+  }
+
+  static widgetDescription() {
+    return 'Sentiment can be extracted from news articles across a variety of sources.';
+  }
+
+  static filterEmptySentimentResults(sentiments) {
+    return sentiments.results.filter(result => result.aggregations[0].results.length > 0);
+  }
+
   static propTypes = {
     sentiment: shape({
       results: arrayOf(shape({
@@ -31,18 +43,6 @@ export default class SentimentAnalysis extends Component {
         to: string.isRequired,
       }).isRequired,
     }).isRequired,
-  }
-
-  static widgetTitle() {
-    return 'Sentiment Analysis';
-  }
-
-  static widgetDescription() {
-    return 'Sentiment can be extracted from news articles across a variety of sources.';
-  }
-
-  static filterEmptySentimentResults(sentiments) {
-    return sentiments.results.filter(result => result.aggregations[0].results.length > 0);
   }
 
   state = {
