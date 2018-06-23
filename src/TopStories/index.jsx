@@ -7,6 +7,14 @@ import Story from './Story';
 import { fields } from '../fields';
 
 export default class TopStories extends Component {
+  static widgetTitle() {
+    return 'Top Stories';
+  }
+
+  static widgetDescription() {
+    return 'Discovery can pull a list of the most recent and relevant news articles about this company.';
+  }
+
   static propTypes = {
     stories: arrayOf(object).isRequired,
     query: shape({
@@ -16,14 +24,6 @@ export default class TopStories extends Component {
         to: string.isRequired,
       }).isRequired,
     }).isRequired,
-  }
-
-  static widgetTitle() {
-    return 'Top Stories';
-  }
-
-  static widgetDescription() {
-    return 'Discovery can pull a list of the most recent and relevant news articles about this company.';
   }
 
   state = {
