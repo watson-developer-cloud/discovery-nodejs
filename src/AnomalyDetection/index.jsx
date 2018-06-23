@@ -21,22 +21,6 @@ import AnomalyTooltip from './AnomalyTooltip';
 import NoAnomaliesOverlay from './NoAnomaliesOverlay';
 
 export default class AnomalyDetection extends Component {
-  static propTypes = {
-    anomalyData: arrayOf(shape({
-      key_as_string: string.isRequired,
-      matching_results: number.isRequired,
-      anomaly: number,
-    })).isRequired,
-    query: shape({
-      text: string.isRequired,
-    }).isRequired,
-    colorLine: string.isRequired,
-  }
-
-  static defaultProps = {
-    colorLine: '#00a78f',
-  }
-
   static widgetTitle() {
     return 'Anomaly Detection';
   }
@@ -55,6 +39,22 @@ export default class AnomalyDetection extends Component {
 
   static hasAnomalies(anomalyData) {
     return anomalyData.some(result => result.anomaly);
+  }
+
+  static propTypes = {
+    anomalyData: arrayOf(shape({
+      key_as_string: string.isRequired,
+      matching_results: number.isRequired,
+      anomaly: number,
+    })).isRequired,
+    query: shape({
+      text: string.isRequired,
+    }).isRequired,
+    colorLine: string.isRequired,
+  }
+
+  static defaultProps = {
+    colorLine: '#00a78f',
   }
 
   state = {
