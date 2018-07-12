@@ -16,7 +16,7 @@ export default function Layout() {
         repository="https://github.com/watson-developer-cloud/discovery-nodejs"
         documentation="https://console.bluemix.net/docs/services/discovery/index.html"
         apiReference="http://www.ibm.com/watson/developercloud/discovery/api"
-        startInBluemix="https://console.bluemix.net/catalog/services/discovery"
+        startInBluemix="https://console.bluemix.net/registration/?target=%2Fcatalog%2Fservices%2Fdiscovery%3FhideTours%3Dtrue%26cm_mmc%3D-_-Watson%2BCore_Watson%2BCore%2B-%2BPlatform-_-WW_WW-_-wdc-ref%26cm_mmc%3D-_-Watson%2BCore_Watson%2BCore%2B-%2BPlatform-_-WW_WW-_-wdc-ref%26cm_mmca1%3D000000OF%26cm_mmca2%3D10000409"
         version="GA"
         description="Unlock hidden value in data to find answers, monitor trends and surface patterns, with the world’s most advanced cloud-native insight engine."
       />
