@@ -11,7 +11,7 @@ if (process.env.DISCOVERY_IAM_APIKEY && process.env.DISCOVERY_IAM_APIKEY !== '')
   discovery = new DiscoveryV1({
     version: '2017-08-01',
     iam_apikey: process.env.DISCOVERY_IAM_APIKEY || '<iam_apikey>',
-    iam_url: 'https://iam.bluemix.net/identity/token',
+    iam_url: process.env.DISCOVERY_IAM_URL || 'https://iam.bluemix.net/identity/token',
     url: process.env.DISCOVERY_URL || 'https://gateway.watsonplatform.net/discovery/api',
   });
 } else {
