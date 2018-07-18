@@ -1,7 +1,7 @@
 language: node_js
 dist: trusty
 sudo: required
-node_js: 6
+node_js: 8
 before_install:
 - openssl aes-256-cbc -K $encrypted_aba75b5b520c_key -iv $encrypted_aba75b5b520c_iv
   -in .env.enc -out .env -d
@@ -10,3 +10,9 @@ script:
 cache:
   directories:
   - node_modules
+deploy:
+- provider: script
+  skip_cleanup: true
+  script: npx semantic-release
+  on:
+    node: 8

@@ -1,5 +1,5 @@
 {
-  "name": "discovery-nodejs",
+  "name": "@ibm-watson/discovery-nodejs",
   "version": "1.0.0",
   "description": "Discovery sample application",
   "main": "server.js",
@@ -35,14 +35,13 @@
     "express-rate-limit": "^2.9.0",
     "express-secure-only": "^0.2.1",
     "helmet": "^3.8.1",
-    "metrics-tracker-client": "^0.4.1",
     "moment": "^2.17.1",
     "morgan": "^1.7.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "recharts": "^0.20.2",
-    "watson-developer-cloud": "^3.5.0",
+    "watson-developer-cloud": "^3.7.0",
     "watson-react-components": "^0.6.9"
   },
   "devDependencies": {
@@ -51,9 +50,9 @@
     "enzyme": "^2.8.2",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react": "^7.10.0",
     "mocha": "^5.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "react-addons-test-utils": "^15.5.1",
@@ -61,5 +60,9 @@
     "react-test-renderer": "^15.6.1",
     "sinon": "^2.4.1",
     "supertest": "^3.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }

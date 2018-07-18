@@ -1,0 +1,4 @@
+{
+  "branch": "release",
+  "publish": ["@semantic-release/github"]
+}
