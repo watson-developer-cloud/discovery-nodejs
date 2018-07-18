@@ -1,81 +1,101 @@
-# Discovery Demo [![Build Status](https://travis-ci.org/watson-developer-cloud/discovery-nodejs.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/discovery-nodejs)
+<h1 align="center" style="border-bottom: none;">🔎 Discovery Demo </h1>
+<h3 align="center">Use the IBM Watson Discovery service to add a cognitive search and content analytics engine to your applications to identify patterns, trends and actionable insights that drive better decision-making.</h3>
+<p align="center">
+  <a href="http://travis-ci.org/watson-developer-cloud/discovery-nodejs">
+    <img alt="Travis" src="https://travis-ci.org/watson-developer-cloud/discovery-nodejs.svg?branch=master">
+  </a>
+  <a href="#badge">
+    <img alt="semantic-release" src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg">
+  </a>
+</p>
+</p>
 
-
-Use the IBM Watson [Discovery][service_url] service to add a cognitive search and content analytics engine to your applications to identify patterns, trends and actionable insights that drive better decision-making.
-
-![Demo](readme-images/new-demo.gif)
+![demo](readme-images/new-demo.gif)
 
 Demo: https://discovery-news-demo.ng.bluemix.net/
 
-## Getting started
+## Prerequisites
 
-To deploy this repository as-is, click the "Deploy to IBM Cloud" button
+1. Sign up for an [IBM Cloud account](https://console.bluemix.net/registration/).
+1. Download the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview).
+1. Create an instance of the Discovery service and get your credentials:
+    - Go to the [Discovery](https://console.bluemix.net/catalog/services/discovery) page in the IBM Cloud Catalog.
+    - Log in to your IBM Cloud account.
+    - Click **Create**.
+    - Click **Show** to view the service credentials.
+    - Copy the `apikey` value, or copy the `username` and `password` values if your service instance doesn't provide an `apikey`.
+    - Copy the `url` value.
 
-[![Deploy to IBM Cloud][deploy_button_url]][deploy_url]
+## Configuring the application
 
-When this button is clicked, it will begin the process of creating a deployment toolchain based on the master branch of the repo into Bluemix and you will have to modify the application name to the name of the host you want to put it at. The default will get mapped to {organization/user}-{repo_name}-{timestamp}.
+1. In the application folder, copy the *.env.example* file and create a file called *.env*
 
-After creating the toolchain, you must either run the deployment script as part of the [Continuous Delivery](https://www.ibm.com/devops/method/content/deliver/practice_continuous_delivery/) which will create the service for you, or refer to the [Setup a IBM Watson Discovery Service](#setup-a-ibm-watson-discovery-service) section below to create it manually.
+    ```
+    cp .env.example .env
+    ```
 
-For more details about developing applications that use Watson Developer Cloud services in Bluemix, see [Getting started with Watson Developer Cloud and Bluemix][getting_started].
+2. Open the *.env* file and add the service credentials that you obtained in the previous step.
 
-## Development
+    Example *.env* file that configures the `apikey` and `url` for a Discovery service instance hosted in the US East region:
 
-### Setup a IBM Watson Discovery Service
+    ```
+    DISCOVERY_IAM_APIKEY=X4rbi8vwZmKpXfowaS3GAsA7vdy17Qh7km5D6EzKLHL2
+    DISCOVERY_URL=https://gateway-wdc.watsonplatform.net/discovery/api
+    ```
 
-1. You need a Bluemix account. If you don't have one, [sign up][sign_up].
+    - If your service instance uses `username` and `password` credentials, add the `DISCOVERY_USERNAME` and `DISCOVERY_PASSWORD` variables to the *.env* file.
 
-1. Download and install the [Cloud-foundry CLI][cloud_foundry] tool if you haven't already.
+    Example *.env* file that configures the `username`, `password`, and `url` for a Discovery service instance hosted in the Sydney region:
 
-1. Connect to Bluemix with the command line tool.
+    ```
+    DISCOVERY_USERNAME=522be-7b41-ab44-dec3-g1eab2ha73c6
+    DISCOVERY_PASSWORD=A4Z5BdGENrwu8
+    DISCOVERY_URL=https://gateway-syd.watsonplatform.net/discovery/api
+    ```
 
-   ```sh
-   cf api https://api.ng.bluemix.net
-   cf login
-   ```
+<!-- **ADD ANY APP-SPECIFIC CONFIGURATION INSTRUCTIONS HERE** -->
 
-1. Create and retrieve service keys to access the [Discovery][service_url] service:
+## Running locally
 
-   ```none
-   cf create-service discovery standard Discovery-Demo
-   cf create-service-key Discovery-Demo myKey
-   cf service-key Discovery-Demo myKey
-   ```
+1. Install the dependencies
 
-1. Create an `.env` file in the root directory by copying the sample `.env.example` file using the following command:
+    ```
+    npm install
+    ```
 
-   ```none
-   cp .env.example .env
-   ```
-   Update the `.env` with your service instance information from step 4
+1. Run the application
 
-   The `.env` file will look something like the following:
+    ```
+    npm start
+    ```
 
-   ```none
-   DISCOVERY_USERNAME=<username>
-   DISCOVERY_PASSWORD=<password>
-   ```
+1. View the application in a browser at `localhost:3000`
 
-### Run the demo locally
+## Deploying to IBM Cloud as a Cloud Foundry Application
 
-1. Install the needed application dependencies with this command:
+1. Login to IBM Cloud with the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview)
 
-   ```none
-   npm install
-   ```
+    ```
+    ibmcloud login
+    ```
 
-1. Start the application locally:
+1. Target a Cloud Foundry organization and space.
 
-   ```none
-   npm start
-   ```
+    ```
+    ibmcloud target --cf
+    ```
+
+1. Edit the *manifest.yml* file. Change the **name** field to something unique. For example, `- name: my-app-name`.
+1. Deploy the application
+
+    ```
+    ibmcloud app push
+    ```
+
+1. View the application online at the app URL, for example: https://my-app-name.mybluemix.net
 
 
-1. Point your browser to [http://localhost:3000](http://localhost:3000).
-
-You may build the optimized production build by running `npm run build`. Then you only require to run the `node server.js` to see your code hosted at [http://localhost:5000](http://localhost:5000)
-
-### Run tests
+## Tests
 
 #### Unit tests
 Run unit tests with `npm run test-unit`, then `a` to run all tests. See the output for more info.
@@ -85,19 +105,7 @@ First you have to make sure your code is built: `npm run build`
 
 Then run integration tests with: `npm run test-integration-runner`
 
-## Troubleshooting
-
-* The main source of troubleshooting and recovery information is the Bluemix log. To view the log, run this command:
-
-  ```sh
-  cf logs <your application name> --recent
-  ```
-
-* For more details about the service, see the [documentation][docs] for the Discovery service.
-
-----
-
-### Directory structure
+## Directory structure
 
 ```none
 .
@@ -126,7 +134,7 @@ Then run integration tests with: `npm run test-integration-runner`
 ## Open Source @ IBM
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
-# Privacy Notice
+## Privacy Notice
 
 Sample web applications that include this package may be configured to track deployments to [IBM Cloud](https://www.bluemix.net/) and other Cloud Foundry platforms. The following information is sent to a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) service on each deployment:
 
@@ -150,9 +158,7 @@ If you want to disable deployment tracking, follow these steps:
 - Set the environment variable `DEMO_DEPLOY` to `1` OR
 - remove the `tracker.track();` line in the `./server.js` file
 
-[cloud_foundry]: https://github.com/cloudfoundry/cli
 [getting_started]: https://www.ibm.com/watson/developercloud/doc/common/index.html
-[service_url]: http://www.ibm.com/watson/developercloud/discovery.html
 [docs]: http://www.ibm.com/watson/developercloud/doc/discovery/index.html
 [sign_up]: https://console.ng.bluemix.net/registration/
 [deploy_button_url]: https://metrics-tracker.mybluemix.net/stats/77edd7e5d6ad4cedf9bc7afaddc29f05/button.svg
