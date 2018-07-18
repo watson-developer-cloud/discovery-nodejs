@@ -134,32 +134,6 @@ Then run integration tests with: `npm run test-integration-runner`
 ## Open Source @ IBM
   Find more open source projects on the [IBM Github Page](http://ibm.github.io/)
 
-## Privacy Notice
-
-Sample web applications that include this package may be configured to track deployments to [IBM Cloud](https://www.bluemix.net/) and other Cloud Foundry platforms. The following information is sent to a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) service on each deployment:
-
-* Node.js package version
-* Node.js repository URL
-* Application Name (`application_name`)
-* Application GUID (`application_id`)
-* Application instance index number (`instance_index`)
-* Space ID (`space_id`) or OS username
-* Application Version (`application_version`)
-* Application URIs (`application_uris`)
-* Cloud Foundry API (`cf_api`)
-* Labels of bound services
-* Number of instances for each bound service and associated plan information
-* Metadata in the repository.yaml file
-
-This data is collected from the `package.json` and `repository.yaml` file in the sample application and the `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables in IBM Cloud and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
-
-If you want to disable deployment tracking, follow these steps:
-
-- Set the environment variable `DEMO_DEPLOY` to `1` OR
-- remove the `tracker.track();` line in the `./server.js` file
-
 [getting_started]: https://www.ibm.com/watson/developercloud/doc/common/index.html
 [docs]: http://www.ibm.com/watson/developercloud/doc/discovery/index.html
 [sign_up]: https://console.ng.bluemix.net/registration/
-[deploy_button_url]: https://metrics-tracker.mybluemix.net/stats/77edd7e5d6ad4cedf9bc7afaddc29f05/button.svg
-[deploy_url]: https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/discovery-nodejs.git
