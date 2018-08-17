@@ -5,9 +5,9 @@ const app = require('../../../app');
 const request = require('supertest');
 const moment = require('moment');
 
-if (!process.env.DISCOVERY_USERNAME || process.env.DISCOVERY_USERNAME === '<username>') {
+if (!process.env.DISCOVERY_USERNAME && !process.env.DISCOVERY_IAM_APIKEY) {
   // eslint-disable-next-line
-  console.log('Skipping integration tests because DISCOVERY_USERNAME is null.');
+  console.log('Skipping integration tests because DISCOVERY_USERNAME and DISCOVERY_IAM_APIKEY is null.');
 } else {
   const API_ENDPOINT = '/api/query';
 
