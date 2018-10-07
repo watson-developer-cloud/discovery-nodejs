@@ -63,6 +63,12 @@ Demo: https://discovery-news-demo.ng.bluemix.net/
     npm install
     ```
 
+1. Build the application
+
+    ```
+    npm run build
+    ```
+
 1. Run the application
 
     ```
