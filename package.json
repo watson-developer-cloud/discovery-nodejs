@@ -5,12 +5,12 @@
   "main": "server.js",
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "react-scripts build",
+    "build": "npx react-scripts build",
     "test-page": "_mocha test/integration/page --exit",
     "test-integration": "casperjs test ./test/integration/test.*.js",
     "test-integration-runner": "NODE_ENV=test node casper-runner.js",
     "test": "npm run lint && npm run test-unit && npm run test-page && npm run build && npm run test-integration-runner",
-    "test-unit": "react-scripts test --env=jsdom",
+    "test-unit": "npx react-scripts test --env=jsdom",
     "lint": "eslint --ext .jsx --ext .js . test"
   },
   "repository": {
@@ -22,7 +22,7 @@
   },
   "author": "IBM Corp.",
   "engines": {
-    "node": ">=6.0",
+    "node": ">=8.0",
     "npm": ">=3.0"
   },
   "license": "MIT",
@@ -32,17 +32,17 @@
     "cross-spawn": "^6.0.5",
     "dotenv": "^6.0.0",
     "express": "^4.14.0",
-    "express-rate-limit": "^2.9.0",
+    "express-rate-limit": "^2.14.2",
     "express-secure-only": "^0.2.1",
-    "helmet": "^3.8.1",
+    "helmet": "^3.13.0",
     "moment": "^2.17.1",
-    "morgan": "^1.7.0",
+    "morgan": "^1.9.1",
     "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "recharts": "^0.20.2",
-    "watson-developer-cloud": "^3.7.0",
-    "watson-react-components": "^0.6.9"
+    "watson-developer-cloud": "^3.11.1",
+    "watson-react-components": "^0.6.17"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -50,16 +50,16 @@
     "enzyme": "^2.8.2",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-react": "^7.11.1",
     "mocha": "^5.2.0",
     "phantomjs-prebuilt": "^2.1.14",
     "react-addons-test-utils": "^15.5.1",
-    "react-scripts": "^1.0.11",
+    "react-scripts": "^1.1.5",
     "react-test-renderer": "^15.6.1",
     "sinon": "^2.4.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.3.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

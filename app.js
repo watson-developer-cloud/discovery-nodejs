@@ -5,23 +5,10 @@ const NEWS_COLLECTION_ID = 'news';
 
 const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 
-let discovery;
-
-if (process.env.DISCOVERY_IAM_APIKEY && process.env.DISCOVERY_IAM_APIKEY !== '') {
-  discovery = new DiscoveryV1({
-    version: '2017-08-01',
-    iam_apikey: process.env.DISCOVERY_IAM_APIKEY || '<iam_apikey>',
-    iam_url: process.env.DISCOVERY_IAM_URL || 'https://iam.bluemix.net/identity/token',
-    url: process.env.DISCOVERY_URL || 'https://gateway.watsonplatform.net/discovery/api',
-  });
-} else {
-  discovery = new DiscoveryV1({
-    version: '2017-08-01',
-    username: process.env.DISCOVERY_USERNAME || '<username>',
-    password: process.env.DISCOVERY_PASSWORD || '<password>',
-    url: process.env.DISCOVERY_URL || 'https://gateway.watsonplatform.net/discovery/api',
-  });
-}
+const discovery = new DiscoveryV1({
+  version: '2017-08-01',
+  url: process.env.DISCOVERY_URL || 'https://gateway.watsonplatform.net/discovery/api',
+});
 
 // Bootstrap application settings
 const express = require('express');
