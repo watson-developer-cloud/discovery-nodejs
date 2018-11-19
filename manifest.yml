@@ -1,7 +1,7 @@
 name: discovery-news-demo-crawl-date
 instances: 1
 memory: 512M
-command: npm start
+command: node server.js
 env:
   DEMO_DEPLOY: 1
 
