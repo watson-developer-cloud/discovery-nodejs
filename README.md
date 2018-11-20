@@ -79,6 +79,12 @@ Demo: https://discovery-news-demo.ng.bluemix.net/
 
 ## Deploying to IBM Cloud as a Cloud Foundry Application
 
+1. Build the application
+
+    ```
+    npm run build
+    ```
+
 1. Login to IBM Cloud with the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview)
 
     ```
