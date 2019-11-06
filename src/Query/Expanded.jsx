@@ -71,7 +71,10 @@ export default class QueryExpanded extends Component {
               <li className="base--li query--query-list-item">Trend of most commonly paired entities (co-mentions)</li>
             </ul>
             <p className="base--p query--query-description">
-              Watson Discovery also lets you do the same analysis with your own data. Learn more <a href="https://ibm.biz/WatsonDiscovery">here</a>.
+              Watson Discovery also lets you do the same analysis with your own data. Learn more
+              {' '}
+              <a href="https://ibm.biz/WatsonDiscovery">here</a>
+.
             </p>
           </div>
         </div>

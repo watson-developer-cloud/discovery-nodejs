@@ -2,7 +2,9 @@ import React from 'react';
 import moment from 'moment';
 import { string, number } from 'prop-types';
 
-function Story({ date, host, score, title, url }) {
+function Story({
+  date, host, score, title, url,
+}) {
   return (
     <div className="story">
       <div className="story--date">
@@ -23,7 +25,10 @@ function Story({ date, host, score, title, url }) {
         </span>
         <span className="story--source-score-divider"> | </span>
         <span className="story--score base--p">
-          <span>Score: { score }</span>
+          <span>
+Score:
+            { score }
+          </span>
         </span>
       </div>
     </div>

@@ -56,14 +56,15 @@ describe('<AnomalyDetection />', () => {
   });
 
   describe('when the anomalyData has no anomalies', () => {
-    const propsWithNoAnomalies = Object.assign({}, props, {
+    const propsWithNoAnomalies = {
+      ...props,
       anomalyData: [
         {
           key_as_string: '2017-08-01T00:00:00.000-04:00',
           matching_results: 10,
         },
       ],
-    });
+    };
 
     beforeEach(() => {
       wrapper = shallow(<AnomalyDetection {...propsWithNoAnomalies} />);
@@ -140,9 +141,7 @@ describe('<AnomalyDetection />', () => {
   });
 
   describe('when there is no anomalyData', () => {
-    const propsWithNoData = Object.assign({}, props, {
-      anomalyData: [],
-    });
+    const propsWithNoData = { ...props, anomalyData: [] };
 
     beforeEach(() => {
       wrapper = shallow(<AnomalyDetection {...propsWithNoData} />);

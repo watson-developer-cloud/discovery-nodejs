@@ -1,19 +1,18 @@
 import React from 'react';
-import { string, number, bool, shape, arrayOf, oneOf } from 'prop-types';
+import {
+  string, number, bool, shape, arrayOf, oneOf,
+} from 'prop-types';
 
 function SentimentChart({ sentiment, size, showLabels }) {
   const sum = sentiment.results.reduce((k, v) => k + v.matching_results, 0);
-  const percentages = sentiment.results.reduce((k, v) =>
-    Object.assign({}, k, {
-      [v.key]: 100 * (v.matching_results / sum),
-    })
-    , { negative: 0, neutral: 0, positive: 0 });
+  const percentages = sentiment.results.reduce((k, v) => ({ ...k, [v.key]: 100 * (v.matching_results / sum) }),
+    { negative: 0, neutral: 0, positive: 0 });
 
   return (
     <div className="sentiment--chart-container">
-      <div className={`sentiment--chart sentiment--chart_${size}`} >
+      <div className={`sentiment--chart sentiment--chart_${size}`}>
         {
-          ['negative', 'neutral', 'positive'].filter(key => Math.round(percentages[key]) > 0).map(key => (
+          ['negative', 'neutral', 'positive'].filter((key) => Math.round(percentages[key]) > 0).map((key) => (
             <div
               key={key}
               className={`sentiment--bar sentiment--bar_${key}`}

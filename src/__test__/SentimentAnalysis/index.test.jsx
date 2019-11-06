@@ -22,7 +22,8 @@ describe('<SentimentAnalysis />', () => {
                   key: 'positive',
                   matching_results: 56,
                 },
-              ] },
+              ],
+            },
           ],
         },
         {

@@ -4,7 +4,7 @@ import WidgetHeader from '../WidgetHeader/index';
 import SentimentChart from './SentimentChart';
 import SentimentBySource from './SentimentBySource';
 import QuerySyntax from '../QuerySyntax/index';
-import queryBuilder from '../query-builder';
+import { queryBuilder } from '../query-builder';
 
 export default class SentimentAnalysis extends Component {
   static widgetTitle() {
@@ -21,20 +21,28 @@ export default class SentimentAnalysis extends Component {
 
   static propTypes = {
     sentiment: shape({
-      results: arrayOf(shape({
-        key: string.isRequired,
-        matching_results: number.isRequired,
-      })).isRequired,
+      results: arrayOf(
+        shape({
+          key: string.isRequired,
+          matching_results: number.isRequired,
+        })
+      ).isRequired,
     }).isRequired,
     sentiments: shape({
-      results: arrayOf(shape({
-        key: string.isRequired,
-        aggregations: arrayOf(shape({
-          results: arrayOf(shape({
-            key: string.isRequired,
-          })).isRequired,
-        })).isRequired,
-      })).isRequired,
+      results: arrayOf(
+        shape({
+          key: string.isRequired,
+          aggregations: arrayOf(
+            shape({
+              results: arrayOf(
+                shape({
+                  key: string.isRequired,
+                })
+              ).isRequired,
+            })
+          ).isRequired,
+        })
+      ).isRequired,
     }).isRequired,
     query: shape({
       text: string.isRequired,
@@ -43,55 +51,45 @@ export default class SentimentAnalysis extends Component {
         to: string.isRequired,
       }).isRequired,
     }).isRequired,
-  }
+  };
 
   state = {
     showQuery: false,
-  }
+  };
 
   onShowQuery = () => {
     this.setState({ showQuery: true });
-  }
+  };
 
   onShowResults = () => {
     this.setState({ showQuery: false });
-  }
+  };
 
   render() {
     const { sentiment, sentiments, query } = this.props;
 
     return (
       <div>
-        {
-          !this.state.showQuery
-            ? (
-              <div className="sentiment widget">
-                <WidgetHeader
-                  title={SentimentAnalysis.widgetTitle()}
-                  description={SentimentAnalysis.widgetDescription()}
-                  onShowQuery={this.onShowQuery}
-                />
-                <SentimentChart
-                  sentiment={sentiment}
-                  showLabels
-                  size="large"
-                />
-                <SentimentBySource
-                  sentiments={
-                    SentimentAnalysis.filterEmptySentimentResults(sentiments)
-                  }
-                />
-              </div>
-            )
-            : (
-              <QuerySyntax
-                title="Sentiment Analysis"
-                query={queryBuilder.build(query, queryBuilder.widgetQueries.sentimentAnalysis)}
-                response={{ sentiment, sentiments }}
-                onGoBack={this.onShowResults}
-              />
-            )
-        }
+        {!this.state.showQuery ? (
+          <div className="sentiment widget">
+            <WidgetHeader
+              title={SentimentAnalysis.widgetTitle()}
+              description={SentimentAnalysis.widgetDescription()}
+              onShowQuery={this.onShowQuery}
+            />
+            <SentimentChart sentiment={sentiment} showLabels size="large" />
+            <SentimentBySource
+              sentiments={SentimentAnalysis.filterEmptySentimentResults(sentiments)}
+            />
+          </div>
+        ) : (
+          <QuerySyntax
+            title="Sentiment Analysis"
+            query={queryBuilder.build(query, queryBuilder.widgetQueries.sentimentAnalysis)}
+            response={{ sentiment, sentiments }}
+            onGoBack={this.onShowResults}
+          />
+        )}
       </div>
     );
   }

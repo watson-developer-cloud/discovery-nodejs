@@ -1,10 +1,10 @@
 require('dotenv').config();
+const { spawn } = require('child_process');
 const app = require('./app');
-const spawn = require('child_process').spawn;
 
-if (!process.env.DISCOVERY_USERNAME && !process.env.DISCOVERY_IAM_APIKEY) {
+if (!process.env.DISCOVERY_IAM_APIKEY) {
   // eslint-disable-next-line no-console
-  console.log('Skipping integration tests because DISCOVERY_USERNAME and DISCOVERY_IAM_APIKEY are null');
+  console.log('Skipping integration tests because DISCOVERY_IAM_APIKEY is null');
 } else {
   const port = 3000;
   const server = app.listen(port, () => {

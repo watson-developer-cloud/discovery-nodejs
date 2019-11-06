@@ -9,7 +9,6 @@ module.exports = function secureApp(app) {
 
   const limiter = rateLimit({
     windowMs: 30 * 1000, // seconds
-    delayMs: 0,
     max: 5,
     message: JSON.stringify({
       error: 'Too many requests, please try again in 30 seconds.',

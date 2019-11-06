@@ -20,9 +20,7 @@ describe('<AnomalyDot />', () => {
   });
 
   describe('when rendering a dot without an anomaly', () => {
-    const propsWithoutAnomaly = Object.assign({}, props, {
-      payload: {},
-    });
+    const propsWithoutAnomaly = { ...props, payload: {} };
 
     beforeEach(() => {
       wrapper = shallow(<AnomalyDot {...propsWithoutAnomaly} />);
@@ -56,9 +54,7 @@ describe('<AnomalyDot />', () => {
     });
 
     describe('and it is active', () => {
-      const propsWithActive = Object.assign({}, props, {
-        active: true,
-      });
+      const propsWithActive = { ...props, active: true };
 
       beforeEach(() => {
         wrapper = shallow(<AnomalyDot {...propsWithActive} />);

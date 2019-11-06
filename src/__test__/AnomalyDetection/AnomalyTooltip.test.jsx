@@ -57,7 +57,8 @@ describe('<AnomalyTooltip />', () => {
   });
 
   describe('when rendering a tooltip without an anomaly', () => {
-    const propsWithoutAnomaly = Object.assign({}, props, {
+    const propsWithoutAnomaly = {
+      ...props,
       payload: [
         {
           payload: {
@@ -65,7 +66,7 @@ describe('<AnomalyTooltip />', () => {
           },
         },
       ],
-    });
+    };
 
     beforeEach(() => {
       wrapper = shallow(<AnomalyTooltip {...propsWithoutAnomaly} />);
@@ -88,13 +89,14 @@ describe('<AnomalyTooltip />', () => {
     });
 
     describe('and there are no matching results', () => {
-      const propsWithoutResults = Object.assign({}, props, {
+      const propsWithoutResults = {
+        ...props,
         payload: [
           {
             payload: {},
           },
         ],
-      });
+      };
 
       beforeEach(() => {
         wrapper = shallow(<AnomalyTooltip {...propsWithoutResults} />);
@@ -108,7 +110,8 @@ describe('<AnomalyTooltip />', () => {
     });
 
     describe('and there is 1 matching result', () => {
-      const propsWithOneResult = Object.assign({}, props, {
+      const propsWithOneResult = {
+        ...props,
         payload: [
           {
             payload: {
@@ -116,7 +119,7 @@ describe('<AnomalyTooltip />', () => {
             },
           },
         ],
-      });
+      };
 
       beforeEach(() => {
         wrapper = shallow(<AnomalyTooltip {...propsWithOneResult} />);
@@ -144,8 +147,7 @@ describe('<AnomalyTooltip />', () => {
     it('should have an extra className on the tooltip articles span', () => {
       const actual = wrapper.find('.anomaly-tooltip-articles--span');
 
-      expect(actual.props().className)
-        .toEqual('anomaly-tooltip-articles--span anomaly');
+      expect(actual.props().className).toEqual('anomaly-tooltip-articles--span anomaly');
     });
 
     it('should render the expected article count with (Anomalous)', () => {
@@ -157,7 +159,8 @@ describe('<AnomalyTooltip />', () => {
 
   describe('when rendering a tooltip with a long title', () => {
     const longTitle = Array(122).join('a');
-    const propsWithLongTitle = Object.assign({}, props, {
+    const propsWithLongTitle = {
+      ...props,
       payload: [
         {
           payload: {
@@ -190,7 +193,7 @@ describe('<AnomalyTooltip />', () => {
           },
         },
       ],
-    });
+    };
 
     beforeEach(() => {
       wrapper = shallow(<AnomalyTooltip {...propsWithLongTitle} />);

@@ -18,18 +18,24 @@ export default class TopEntities extends Component {
 
   static propTypes = {
     entities: shape({
-      topics: arrayOf(shape({
-        key: string.isRequired,
-        matching_results: number.isRequired,
-      })).isRequired,
-      companies: arrayOf(shape({
-        key: string.isRequired,
-        matching_results: number.isRequired,
-      })).isRequired,
-      people: arrayOf(shape({
-        key: string.isRequired,
-        matching_results: number.isRequired,
-      })).isRequired,
+      topics: arrayOf(
+        shape({
+          key: string.isRequired,
+          matching_results: number.isRequired,
+        })
+      ).isRequired,
+      companies: arrayOf(
+        shape({
+          key: string.isRequired,
+          matching_results: number.isRequired,
+        })
+      ).isRequired,
+      people: arrayOf(
+        shape({
+          key: string.isRequired,
+          matching_results: number.isRequired,
+        })
+      ).isRequired,
     }).isRequired,
     query: shape({
       text: string.isRequired,
@@ -38,22 +44,25 @@ export default class TopEntities extends Component {
         to: string.isRequired,
       }),
     }).isRequired,
-  }
+  };
 
   state = {
     showQuery: false,
-  }
+  };
 
   onShowQuery = () => {
     this.setState({ showQuery: true });
-  }
+  };
 
   onShowResults = () => {
     this.setState({ showQuery: false });
-  }
+  };
 
   getCompanies() {
-    const { entities: { companies }, query } = this.props;
+    const {
+      entities: { companies },
+      query,
+    } = this.props;
 
     if (!companies) {
       return [];
@@ -63,76 +72,52 @@ export default class TopEntities extends Component {
   }
 
   render() {
-    const { entities: { topics, companies, people }, query } = this.props;
+    const {
+      entities: { topics, companies, people },
+      query,
+    } = this.props;
 
     return (
       <div>
-        {
-          !this.state.showQuery
-            ? (
-              <div className="top-entities widget">
-                <WidgetHeader
-                  title={TopEntities.widgetTitle()}
-                  description={TopEntities.widgetDescription()}
-                  onShowQuery={this.onShowQuery}
-                />
-                <Tabs selected={0}>
-                  <Pane label="Topics">
-                    {
-                      topics.length > 0
-                        ? (
-                          <Cloud data={topics} />
-                        )
-                        : (
-                          <NoContent
-                            query={query}
-                            message={'No Topics found.'}
-                          />
-                        )
-                    }
-                  </Pane>
-                  <Pane label="Companies">
-                    {
-                      companies.length > 0
-                        ? (
-                          <Cloud
-                            data={this.getCompanies()}
-                          />
-                        )
-                        : (
-                          <NoContent
-                            query={query}
-                            message={'No Companies found.'}
-                          />
-                        )
-                    }
-                  </Pane>
-                  <Pane label="People">
-                    {
-                      people.length > 0
-                        ? (
-                          <Cloud data={people} />
-                        )
-                        : (
-                          <NoContent
-                            query={query}
-                            message={'No People found.'}
-                          />
-                        )
-                    }
-                  </Pane>
-                </Tabs>
-              </div>
-            )
-            : (
-              <QuerySyntax
-                title="Top Entities"
-                query={queryBuilder.build(query, queryBuilder.widgetQueries.topEntities)}
-                response={this.props.entities}
-                onGoBack={this.onShowResults}
-              />
-            )
-        }
+        {!this.state.showQuery ? (
+          <div className="top-entities widget">
+            <WidgetHeader
+              title={TopEntities.widgetTitle()}
+              description={TopEntities.widgetDescription()}
+              onShowQuery={this.onShowQuery}
+            />
+            <Tabs selected={0}>
+              <Pane label="Topics">
+                {topics.length > 0 ? (
+                  <Cloud data={topics} />
+                ) : (
+                  <NoContent query={query} message="No Topics found." />
+                )}
+              </Pane>
+              <Pane label="Companies">
+                {companies.length > 0 ? (
+                  <Cloud data={this.getCompanies()} />
+                ) : (
+                  <NoContent query={query} message="No Companies found." />
+                )}
+              </Pane>
+              <Pane label="People">
+                {people.length > 0 ? (
+                  <Cloud data={people} />
+                ) : (
+                  <NoContent query={query} message="No People found." />
+                )}
+              </Pane>
+            </Tabs>
+          </div>
+        ) : (
+          <QuerySyntax
+            title="Top Entities"
+            query={queryBuilder.build(query, queryBuilder.widgetQueries.topEntities)}
+            response={this.props.entities}
+            onGoBack={this.onShowResults}
+          />
+        )}
       </div>
     );
   }

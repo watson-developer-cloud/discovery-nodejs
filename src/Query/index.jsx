@@ -1,5 +1,7 @@
 import React from 'react';
-import { string, bool, func, shape } from 'prop-types';
+import {
+  string, bool, func, shape,
+} from 'prop-types';
 import Collapsed from './Collapsed';
 import Expanded from './Expanded';
 
