@@ -1,5 +1,7 @@
 import React from 'react';
-import { string, number, shape, arrayOf } from 'prop-types';
+import {
+  string, number, shape, arrayOf,
+} from 'prop-types';
 
 function Cloud({ data, maxSize, minSize }) {
   const largest = data
@@ -8,31 +10,29 @@ function Cloud({ data, maxSize, minSize }) {
       : prev), 0)
     : 0;
   const ratio = maxSize / largest;
-  const computeSize = value => Math.max(minSize, value * ratio);
+  const computeSize = (value) => Math.max(minSize, value * ratio);
 
   return (
     <div className="top-entities--cloud">
       {
         data
-          ? data.map(item =>
-            (
-              <div
-                className="top-entities--word"
-                key={`${item.key}`}
-                title={item.matching_results}
-                style={{
-                  fontSize: `${computeSize(item.matching_results)}px`,
-                  fontWeight: (
-                    computeSize(item.matching_results) < 13
-                      ? 400
-                      : null
-                  ),
-                }}
-              >
-                {item.key}
-              </div>
-            ),
-          )
+          ? data.map((item) => (
+            <div
+              className="top-entities--word"
+              key={`${item.key}`}
+              title={item.matching_results}
+              style={{
+                fontSize: `${computeSize(item.matching_results)}px`,
+                fontWeight: (
+                  computeSize(item.matching_results) < 13
+                    ? 400
+                    : null
+                ),
+              }}
+            >
+              {item.key}
+            </div>
+          ))
           : []
       }
     </div>

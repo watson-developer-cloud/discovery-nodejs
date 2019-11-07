@@ -1,9 +1,13 @@
 import React from 'react';
-import { string, bool, node, oneOfType, func } from 'prop-types';
+import {
+  string, bool, node, oneOfType, func,
+} from 'prop-types';
 import classNames from 'classnames';
 import { Icon } from 'watson-react-components';
 
-function Accordion({ content, header, onClickToggle, show }) {
+function Accordion({
+  content, header, onClickToggle, show,
+}) {
   return (
     <div className="accordion">
       <button

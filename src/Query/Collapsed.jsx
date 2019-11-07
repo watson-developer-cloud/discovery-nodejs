@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { string, bool, shape, func } from 'prop-types';
+import {
+  string, bool, shape, func,
+} from 'prop-types';
 import moment from 'moment';
 import { TextInput, Icon, ButtonsGroup } from 'watson-react-components';
 
@@ -19,9 +21,7 @@ export default class Collapsed extends Component {
   state = {
     startDate: moment(this.props.query.date.from),
     endDate: moment(this.props.query.date.to),
-    query: Object.assign({}, this.props.query, {
-      enabled: this.props.query.text.length > 0,
-    }),
+    query: { ...this.props.query, enabled: this.props.query.text.length > 0 },
     restrictedDateRange: false,
     dateButtons: [
       {
@@ -67,12 +67,12 @@ export default class Collapsed extends Component {
     });
   }
 
-  buttonState = () => (this.state.query.enabled ?
-    ('query--date-buttons-container') :
-    ('query--date-buttons-disabled query--date-buttons-container'))
+  buttonState = () => (this.state.query.enabled
+    ? ('query--date-buttons-container')
+    : ('query--date-buttons-disabled query--date-buttons-container'))
 
   handleInputChange = (event) => {
-    const value = event.target.value;
+    const { value } = event.target;
 
     this.setState({
       query: {
@@ -113,9 +113,7 @@ export default class Collapsed extends Component {
     const largestValue = 'lasttwomonths';
     let restrictedDateRange;
     const newButtonState = this.state.dateButtons.map((item) => {
-      const newItem = Object.assign({}, item, {
-        selected: item.value === e.target.value,
-      });
+      const newItem = { ...item, selected: item.value === e.target.value };
       if (newItem.selected) {
         newDates = {
           startDate: newItem.startDate,

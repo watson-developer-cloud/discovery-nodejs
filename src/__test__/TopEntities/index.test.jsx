@@ -72,15 +72,10 @@ describe('<TopEntities />', () => {
     let people;
 
     beforeEach(() => {
-      wrapper = shallow(
-        <TopEntities
-          entities={entitiesPartiallyEmptySample}
-          query={query}
-        />,
-      );
-      topics = wrapper.find(Tabs).nodes[0].props.children[0].props;
-      companies = wrapper.find(Tabs).nodes[0].props.children[1].props;
-      people = wrapper.find(Tabs).nodes[0].props.children[2].props;
+      wrapper = shallow(<TopEntities entities={entitiesPartiallyEmptySample} query={query} />);
+      topics = wrapper.find(Tabs).getElements()[0].props.children[0].props;
+      companies = wrapper.find(Tabs).getElements()[0].props.children[1].props;
+      people = wrapper.find(Tabs).getElements()[0].props.children[2].props;
     });
 
     it('Shows the Cloud component for a tab with results', () => {

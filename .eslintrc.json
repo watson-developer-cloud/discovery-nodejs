@@ -1,8 +1,4 @@
 {
-    "extends": ["react-app", "airbnb"],
-    "plugins": [
-        "react",
-        "jsx-a11y",
-        "import"
-    ]
+  "extends": ["react-app"],
+  "plugins": ["react", "jsx-a11y", "import"]
 }

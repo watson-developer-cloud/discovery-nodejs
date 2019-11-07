@@ -8,8 +8,8 @@ function SentimentBySource({ sentiments }) {
       <div className="sentiment--sources">
         <div className="sentiment--sources-table">
           {
-            sentiments.map(source =>
-              (<div key={source.key} className="sentiment--source">
+            sentiments.map((source) => (
+              <div key={source.key} className="sentiment--source">
                 <div
                   className="sentiment--source-cell sentiment--source-name"
                 >
@@ -25,8 +25,8 @@ function SentimentBySource({ sentiments }) {
                 >
                   <SentimentChart sentiment={source.aggregations[0]} />
                 </div>
-              </div>),
-            )
+              </div>
+            ))
           }
         </div>
       </div>

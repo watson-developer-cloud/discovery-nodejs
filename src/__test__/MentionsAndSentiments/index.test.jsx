@@ -216,17 +216,14 @@ describe('<MentionsAndSentiments />', () => {
 
   it('Orders results by number of mentions', () => {
     const wrapper = shallow(
-      <MentionsAndSentiments
-        query={querySample}
-        mentions={mentionsSample}
-      />,
+      <MentionsAndSentiments query={querySample} mentions={mentionsSample} />
     );
-    const firstMention = wrapper.find(Accordion).nodes[0]
-      .props.header.props.children[0].props.children;
-    const secondMention = wrapper.find(Accordion).nodes[1]
-      .props.header.props.children[0].props.children;
-    const thirdMention = wrapper.find(Accordion).nodes[2]
-      .props.header.props.children[0].props.children;
+    const firstMention = wrapper.find(Accordion).getElements()[0].props.header.props.children[0]
+      .props.children;
+    const secondMention = wrapper.find(Accordion).getElements()[1].props.header.props.children[0]
+      .props.children;
+    const thirdMention = wrapper.find(Accordion).getElements()[2].props.header.props.children[0]
+      .props.children;
     assert.equal(firstMention, 'Sample Company + Company Three');
     assert.equal(secondMention, 'Sample Company + Company One');
     assert.equal(thirdMention, 'Sample Company + Company Two');
@@ -234,17 +231,14 @@ describe('<MentionsAndSentiments />', () => {
 
   it('Mentions should equal the sum of positive, negative, and neutral mentions', () => {
     const wrapper = shallow(
-      <MentionsAndSentiments
-        query={querySample}
-        mentions={mentionsSample}
-      />,
+      <MentionsAndSentiments query={querySample} mentions={mentionsSample} />
     );
-    const firstMentionCount = wrapper.find(Accordion).nodes[0]
-      .props.header.props.children[1].props.children;
-    const secondMentionCount = wrapper.find(Accordion).nodes[1]
-      .props.header.props.children[1].props.children;
-    const thirdMentionCount = wrapper.find(Accordion).nodes[2]
-      .props.header.props.children[1].props.children;
+    const firstMentionCount = wrapper.find(Accordion).getElements()[0].props.header.props.children[1].props
+      .children;
+    const secondMentionCount = wrapper.find(Accordion).getElements()[1].props.header.props.children[1].props
+      .children;
+    const thirdMentionCount = wrapper.find(Accordion).getElements()[2].props.header.props.children[1].props
+      .children;
     assert.equal(firstMentionCount, 28);
     assert.equal(secondMentionCount, 20);
     assert.equal(thirdMentionCount, 10);
@@ -252,10 +246,7 @@ describe('<MentionsAndSentiments />', () => {
 
   it('Shows the No Content component when there are no results', () => {
     const wrapper = shallow(
-      <MentionsAndSentiments
-        query={querySample}
-        mentions={mentionsEmptySample}
-      />,
+      <MentionsAndSentiments query={querySample} mentions={mentionsEmptySample} />
     );
     assert.equal(wrapper.find(NoContent).length, 1);
   });

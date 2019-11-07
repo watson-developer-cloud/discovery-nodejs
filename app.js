@@ -1,24 +1,28 @@
-const queryBuilder = require('./src/query-builder');
+const DISCOVERY_ENVIRONMENT_ID = 'system';
+const DISCOVERY_COLLECTION_ID = 'news';
 
-const NEWS_ENVIRONMENT_ID = 'system';
-const NEWS_COLLECTION_ID = 'news';
+const DiscoveryV1 = require('ibm-watson/discovery/v1');
+const { IamAuthenticator } = require('ibm-watson/auth');
 
-const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
-
+// Create the service wrapper
 const discovery = new DiscoveryV1({
-  version: '2017-08-01',
-  url: process.env.DISCOVERY_URL || 'https://gateway.watsonplatform.net/discovery/api',
+  version: '2019-02-28',
+  authenticator: new IamAuthenticator({
+    apikey: process.env.DISCOVERY_IAM_APIKEY,
+  }),
+  url: process.env.DISCOVERY_URL,
 });
 
 // Bootstrap application settings
 const express = require('express');
 const path = require('path');
+const queryBuilder = require('./src/query-builder');
 
 const app = express();
 require('./config/express')(app);
 
 function getWidgetQuery(request) {
-  const widgetQueries = request.query.widgetQueries;
+  const { widgetQueries } = request.query;
 
   if (!widgetQueries) {
     return null;
@@ -34,12 +38,14 @@ function getWidgetQuery(request) {
         const currentAggregations = finalWidgetQuery.aggregations || [];
         delete queryBuilderWidgetQuery.aggregations;
 
-        return Object.assign({}, finalWidgetQuery, queryBuilderWidgetQuery, {
+        return {
+          ...finalWidgetQuery,
+          ...queryBuilderWidgetQuery,
           aggregations: currentAggregations.concat(widgetAggregations),
-        });
+        };
       }
     }
-    return Object.assign({}, finalWidgetQuery, queryBuilderWidgetQuery);
+    return { ...finalWidgetQuery, ...queryBuilderWidgetQuery };
   }, {});
 }
 
@@ -56,10 +62,11 @@ app.post('/api/query', (req, res, next) => {
     delete queryParams.aggregations;
   }
 
-  const params = Object.assign({}, queryParams, {
-    environment_id: NEWS_ENVIRONMENT_ID,
-    collection_id: NEWS_COLLECTION_ID,
-  });
+  const params = {
+    ...queryParams,
+    environmentId: DISCOVERY_ENVIRONMENT_ID,
+    collectionId: DISCOVERY_COLLECTION_ID,
+  };
 
   discovery.query(params, (error, response) => {
     if (error) {
