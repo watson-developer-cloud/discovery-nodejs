@@ -18,7 +18,7 @@ import NoContent from '../NoContent/index';
 import AnomalyDot from './AnomalyDot';
 import AnomalyTooltip from './AnomalyTooltip';
 import NoAnomaliesOverlay from './NoAnomaliesOverlay';
-import { queryBuilder } from '../query-builder';
+import queryBuilder from '../query-builder';
 
 export default class AnomalyDetection extends Component {
   static widgetTitle() {

@@ -233,11 +233,11 @@ describe('<MentionsAndSentiments />', () => {
     const wrapper = shallow(
       <MentionsAndSentiments query={querySample} mentions={mentionsSample} />
     );
-    const firstMentionCount = wrapper.find(Accordion).nodes[0].props.header.props.children[1].props
+    const firstMentionCount = wrapper.find(Accordion).getElements()[0].props.header.props.children[1].props
       .children;
-    const secondMentionCount = wrapper.find(Accordion).nodes[1].props.header.props.children[1].props
+    const secondMentionCount = wrapper.find(Accordion).getElements()[1].props.header.props.children[1].props
       .children;
-    const thirdMentionCount = wrapper.find(Accordion).nodes[2].props.header.props.children[1].props
+    const thirdMentionCount = wrapper.find(Accordion).getElements()[2].props.header.props.children[1].props
       .children;
     assert.equal(firstMentionCount, 28);
     assert.equal(secondMentionCount, 20);
