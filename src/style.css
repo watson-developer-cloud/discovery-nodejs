@@ -1878,3 +1878,6 @@ input:focus, button:focus, textarea:focus {
     font-size: x-small;
   }
 }
+.new_demo_notification {
+  margin-bottom: 12px;
+}
