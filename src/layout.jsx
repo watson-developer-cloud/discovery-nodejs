@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Jumbotron, Footer } from 'watson-react-components';
+import {Header, Jumbotron, Footer, Alert} from 'watson-react-components';
 import Demo from './demo';
 
 export default function Layout() {
@@ -20,7 +20,15 @@ export default function Layout() {
         version="GA"
         description="Unlock hidden value in data to find answers, monitor trends and surface patterns, with the world’s most advanced cloud-native insight engine."
       />
+
+      <div className="new_demo_notification">
+        <Alert type="info" color="blue">
+          We also have new demos for <a href="https://www.ibm.com/demos/live/watson-discovery/self-service" target="blank">Discovery</a> and <a href="https://www.ibm.com/demos/live/discovery-expert-assist/self-service" target="blank">Expert assist</a> available now.
+        </Alert>
+      </div>
+
       <Demo />
+
       <div className="footer-container--div">
         <section className="_full-width-row footer-gdpr--section">
           <span>
