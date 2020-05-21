@@ -1,13 +1,4 @@
-<h1 align="center" style="border-bottom: none;">*** DEPRECATED ***</h1>
 <h1 align="center" style="border-bottom: none;">🔎 Discovery Demo </h1>
-<h1 align="center" style="border-bottom: none;">*** DEPRECATED ***</h1>
-
-<h3 align="center">There are new demos for
-  <a href="https://www.ibm.com/demos/live/watson-discovery/self-service">Discovery</a>
-  and 
-  <a href="https://www.ibm.com/demos/live/discovery-expert-assist/self-service">Expert assist</a>
-</h3>
-
 <h3 align="center">Use the IBM Watson Discovery service to add a cognitive search and content analytics engine to your applications to identify patterns, trends and actionable insights that drive better decision-making.</h3>
 <p align="center">
   <a href="http://travis-ci.org/watson-developer-cloud/discovery-nodejs">

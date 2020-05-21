@@ -23,7 +23,7 @@ export default function Layout() {
 
       <div className="new_demo_notification">
         <Alert type="info" color="blue">
-          There are new demos for <a href="https://www.ibm.com/demos/live/watson-discovery/self-service" target="blank">Discovery</a> and <a href="https://www.ibm.com/demos/live/discovery-expert-assist/self-service" target="blank">Expert assist.</a>
+          We also have new demos for <a href="https://www.ibm.com/demos/live/watson-discovery/self-service" target="blank">Discovery</a> and <a href="https://www.ibm.com/demos/live/discovery-expert-assist/self-service" target="blank">Expert assist</a> available now.
         </Alert>
       </div>
 
