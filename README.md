@@ -17,7 +17,7 @@ Demo: https://discovery-news-demo.ng.bluemix.net/
 ## Prerequisites
 
 1. Sign up for an [IBM Cloud account](https://console.bluemix.net/registration/).
-1. Download the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview).
+1. Download the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started#overview).
 1. Create an instance of the Discovery service and get your credentials:
     - Go to the [Discovery](https://console.bluemix.net/catalog/services/discovery) page in the IBM Cloud Catalog.
     - Log in to your IBM Cloud account.
@@ -85,7 +85,7 @@ Demo: https://discovery-news-demo.ng.bluemix.net/
     npm run build
     ```
 
-1. Login to IBM Cloud with the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview)
+1. Login to IBM Cloud with the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli?topic=cli-getting-started#overview)
 
     ```
     ibmcloud login

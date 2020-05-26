@@ -14,7 +14,7 @@ export default function Layout() {
       <Jumbotron
         serviceName="Discovery"
         repository="https://github.com/watson-developer-cloud/discovery-nodejs"
-        documentation="https://cloud.ibm.com/docs/services/discovery?topic=discovery-about"
+        documentation="https://cloud.ibm.com/docs/discovery?topic=discovery-about"
         apiReference="https://cloud.ibm.com/apidocs/discovery/discovery"
         startInBluemix="https://cloud.ibm.com/registration/?target=%2Fcatalog%2Fservices%2Fdiscovery%3FhideTours%3Dtrue%26cm_mmc%3D-_-Watson%2BCore_Watson%2BCore%2B-%2BPlatform-_-WW_WW-_-wdc-ref%26cm_mmc%3D-_-Watson%2BCore_Watson%2BCore%2B-%2BPlatform-_-WW_WW-_-wdc-ref%26cm_mmca1%3D000000OF%26cm_mmca2%3D10000409"
         version="GA"
