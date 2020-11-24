@@ -1,3 +1,10 @@
+<h1 style="font-weight: bold;"># DEPRECATED</h1>
+<h2> 
+  This demo and repo is no longer supported. You can find the newly supported Discovery demo
+  <a href="https://www.ibm.com/demos/live/watson-discovery/self-service">
+    here.
+  </a>
+</h2>
 <h1 align="center" style="border-bottom: none;">🔎 Discovery Demo </h1>
 <h3 align="center">Use the IBM Watson Discovery service to add a cognitive search and content analytics engine to your applications to identify patterns, trends and actionable insights that drive better decision-making.</h3>
 <p align="center">
